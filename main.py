@@ -4,7 +4,7 @@ import Funcionarios
 import Estoque
 import Funções_basicas
 
-def name_app_main():     
+def name_app():     
     print('''
 ░██████╗░███████╗██████╗░███████╗███╗░░██╗░█████╗░██╗░█████╗░
 ██╔════╝░██╔════╝██╔══██╗██╔════╝████╗░██║██╔══██╗██║██╔══██╗
@@ -58,9 +58,9 @@ def Conferir_alternativas(): #Faz a checagem e autenticação da escolha
         
 def main():
     Funções_basicas.limpar_tela()
-    name_app_main()
+    name_app()
     exibir_opcoes()
     Conferir_alternativas()
     
-
+    
 main()
