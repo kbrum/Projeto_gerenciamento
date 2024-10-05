@@ -23,40 +23,47 @@ def exibir_opcoes():
     print('5 - Sair')
     
 
+def erro_de_valor():
+    print("Por favor, selecione uma opção valida\n")
+
+
 def Conferir_alternativas():
     while True:
-        escolher_opcoes = int(input('Escolha uma opção: '))
-                
-        if escolher_opcoes == 1:
-            os.system('cls')
-            main_produtos()
-            break
+        try:
+            escolher_opcoes = int(input('Escolha uma opção: '))
                     
-        elif escolher_opcoes == 2:
-            os.system('cls')
-            main_estoque()
-            break
+            if escolher_opcoes == 1:
+                os.system('cls')
+                main_produtos()
+                break
+                        
+            elif escolher_opcoes == 2:
+                os.system('cls')
+                main_estoque()
+                break
+                        
+            elif escolher_opcoes == 3:
+                os.system('cls')
+                main_financeiro()
+                break
+                        
+            elif escolher_opcoes == 4:
+                os.system('cls')
+                main_funcionarios()
+                break
+                        
+            elif escolher_opcoes == 5:
+                os.system('cls')
+                print('Finalizado')
+                break
                     
-        elif escolher_opcoes == 3:
-            os.system('cls')
-            main_financeiro()
-            break
-                    
-        elif escolher_opcoes == 4:
-            os.system('cls')
-            main_funcionarios()
-            break
-                    
-        elif escolher_opcoes == 5:
-            os.system('cls')
-            print('Finalizado')
-            break
-                
-        else:
-            print("Por favor, selecione uma opção valida")
-        
+            else:
+                erro_de_valor()
+        except:
+            erro_de_valor()
         
 def main():
+    os.system('cls')
     name_app()
     exibir_opcoes()
     Conferir_alternativas()
