@@ -24,7 +24,8 @@ def exibir_opcoes():
 def Conferir_alternativas(): #Faz a checagem e autenticação da escolha
     while True:
         try:
-            escolha = int(input('\nEscolha uma opção: '))
+            print('\nEscolha uma opção')
+            escolha = int(input('\n-------------> '))
                     
             if escolha == 1:
                 Funções_basicas.limpar_tela()

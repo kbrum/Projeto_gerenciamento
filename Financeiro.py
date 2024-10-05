@@ -29,9 +29,10 @@ def mostrar_opces_financeiro(): #mostra as opções
 def menu_financeiro(): #pergunta ao usuario se quer voltar ao menu
     while True:
         try:
+            print('Deseja voltar ao menu? ')
             print('1 - Sim')
             print('2 - Não')
-            menu = int(input('\nDeseja voltar ao menu?: '))
+            menu = int(input('\n-------------> '))
             
             if menu == 2:
                 Funções_basicas.limpar_tela()
@@ -53,16 +54,19 @@ def menu_financeiro(): #pergunta ao usuario se quer voltar ao menu
 def checagem_financeiro(): #faz a checagem doq foi escolido entre os mostrados acima
     while True:
         try:
-            escolha_financeiro = int(input('\nEscolha uma opção: '))
+            print('\nEscolha uma opção')
+            escolha_financeiro = int(input('\n-------------> '))
             
             if escolha_financeiro == 1:
                 Funções_basicas.limpar_tela()
+                name_app()
                 mostrar_saldo()
                 print('\n')
                 menu_financeiro()
                 break
             elif escolha_financeiro == 2:
                 Funções_basicas.limpar_tela()
+                name_app()
                 mostrar_despesas()
                 print('\n')
                 menu_financeiro()
@@ -73,9 +77,19 @@ def checagem_financeiro(): #faz a checagem doq foi escolido entre os mostrados a
                 print('nao implementado')
                 break
             else:
+                Funções_basicas.limpar_tela()
+                name_app()
+                mostrar_opces_financeiro()
                 Funções_basicas.erro_de_valor()
+                checagem_financeiro()
+                break
         except:
-           Funções_basicas.erro_de_valor()
+            Funções_basicas.limpar_tela()
+            name_app()
+            mostrar_opces_financeiro()
+            Funções_basicas.erro_de_valor()
+            checagem_financeiro()
+            break
     
     
 def main_financeiro():
