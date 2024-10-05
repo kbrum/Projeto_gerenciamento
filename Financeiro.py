@@ -12,10 +12,10 @@ def name_app():
 saldo = 1000.00
 despesas = ['despesa 1', 'despesa 2', 'despesa 3']
 
-def mostrar_saldo():
+def mostrar_saldo(): #mostra o saldo
     print(f'\n Seu saldo é de R${saldo}')
 
-def mostrar_despesas():
+def mostrar_despesas(): # mostra as despesas
     print(f'Suas depesas:\n')
     for despesa in despesas:
         print(f'.{despesa}')
@@ -24,7 +24,6 @@ def mostrar_opces_financeiro(): #mostra as opções
     print('\n1 - Ver Saldo')
     print('2 - Ver despesas')
     print('3 - Voltar ao menu inicial')
-    
     
 def menu_financeiro(): #pergunta ao usuario se quer voltar ao menu
     while True:
@@ -49,7 +48,6 @@ def menu_financeiro(): #pergunta ao usuario se quer voltar ao menu
 
         except:
             Funções_basicas.erro_de_valor()
-
 
 def checagem_financeiro(): #faz a checagem doq foi escolido entre os mostrados acima
     while True:
@@ -98,7 +96,7 @@ def main_financeiro():
     mostrar_opces_financeiro()
     checagem_financeiro()
     
-def executar_programa():
+def executar_programa(): #mostra o programa na tela
     main_financeiro()
 
-executar_programa()
+#executar_programa()
