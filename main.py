@@ -1,10 +1,10 @@
-import os
-from Produtos import *
-from Estoque import *
-from Funcionarios import * 
-from Financeiro import *
+import Produtos
+import Financeiro
+import Funcionarios
+import Estoque
+import Funções_basicas
 
-def name_app():     
+def name_app_main():     
     print('''
 ░██████╗░███████╗██████╗░███████╗███╗░░██╗░█████╗░██╗░█████╗░
 ██╔════╝░██╔════╝██╔══██╗██╔════╝████╗░██║██╔══██╗██║██╔══██╗
@@ -12,59 +12,53 @@ def name_app():
 ██║░░╚██╗██╔══╝░░██╔══██╗██╔══╝░░██║╚████║██║░░██╗██║██╔══██║
 ╚██████╔╝███████╗██║░░██║███████╗██║░╚███║╚█████╔╝██║██║░░██║
 ░╚═════╝░╚══════╝╚═╝░░╚═╝╚══════╝╚═╝░░╚══╝░╚════╝░╚═╝╚═╝░░╚═╝''')
-   
     
 def exibir_opcoes():
-    print('Seja bem vindo')
-    print('1 - Produtos')
+    print('\nSeja bem vindo')
+    print('\n1 - Produtos')
     print('2 - Estoque')
-    print('3 - Gerenciamento Financeiro')
+    print('3 - Financeiro')
     print('4 - Funcionarios')
     print('5 - Sair')
-    
 
-def erro_de_valor():
-    print("Por favor, selecione uma opção valida\n")
-
-
-def Conferir_alternativas():
+def Conferir_alternativas(): #Faz a checagem e autenticação da escolha
     while True:
         try:
-            escolher_opcoes = int(input('Escolha uma opção: '))
+            escolha = int(input('\nEscolha uma opção: '))
                     
-            if escolher_opcoes == 1:
-                os.system('cls')
-                main_produtos()
+            if escolha == 1:
+                Funções_basicas.limpar_tela()
+                Produtos.main_produtos()
                 break
                         
-            elif escolher_opcoes == 2:
-                os.system('cls')
-                main_estoque()
+            elif escolha == 2:
+                Funções_basicas.limpar_tela()
+                Estoque.main_estoque()
+                break
+            
+            elif escolha == 3:
+                Funções_basicas.limpar_tela()
+                Financeiro.main_financeiro()
                 break
                         
-            elif escolher_opcoes == 3:
-                os.system('cls')
-                main_financeiro()
+            elif escolha == 4:
+                Funções_basicas.limpar_tela()
+                Funcionarios.main_funcionarios()
                 break
                         
-            elif escolher_opcoes == 4:
-                os.system('cls')
-                main_funcionarios()
-                break
-                        
-            elif escolher_opcoes == 5:
-                os.system('cls')
+            elif escolha == 5:
+                Funções_basicas.limpar_tela()
                 print('Finalizado')
                 break
                     
             else:
-                erro_de_valor()
+                Funções_basicas.erro_de_valor()
         except:
-            erro_de_valor()
+            Funções_basicas.erro_de_valor()
         
 def main():
-    os.system('cls')
-    name_app()
+    Funções_basicas.limpar_tela()
+    name_app_main()
     exibir_opcoes()
     Conferir_alternativas()
     
