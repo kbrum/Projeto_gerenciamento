@@ -9,10 +9,5 @@ def name_app():
     
     
     
-    
-    
-    
-
-
 def main_estoque():
-    name_app
+    name_app()

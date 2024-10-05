@@ -9,8 +9,5 @@ def name_app():
     
     
     
-    
-    
-    
 def main_funcionarios(): 
-    name_app
+    name_app()

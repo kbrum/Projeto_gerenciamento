@@ -2,7 +2,7 @@ import os
 from Produtos import *
 from Estoque import *
 from Funcionarios import * 
-from Financeiro import * 
+from Financeiro import *
 
 def name_app():     
     print('''
@@ -24,34 +24,36 @@ def exibir_opcoes():
     
 
 def Conferir_alternativas():
-    
-    escolher_opcoes = int(input('Escolha uma opção: '))
-            
-    if escolher_opcoes == 1:
-        os.system('cls')
-        main_produtos()
+    while True:
+        escolher_opcoes = int(input('Escolha uma opção: '))
                 
-    elif escolher_opcoes == 2:
-        os.system('cls')
-        main_estoque()
+        if escolher_opcoes == 1:
+            os.system('cls')
+            main_produtos()
+            break
+                    
+        elif escolher_opcoes == 2:
+            os.system('cls')
+            main_estoque()
+            break
+                    
+        elif escolher_opcoes == 3:
+            os.system('cls')
+            main_financeiro()
+            break
+                    
+        elif escolher_opcoes == 4:
+            os.system('cls')
+            main_funcionarios()
+            break
+                    
+        elif escolher_opcoes == 5:
+            os.system('cls')
+            print('Finalizado')
+            break
                 
-    elif escolher_opcoes == 3:
-        os.system('cls')
-        main_financeiro()
-                
-    elif escolher_opcoes == 4:
-        os.system('cls')
-        main_funcionarios()
-                
-    elif escolher_opcoes == 5:
-        os.system('cls')
-        print('Finalizado')
-            
-    elif escolher_opcoes != int:
-        print('Digite apenas numeros')
-            
-    else:
-        print("Por favor, selecione uma opção valida")
+        else:
+            print("Por favor, selecione uma opção valida")
         
         
 def main():

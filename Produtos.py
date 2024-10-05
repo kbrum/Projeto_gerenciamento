@@ -9,9 +9,5 @@ def name_app():
     
     
     
-    
-    
 def main_produtos():
-    name_app
-
-main_produtos()
+    name_app()
