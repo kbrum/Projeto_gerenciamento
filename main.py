@@ -21,7 +21,7 @@ def exibir_opcoes():
     print('4 - Funcionarios')
     print('5 - Sair')
 
-def Conferir_alternativas(): #Faz a checagem e autenticação da escolha
+def conferir_alternativas(): #Faz a checagem e autenticação da escolha
     while True:
         try:
             print('\nEscolha uma opção')
@@ -53,15 +53,25 @@ def Conferir_alternativas(): #Faz a checagem e autenticação da escolha
                 break
                     
             else:
+                Funções_basicas.limpar_tela()
+                name_app()
+                exibir_opcoes()
                 Funções_basicas.erro_de_valor()
+                conferir_alternativas()
+                break
         except:
+            Funções_basicas.limpar_tela()
+            name_app()
+            exibir_opcoes()
             Funções_basicas.erro_de_valor()
+            conferir_alternativas()
+            break
         
 def main():
     Funções_basicas.limpar_tela()
     name_app()
     exibir_opcoes()
-    Conferir_alternativas()
+    conferir_alternativas()
     
     
 main()
