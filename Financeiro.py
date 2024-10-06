@@ -1,6 +1,6 @@
 import Funções_basicas
 
-def name_app():    
+def name_app(): #titulo
     print('''
 ███████╗██╗███╗░░██╗░█████╗░███╗░░██╗░█████╗░███████╗██╗██████╗░░█████╗░
 ██╔════╝██║████╗░██║██╔══██╗████╗░██║██╔══██╗██╔════╝██║██╔══██╗██╔══██╗
@@ -9,8 +9,8 @@ def name_app():
 ██║░░░░░██║██║░╚███║██║░░██║██║░╚███║╚█████╔╝███████╗██║██║░░██║╚█████╔╝
 ╚═╝░░░░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝╚═╝░░╚══╝░╚════╝░╚══════╝╚═╝╚═╝░░╚═╝░╚════╝░''')
     
-saldo = 1000.00
-despesas = ['despesa 1', 'despesa 2', 'despesa 3']
+saldo = 1000.00 #variavel que guarda o saldo
+despesas = ['despesa 1', 'despesa 2', 'despesa 3'] #lista das despesas
 
 def mostrar_saldo(): #mostra o saldo
     print(f'\nSeu saldo é de R${saldo}')
@@ -53,7 +53,7 @@ def mostrar_opcoes_financeiro(): #mostra as opções que o usuario pode escolher
     print('2 - Ver despesas')
     print('3 - Voltar ao menu inicial')
 
-def checagem_financeiro(): #faz a checagem doq foi escolido entre os mostrados acima
+def checagem_financeiro(): #faz a checagem doq foi escolhido entre os mostrados acima
     while True:
         try:
             print('\nEscolha uma opção')
@@ -92,7 +92,7 @@ def checagem_financeiro(): #faz a checagem doq foi escolido entre os mostrados a
             checagem_financeiro()
             break
     
-def main_financeiro(): # executa todas as funções na ordem certa
+def main_financeiro(): #executa todas as funções na ordem certa
     Funções_basicas.limpar_tela()
     name_app()
     mostrar_opcoes_financeiro()
@@ -101,4 +101,4 @@ def main_financeiro(): # executa todas as funções na ordem certa
 def executar_programa(): #mostra o programa na tela
     main_financeiro()
 
-executar_programa() #usado para testes unitarios
+#executar_programa() #usado para testes unitarios

@@ -1,6 +1,6 @@
 import Funções_basicas
 
-def name_app():    
+def name_app(): # titulo    
     print('''
 ███████╗░██████╗████████╗░█████╗░░██████╗░██╗░░░██╗███████╗
 ██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔═══██╗██║░░░██║██╔════╝
@@ -55,7 +55,7 @@ def mostrar_opcoes_estoque(): #mostra a opções q o usuario pode escolher
     print('2 - Produtos em falta')
     print('3 - Voltar ao menu inicial')
 
-def checagem_estoque():
+def checagem_estoque(): #faz a checagem doq foi escolhido entre os mostrados acima
     while True:
         try:
             print('\nEscolha uma opção')
@@ -94,12 +94,12 @@ def checagem_estoque():
             checagem_estoque()
             break
     
-def main_estoque():
+def main_estoque(): #executa todas as funções na ordem certa
     name_app()
     mostrar_opcoes_estoque()
     checagem_estoque()
 
-def executar_programa():
+def executar_programa(): #mostra o programa na tela
     main_estoque()
 
-executar_programa()
+#executar_programa() #usado para testes unitarios
