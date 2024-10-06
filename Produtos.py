@@ -57,7 +57,7 @@ def cadastrar_outro_produto(): #pergunta se quer cadastrar outro produto
         try:
             Funções_basicas.limpar_tela
             name_app()
-            print('\nDeseja cadastrar outro prosuto?')
+            print('\nDeseja cadastrar outro produto?')
             print('1 - Sim')
             print('2 - Não')
             Nv_produto = int(input('\n-------------> '))
@@ -86,7 +86,7 @@ def cadastrar_outro_produto(): #pergunta se quer cadastrar outro produto
 def cadastro_feito(): #mostra mensagem de cadastro bem sucedido
     print('\n Um codigo de produto foi dado automaticamente a seu produto')
     print('\n Cadastro concluido com succeso')
-    input('\n Pressione qualquer tecla par continuar')
+    input('\n Pressione enter para continuar')
    
 class codigo_produto: #gera um codigo de produto autoincrementavel
     def __init__(self):
@@ -130,8 +130,7 @@ def cadastrar_produto(): #cadastrar um novo produto
 def mostrar_opcoes_produtos(): #mostra as opções que o usuario pode escolher
     print('\n1 - Todos os produtos')
     print('2 - Cadastrar produto')
-    print('3 - Apagar produtos')
-    print('4 - Voltar ao menu')
+    print('3 - Voltar ao menu')
        
 def checagem_produtos(): #faz a checagem doq foi escolhido entre os mostrados acima
     while True:
@@ -158,10 +157,8 @@ def checagem_produtos(): #faz a checagem doq foi escolhido entre os mostrados ac
                 name_app()
                 menu_produtos()
                 break
-            elif escolha_financeiro == 3:
-                ...
             
-            elif escolha_financeiro == 4:
+            elif escolha_financeiro == 3:
                 Funções_basicas.limpar_tela()
                 print('não implementado ainda')
                 break
