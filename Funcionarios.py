@@ -116,7 +116,7 @@ def mostrar_funcionarios():  # Função para mostrar os funcionários cadastrado
             nome = funcionario['nome']
             setor = funcionario['setor']
             codigo_funcionario = funcionario['codigo_funcionario']  # Chave corrigida
-            print(f'\n--> {nome} | {setor} | {codigo_funcionario}')
+            print(f'\n--> Nome: {nome} | Setor: {setor} | Código: {codigo_funcionario}')
     else:
         Funções_basicas.limpar_tela()
         name_app()

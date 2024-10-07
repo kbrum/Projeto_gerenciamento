@@ -10,15 +10,7 @@ def name_app(): #titulo
 ╚═╝░░░░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝╚═╝░░╚══╝░╚════╝░╚══════╝╚═╝╚═╝░░╚═╝░╚════╝░''')
     
 saldo = 1000.00 #variavel que guarda o saldo
-despesas = ['despesa 1', 'despesa 2', 'despesa 3'] #lista das despesas
-
-def mostrar_saldo(): #mostra o saldo
-    print(f'\nSeu saldo é de R${saldo}')
-
-def mostrar_despesas(): # mostra as despesas
-    print('\nSuas depesas:')
-    for despesa in despesas:
-        print(f'.{despesa}')
+despesas = [] #lista das despesas
 
 def menu_financeiro(): #pergunta ao usuario se quer voltar ao menu 
     while True:
@@ -47,11 +39,28 @@ def menu_financeiro(): #pergunta ao usuario se quer voltar ao menu
             Funções_basicas.limpar_tela()
             name_app()
             Funções_basicas.erro_de_valor()
+
+def cadastrar_outra_despesa():
+    ...
+
+def cadastrar_despesa():
+    ...
+
+def mostrar_saldo(): #mostra o saldo
+    print(f'\nSeu saldo é de R${saldo}')
+
+def mostrar_despesas(): # mostra as despesas
+    print('\nSuas depesas:')
+    for despesa in despesas:
+        print(f'.{despesa}')
+
+
             
 def mostrar_opcoes_financeiro(): #mostra as opções que o usuario pode escolher
     print('\n1 - Ver Saldo')
     print('2 - Ver despesas')
-    print('3 - Voltar ao menu inicial')
+    print('3 - Cadastrar despesa')
+    print('4 - Voltar ao menu inicial')
 
 def checagem_financeiro(): #faz a checagem doq foi escolhido entre os mostrados acima
     while True:
@@ -76,6 +85,12 @@ def checagem_financeiro(): #faz a checagem doq foi escolhido entre os mostrados 
                 break
             
             elif escolha_financeiro == 3:
+               Funções_basicas.limpar_tela()
+               name_app()
+               cadastrar_despesa()
+               cadastrar_outra_despesa() 
+            
+            elif escolha_financeiro == 4:
                 Funções_basicas.limpar_tela()
                 print('não implementado ainda')
                 break

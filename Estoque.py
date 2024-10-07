@@ -9,8 +9,8 @@ def name_app(): # titulo
 ███████╗██████╔╝░░░██║░░░╚█████╔╝░╚═██╔═╝░╚██████╔╝███████╗
 ╚══════╝╚═════╝░░░░╚═╝░░░░╚════╝░░░░╚═╝░░░░╚═════╝░╚══════╝''')
 
-em_falta = ['Produto 1', 'Produto 2', 'Produto 3'] #lista de produtos em falta
-produtos_em_estoque = ['Produto 1', 'Produto 2', 'Produto 3'] #todos os produtos
+em_falta = [] #lista de produtos em falta
+produtos_em_estoque = [] #todos os produtos
 
 def menu_estoque(): #pergunta ao usuario se quer voltar ao menu 
     while True:
@@ -40,16 +40,28 @@ def menu_estoque(): #pergunta ao usuario se quer voltar ao menu
             name_app()
             Funções_basicas.erro_de_valor()
 
-def Produtos_em_falta(): #mostra os produtos em falta
-    print('\nOs produtos em falta são:')
-    for produtos_em_falta in em_falta:
-        print(f'.{produtos_em_falta}')
-        
+def Produtos_em_falta():#mostra os produtos em falta
+    if em_falta:
+        print('\nOs produtos em falta são:')
+        for produtos_em_falta in em_falta:
+            print(f'.{produtos_em_falta}')
+    else:
+        Funções_basicas.limpar_tela()
+        name_app()
+        print('\nNenhum produto cadastrado.')
+        input('\nPressione Enter para continuar.')
+            
 def todos_em_estoque(): #mostra todo o estoque
-    print('\nProdutos em estoque:')
-    for produtos in produtos_em_estoque:
-        print(f'.{produtos}')
-        
+    if produtos_em_estoque:
+        print('\nProdutos em estoque:')
+        for produtos in produtos_em_estoque:
+            print(f'.{produtos}')
+    else:
+        Funções_basicas.limpar_tela()
+        name_app()
+        print('\nNenhum produto cadastrado.')
+        input('\nPressione Enter para continuar.')
+           
 def mostrar_opcoes_estoque(): #mostra a opções q o usuario pode escolher
     print('\n1 - Ver todos')
     print('2 - Produtos em falta')
@@ -98,4 +110,4 @@ def main_estoque(): #executa todas as funções na ordem certa
 def executar_programa(): #mostra o programa na tela
     main_estoque()
 
-#executar_programa() #usado para testes unitarios
+executar_programa() #usado para testes unitarios

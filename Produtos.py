@@ -72,47 +72,47 @@ produtos = []
 def cadastrar_produto():  # Função para cadastrar um novo produto
     while True:
         try:
-            Funções_basicas.limpar_tela()
-            name_app()
             print('\nQual o nome do seu produto?')
             nome = input('\n------------->').strip()
-            if not nome:  # Verifica se o nome foi preenchido
+            while not nome: 
+                Funções_basicas.limpar_tela()
+                name_app() 
                 print("\nO nome do produto não pode ficar em branco.")
-                continue
-
+                print('\nQual o nome do seu produto?')
+                nome = input('\n------------->').strip()
+                
             print('\nQual o tipo do seu produto? (ex: Calçado, Vestuário, Eletrônico)')
             tipo = input('\n------------->').strip()
-            if not tipo:  # Verifica se o tipo foi preenchido
+            while not tipo:  # Verifica se o tipo foi preenchido
+                Funções_basicas.limpar_tela()
+                name_app() 
                 print("\nO tipo do produto não pode ficar em branco.")
-                continue
-
+                print('\nQual o tipo do seu produto? (ex: Calçado, Vestuário, Eletrônico)')
+                tipo = input('\n------------->').strip()
+        
             print('\nQual o valor do seu produto? (Insira apenas números)')
-            preço = input('\n------------->').strip()
-            if not preço.replace('.', '', 1).isdigit():  # Verifica se o preço é válido (números e ponto)
-                print("\nPor favor, insira um valor válido para o preço (apenas números).")
-                continue
-
-            preço = float(preço)  # Converte o preço para float
-
+            preço = float(input('\n------------->'))
+            
             codigo = gerador.pro_num()  # Substitua por sua função geradora de código
 
+            #armazena um novo produto
             produto_di = {
                 'nome': nome,
                 'preço': preço,
                 'tipo': tipo,
                 'codigo de produto': codigo
             }
-
             produtos.append(produto_di)
+            
             cadastro_feito()  # Confirma o cadastro do produto
-            break  # Sai do loop após o cadastro bem-sucedido
+            break 
 
-        except Exception as e:
+        except:
             Funções_basicas.limpar_tela()
-            Funções_basicas.preço_erro()  # Função para exibir erro de preço
             name_app()
-            print(f"\nErro: {e}")  # Exibe a mensagem de erro
-            continue  # Continua o loop para tentar novamente
+            Funções_basicas.preço_erro()
+            cadastrar_produto()
+            
 
 def mostrar_produtos():  # Função para mostrar todos os produtos cadastrados
     if produtos:
@@ -181,4 +181,4 @@ def main_produtos(): #executa todas as funções na ordem certa
 def executar_programa(): #mostra o programa na tela
     main_produtos()
     
-#executar_programa() #usado para testes unitarios
+executar_programa() #usado para testes unitarios
