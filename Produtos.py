@@ -9,6 +9,15 @@ def name_app():
 ██║░░░░░██║░░██║╚█████╔╝██████╔╝╚██████╔╝░░░██║░░░╚█████╔╝██████╔╝
 ╚═╝░░░░░╚═╝░░╚═╝░╚════╝░╚═════╝░░╚═════╝░░░░╚═╝░░░░╚════╝░╚═════╝░''')
     
+class codigo_produto: #gera um codigo de produto autoincrementavel
+    def __init__(self):
+        self.codigo = 0
+        
+    def pro_num(self):
+        self.codigo +=1
+        return self.codigo
+gerador = codigo_produto() #instacia do gerador de codigo
+
 def menu_produtos(): #pergunta ao usuario se quer voltar ao menu 
     while True:
         try:
@@ -34,17 +43,6 @@ def menu_produtos(): #pergunta ao usuario se quer voltar ao menu
             menu_produtos()
             break
 
-produtos = [{'nome' : 'produto exemplo', 'tipo' : 'tipo exemplo', 'preço' : 23.50, 'codigo de produto' :20}]
-
-def mostrar_produtos(): #mostra todos os produtos
-    print('\nSeu produtos são:\n')
-    for produto in produtos:
-        preços = produto['preço']
-        nomes = produto['nome']
-        tipos = produto['tipo']
-        codigo_de_produto = produto['codigo de produto']
-        print(f'-->  {nomes} | {tipos} | R$: {preços} | {codigo_de_produto}') 
-
 def cadastrar_outro_produto(): #pergunta se quer cadastrar outro produto
     while True:
         try:
@@ -59,58 +57,83 @@ def cadastrar_outro_produto(): #pergunta se quer cadastrar outro produto
                 Funções_basicas.limpar_tela()
                 name_app()
                 cadastrar_produto()
-                break
             
             elif Nv_produto == 2:
                 break
         except:
             Funções_basicas.limpar_tela()
+            name_app()
             Funções_basicas.erro_de_valor()
             cadastrar_outro_produto()
             break
-    
+
+produtos = []
+
+def cadastrar_produto():  # Função para cadastrar um novo produto
+    while True:
+        try:
+            Funções_basicas.limpar_tela()
+            name_app()
+            print('\nQual o nome do seu produto?')
+            nome = input('\n------------->').strip()
+            if not nome:  # Verifica se o nome foi preenchido
+                print("\nO nome do produto não pode ficar em branco.")
+                continue
+
+            print('\nQual o tipo do seu produto? (ex: Calçado, Vestuário, Eletrônico)')
+            tipo = input('\n------------->').strip()
+            if not tipo:  # Verifica se o tipo foi preenchido
+                print("\nO tipo do produto não pode ficar em branco.")
+                continue
+
+            print('\nQual o valor do seu produto? (Insira apenas números)')
+            preço = input('\n------------->').strip()
+            if not preço.replace('.', '', 1).isdigit():  # Verifica se o preço é válido (números e ponto)
+                print("\nPor favor, insira um valor válido para o preço (apenas números).")
+                continue
+
+            preço = float(preço)  # Converte o preço para float
+
+            codigo = gerador.pro_num()  # Substitua por sua função geradora de código
+
+            produto_di = {
+                'nome': nome,
+                'preço': preço,
+                'tipo': tipo,
+                'codigo de produto': codigo
+            }
+
+            produtos.append(produto_di)
+            cadastro_feito()  # Confirma o cadastro do produto
+            break  # Sai do loop após o cadastro bem-sucedido
+
+        except Exception as e:
+            Funções_basicas.limpar_tela()
+            Funções_basicas.preço_erro()  # Função para exibir erro de preço
+            name_app()
+            print(f"\nErro: {e}")  # Exibe a mensagem de erro
+            continue  # Continua o loop para tentar novamente
+
+def mostrar_produtos():  # Função para mostrar todos os produtos cadastrados
+    if produtos:
+        print('\nSeus produtos são:\n')
+        for produto in produtos:
+            nome = produto['nome']
+            tipo = produto['tipo']
+            preço = produto['preço']
+            codigo_de_produto = produto['codigo de produto']
+            print(f'--> {nome} | {tipo} | R$: {preço:.2f} | Código: {codigo_de_produto}')
+    else:
+        Funções_basicas.limpar_tela()
+        name_app()
+        print('\nNenhum produto cadastrado.')
+        input('\nPressione Enter para continuar.')
+
 def cadastro_feito(): #mostra mensagem de cadastro bem sucedido
     print('\n Um codigo de produto foi dado automaticamente a seu produto')
     print('\n Cadastro concluido com succeso')
     input('\n Pressione enter para continuar')
-class codigo_produto: #gera um codigo de produto autoincrementavel
-    def __init__(self):
-        self.codigo = 0
-        
-    def pro_num(self):
-        self.codigo +=1
-        return self.codigo
-gerador = codigo_produto() #instacia do gerador de codigo
-
-def cadastrar_produto(): #cadastrar um novo produto
-    while True:
-        try:
-            print('\nQual o nome do seu produto')
-            nome = input('\n------------->')
-            
-            print('\nQual o tipo do seu produto(ex: Calçado, Vestuario, Eletrônico)')
-            tipo = input('\n------------->')
-            
-            print('\nQual o valor do seu produto(Insira apenas numeros)')
-            preço = float(input('\n------------->')) 
-            
-            codigo = gerador.pro_num()
-            
-            produto_di = {'nome' : nome,
-                          'preço' : preço, 
-                          'tipo' : tipo, 
-                          'codigo de produto' : codigo}
-            
-            produtos.append(produto_di)
-            cadastro_feito()
-            break
-        except:
-            Funções_basicas.limpar_tela()
-            Funções_basicas.preço_erro()
-            name_app()
-            cadastrar_produto()
-            break
-            
+           
 def mostrar_opcoes_produtos(): #mostra as opções que o usuario pode escolher
     print('\n1 - Todos os produtos')
     print('2 - Cadastrar produto')
@@ -126,7 +149,6 @@ def checagem_produtos(): #faz a checagem doq foi escolhido entre os mostrados ac
                 Funções_basicas.limpar_tela()
                 name_app()
                 mostrar_produtos()
-                print('\n')
                 menu_produtos()
                 break
             
@@ -134,10 +156,7 @@ def checagem_produtos(): #faz a checagem doq foi escolhido entre os mostrados ac
                 Funções_basicas.limpar_tela()
                 name_app()
                 cadastrar_produto()
-                Funções_basicas.limpar_tela()
                 cadastrar_outro_produto()
-                Funções_basicas.limpar_tela()
-                name_app()
                 menu_produtos()
                 break
             
