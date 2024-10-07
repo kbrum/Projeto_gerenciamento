@@ -66,6 +66,7 @@ def checagem_financeiro(): #faz a checagem doq foi escolhido entre os mostrados 
                 print('\n')
                 menu_financeiro()
                 break
+            
             elif escolha_financeiro == 2:
                 Funções_basicas.limpar_tela()
                 name_app()
@@ -73,17 +74,12 @@ def checagem_financeiro(): #faz a checagem doq foi escolhido entre os mostrados 
                 print('\n')
                 menu_financeiro()
                 break
+            
             elif escolha_financeiro == 3:
                 Funções_basicas.limpar_tela()
                 print('não implementado ainda')
                 break
-            else:
-                Funções_basicas.limpar_tela()
-                name_app()
-                mostrar_opcoes_financeiro()
-                Funções_basicas.erro_de_valor()
-                checagem_financeiro()
-                break
+
         except:
             Funções_basicas.limpar_tela()
             name_app()

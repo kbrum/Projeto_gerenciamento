@@ -68,6 +68,7 @@ def checagem_estoque(): #faz a checagem doq foi escolhido entre os mostrados aci
                 print('\n')
                 menu_estoque()
                 break
+            
             elif escolha_financeiro == 2:
                 Funções_basicas.limpar_tela()
                 name_app()
@@ -75,17 +76,12 @@ def checagem_estoque(): #faz a checagem doq foi escolhido entre os mostrados aci
                 print('\n')
                 menu_estoque()
                 break
+            
             elif escolha_financeiro == 3:
                 Funções_basicas.limpar_tela()
                 print('não implementado ainda')
                 break
-            else:
-                Funções_basicas.limpar_tela()
-                name_app()
-                mostrar_opcoes_estoque()
-                Funções_basicas.erro_de_valor()
-                checagem_estoque()
-                break
+        
         except:
             Funções_basicas.limpar_tela()
             name_app()

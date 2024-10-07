@@ -27,13 +27,6 @@ def menu_produtos(): #pergunta ao usuario se quer voltar ao menu
                 main_produtos()
                 break
             
-            else:
-                Funções_basicas.limpar_tela()
-                name_app()
-                Funções_basicas.erro_de_valor()
-                menu_produtos()
-                break
-
         except:
             Funções_basicas.limpar_tela()
             name_app()
@@ -55,28 +48,21 @@ def mostrar_produtos(): #mostra todos os produtos
 def cadastrar_outro_produto(): #pergunta se quer cadastrar outro produto
     while True:
         try:
-            Funções_basicas.limpar_tela
+            Funções_basicas.limpar_tela()
             name_app()
             print('\nDeseja cadastrar outro produto?')
             print('1 - Sim')
             print('2 - Não')
             Nv_produto = int(input('\n-------------> '))
             
-            if Nv_produto == 2:
-                break
-            
-            elif Nv_produto == 1:
+            if Nv_produto == 1:
                 Funções_basicas.limpar_tela()
                 name_app()
                 cadastrar_produto()
                 break
             
-            else:
-                Funções_basicas.limpar_tela()
-                Funções_basicas.erro_de_valor()
-                cadastrar_outro_produto()
+            elif Nv_produto == 2:
                 break
-
         except:
             Funções_basicas.limpar_tela()
             Funções_basicas.erro_de_valor()
@@ -87,7 +73,6 @@ def cadastro_feito(): #mostra mensagem de cadastro bem sucedido
     print('\n Um codigo de produto foi dado automaticamente a seu produto')
     print('\n Cadastro concluido com succeso')
     input('\n Pressione enter para continuar')
-   
 class codigo_produto: #gera um codigo de produto autoincrementavel
     def __init__(self):
         self.codigo = 0
@@ -95,8 +80,7 @@ class codigo_produto: #gera um codigo de produto autoincrementavel
     def pro_num(self):
         self.codigo +=1
         return self.codigo
-
-gerador = codigo_produto()
+gerador = codigo_produto() #instacia do gerador de codigo
 
 def cadastrar_produto(): #cadastrar um novo produto
     while True:
@@ -150,11 +134,7 @@ def checagem_produtos(): #faz a checagem doq foi escolhido entre os mostrados ac
                 Funções_basicas.limpar_tela()
                 name_app()
                 cadastrar_produto()
-                print('\n')
                 Funções_basicas.limpar_tela()
-                cadastrar_outro_produto()
-                cadastrar_outro_produto()
-                cadastrar_outro_produto()
                 cadastrar_outro_produto()
                 Funções_basicas.limpar_tela()
                 name_app()
@@ -164,14 +144,6 @@ def checagem_produtos(): #faz a checagem doq foi escolhido entre os mostrados ac
             elif escolha_financeiro == 3:
                 Funções_basicas.limpar_tela()
                 print('não implementado ainda')
-                break
-            
-            else:
-                Funções_basicas.limpar_tela()
-                name_app()
-                mostrar_opcoes_produtos()
-                Funções_basicas.erro_de_valor()
-                checagem_produtos()
                 break
             
         except:
@@ -190,4 +162,4 @@ def main_produtos(): #executa todas as funções na ordem certa
 def executar_programa(): #mostra o programa na tela
     main_produtos()
     
-executar_programa() #usado para testes unitarios
+#executar_programa() #usado para testes unitarios
