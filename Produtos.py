@@ -114,13 +114,14 @@ def solicitar_entrada(mensagem, tipo):  # Função para garantir que a entrada n
         else:
             Funções_basicas.limpar_tela()
             name_app()
-            print(f'\nO {tipo} do seu produto não pode ficar em branco.')
+            print(f'\nA parte de {tipo} do seu produto não pode ficar em branco.')
 
 def cadastrar_produto():  # Função para cadastrar um novo produto
     while True:
         try:
             nome = solicitar_entrada('Qual o nome do seu produto?', 'nome')
             tipo = solicitar_entrada('Qual o tipo do seu produto? (ex: Calçado, Vestuário, Eletrônico)', 'tipo')
+            subsecao = solicitar_entrada('Qual a subseção do seu produto? (ex: Tenis, Camisa regata, Camisa social)', 'subseção')
             preço = solicitar_preco()
             
             codigo_produto = gerador.pro_num()  # Substitua por sua função geradora de código
@@ -130,6 +131,7 @@ def cadastrar_produto():  # Função para cadastrar um novo produto
                 'nome': nome,
                 'preço': preço,
                 'tipo': tipo,
+                'subseção' : subsecao,
                 'codigo de produto': codigo_produto}
             
             produtos.append(produto_di)
@@ -153,9 +155,10 @@ def mostrar_produtos():  # Função para mostrar todos os produtos cadastrados
         for produto in produtos:
             nome = produto['nome']
             tipo = produto['tipo']
+            subsecao = produto['subseção']
             preço = produto['preço']
             codigo_de_produto = produto['codigo de produto']
-            print(f'\n--> Nome: {nome} | Seção: {tipo} | Preço R${preço:.2f} | Código: {codigo_de_produto}')
+            print(f'\n--> Nome: {nome} | Seção: {tipo} | Subseção: {subsecao} | Preço R${preço:.2f} | Código: {codigo_de_produto} |')
         input('\n(Digite Enter para continuar)')
         
 def cadastro_feito(): #mostra mensagem de cadastro bem sucedido
@@ -226,4 +229,4 @@ def main_produtos(): #executa todas as funções na ordem certa
 def executar_programa():#mostra o programa na tela
     main_produtos()
     
-#executar_programa() #usado para testes unitarios(Por padrao desabilitado)
+executar_programa() #usado para testes unitarios(Por padrao desabilitado)
