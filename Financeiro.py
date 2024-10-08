@@ -354,4 +354,4 @@ def main_financeiro(): #executa todas as funções na ordem certa
 def executar_programa(): #mostra o programa na tela
     main_financeiro()
 
-executar_programa() #usado para testes unitarios
+#executar_programa() #usado para testes unitarios

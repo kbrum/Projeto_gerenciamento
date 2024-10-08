@@ -99,7 +99,6 @@ def checagem_estoque(): #faz a checagem doq foi escolhido entre os mostrados aci
             
             elif escolha_financeiro == 3:
                 Funções_basicas.limpar_tela()
-                print('não implementado ainda')
                 break
         
         except:
@@ -111,11 +110,13 @@ def checagem_estoque(): #faz a checagem doq foi escolhido entre os mostrados aci
             break
     
 def main_estoque(): #executa todas as funções na ordem certa
+    Funções_basicas.limpar_tela()
     name_app()
     mostrar_opcoes_estoque()
     checagem_estoque()
+    
 
 def executar_programa(): #mostra o programa na tela
     main_estoque()
-
+    
 #executar_programa() #usado para testes unitarios (Por padrao desabilitado)

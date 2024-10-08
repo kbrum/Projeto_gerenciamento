@@ -13,7 +13,7 @@ def name_app():
 ╚██████╔╝███████╗██║░░██║███████╗██║░╚███║╚█████╔╝██║██║░░██║
 ░╚═════╝░╚══════╝╚═╝░░╚═╝╚══════╝╚═╝░░╚══╝░╚════╝░╚═╝╚═╝░░╚═╝''')
     
-def exibir_opcoes():
+def mostrar_opcoes():
     print('\nSeja bem vindo')
     print('\n1 - Produtos')
     print('2 - Estoque')
@@ -21,58 +21,81 @@ def exibir_opcoes():
     print('4 - Funcionarios')
     print('5 - Sair')
 
-def conferir_alternativas(): #Faz a checagem e autenticação da escolha
+def checagem_main(): #Faz a checagem e autenticação da escolha
     while True:
         try:
             print('\nEscolha uma opção')
-            escolha = int(input('\n-------------> '))
-                    
-            if escolha == 1:
+            
+            # Captura a entrada e remove espaços em branco
+            escolha_funcionario = input('\n-------------> ').strip()
+    
+            # Verifica se a entrada está vazia
+            if not escolha_funcionario:
                 Funções_basicas.limpar_tela()
-                #
-                # Produtos.main_produtos()
+                name_app()
+                mostrar_opcoes()
+                print('\nA escolha não pode ficar em branco.')
+                continue 
+
+            # Tenta converter para número inteiro
+            escolha_funcionario = int(escolha_funcionario)
+
+            # Verifica as opções
+            if escolha_funcionario == 1:
+                Funções_basicas.limpar_tela()
+                name_app()
+                Produtos.main_produtos()
                 break
-                        
-            elif escolha == 2:
+
+            elif escolha_funcionario == 2:
                 Funções_basicas.limpar_tela()
-                #Estoque.main_estoque()
+                name_app()
+                Estoque.main_estoque()
+                break
+            elif escolha_funcionario == 3:
+                Funções_basicas.limpar_tela()
+                name_app()
+                Financeiro.main_financeiro()
                 break
             
-            elif escolha == 3:
+            elif escolha_funcionario == 4:
                 Funções_basicas.limpar_tela()
-                #Financeiro.main_financeiro()
+                name_app()
+                Funcionarios.main_funcionarios()
                 break
-                        
-            elif escolha == 4:
+            
+            elif escolha_funcionario == 5:
                 Funções_basicas.limpar_tela()
-                #Funcionarios.main_funcionarios()
-                break
-                        
-            elif escolha == 5:
-                Funções_basicas.limpar_tela()
-                print('Finalizado')
-                break
-                    
+                name_app()
+                confirmacao = input('\nTem certeza que deseja sair? (s/n): ').strip().lower()
+                if confirmacao == 's':
+                    Funções_basicas.limpar_tela()
+                    print('\nFINALIZADO')
+                    break
+                else:
+                    Funções_basicas.limpar_tela()
+                    name_app()
+                    mostrar_opcoes()
+            
             else:
                 Funções_basicas.limpar_tela()
                 name_app()
-                exibir_opcoes()
-                Funções_basicas.erro_de_valor()
-                conferir_alternativas()
-                break
-        except:
+                mostrar_opcoes()
+                print('Por favor, escolha uma opção válida.')
+
+        except ValueError:  # Captura erros de conversão de string para int
             Funções_basicas.limpar_tela()
             name_app()
-            exibir_opcoes()
+            mostrar_opcoes()
             Funções_basicas.erro_de_valor()
-            conferir_alternativas()
-            break
-        
+    
 def main():
     Funções_basicas.limpar_tela()
     name_app()
-    exibir_opcoes()
-    conferir_alternativas()
+    mostrar_opcoes()
+    checagem_main()
     
+def executar_programa():#executa o programa 
+    main()
     
-main()
+executar_programa() #mostra na tela

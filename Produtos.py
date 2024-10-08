@@ -229,4 +229,4 @@ def main_produtos(): #executa todas as funções na ordem certa
 def executar_programa():#mostra o programa na tela
     main_produtos()
     
-executar_programa() #usado para testes unitarios(Por padrao desabilitado)
+#executar_programa() #usado para testes unitarios(Por padrao desabilitado)

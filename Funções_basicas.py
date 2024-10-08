@@ -1,4 +1,5 @@
 import os
+
 def variavel_em_branco(): #caso o usuario na digite nada
     print('\nEste campo não pode ficar em branco')
 
@@ -10,4 +11,3 @@ def erro_de_valor(): # aparece quando se digita algo que não é numero
 
 def limpar_tela(): #Meio óbvio...
     os.system('cls')
-    
