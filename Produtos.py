@@ -19,7 +19,7 @@ class codigo_produto: #gera um codigo de produto autoincrementavel
 gerador = codigo_produto() #instacia do gerador de codigo
 
 def menu_produtos(): #pergunta ao usuario se quer voltar ao menu 
-    while True:
+   while True:
         try:
             Funções_basicas.limpar_tela()
             name_app()
@@ -148,15 +148,14 @@ def mostrar_produtos():  # Função para mostrar todos os produtos cadastrados
         name_app()
         print('\nNenhum produto cadastrado.')
         input('\nPressione Enter para continuar.')
-
-    
-    print('\nSeus produtos são:\n')
-    for produto in produtos:
-        nome = produto['nome']
-        tipo = produto['tipo']
-        preço = produto['preço']
-        codigo_de_produto = produto['codigo de produto']
-        print(f'--> {nome} | {tipo} | R$: {preço:.2f} | Código: {codigo_de_produto}')
+    else:
+        print('\nSeus produtos são:\n')
+        for produto in produtos:
+            nome = produto['nome']
+            tipo = produto['tipo']
+            preço = produto['preço']
+            codigo_de_produto = produto['codigo de produto']
+            print(f'\n--> Nome: {nome} | Seção: {tipo} | R$: {preço:.2f} | Código: {codigo_de_produto}')
         input('\n(Digite Enter para continuar)')
         
 def cadastro_feito(): #mostra mensagem de cadastro bem sucedido
@@ -172,19 +171,33 @@ def mostrar_opcoes_produtos(): #mostra as opções que o usuario pode escolher
     print('3 - Voltar ao menu')
        
 def checagem_produtos(): #faz a checagem doq foi escolhido entre os mostrados acima
-    while True:
+   while True:
         try:
             print('\nEscolha uma opção')
-            escolha_financeiro = int(input('\n-------------> '))
             
-            if escolha_financeiro == 1:
+            # Captura a entrada e remove espaços em branco
+            escolha_funcionario = input('\n-------------> ').strip()
+    
+            # Verifica se a entrada está vazia
+            if not escolha_funcionario:
+                Funções_basicas.limpar_tela()
+                name_app()
+                mostrar_opcoes_produtos()
+                print('\nA escolha não pode ficar em branco.')
+                continue 
+
+            # Tenta converter para número inteiro
+            escolha_funcionario = int(escolha_funcionario)
+
+            # Verifica as opções
+            if escolha_funcionario == 1:
                 Funções_basicas.limpar_tela()
                 name_app()
                 mostrar_produtos()
                 menu_produtos()
                 break
-            
-            elif escolha_financeiro == 2:
+
+            elif escolha_funcionario == 2:
                 Funções_basicas.limpar_tela()
                 name_app()
                 cadastrar_produto()
@@ -192,25 +205,25 @@ def checagem_produtos(): #faz a checagem doq foi escolhido entre os mostrados ac
                 menu_produtos()
                 break
             
-            elif escolha_financeiro == 3:
+            else:
                 Funções_basicas.limpar_tela()
-                print('não implementado ainda')
-                break
-            
-        except:
+                name_app()
+                mostrar_opcoes_produtos()
+                print('Por favor, escolha uma opção válida.')
+
+        except ValueError:  # Captura erros de conversão de string para int
             Funções_basicas.limpar_tela()
             name_app()
             mostrar_opcoes_produtos()
             Funções_basicas.erro_de_valor()
-            checagem_produtos()
-            break
     
 def main_produtos(): #executa todas as funções na ordem certa
+    Funções_basicas.limpar_tela()
     name_app()
     mostrar_opcoes_produtos()
     checagem_produtos()
 
-def executar_programa(): #mostra o programa na tela
+def executar_programa():#mostra o programa na tela
     main_produtos()
     
-#executar_programa() #usado para testes unitarios(Por padrao desabilitado)
+executar_programa() #usado para testes unitarios(Por padrao desabilitado)

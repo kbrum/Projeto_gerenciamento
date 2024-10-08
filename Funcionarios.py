@@ -116,19 +116,21 @@ def cadastrar_funcionario():  # Função para cadastrar um novo funcionário
             print('\nEste campo não pode ficar em branco.')
 
 def mostrar_funcionarios():  # Função para mostrar os funcionários cadastrados
-    if funcionarios:
-        print('\nSeus funcionários são:')
-        for funcionario in funcionarios:
-            nome = funcionario['nome']
-            setor = funcionario['setor']
-            codigo_funcionario = funcionario['codigo_funcionario']  # Chave corrigida
-            print(f'\n--> Nome: {nome} | Setor: {setor} | Código: {codigo_funcionario}')
-    else:
+    if not funcionarios:
         Funções_basicas.limpar_tela()
         name_app()
         print('\nNenhum funcionário cadastrado.')
         input('\n(Digite Enter para continuar)')
-
+    
+    else:
+        print('\nSeus funcionários são:')
+        for funcionario in funcionarios:
+            nome = funcionario['nome']
+            setor = funcionario['setor']
+            codigo_funcionario = funcionario['codigo_funcionario']    
+            print(f'\n--> Nome: {nome} | Setor: {setor} | Código: {codigo_funcionario}')
+        input('\n(Digite Enter para continuar)')
+            
 def cadastro_feito(): #mostra mensagem de cadastro bem sucedido
     Funções_basicas.limpar_tela()
     name_app()
@@ -141,20 +143,34 @@ def mostrar_opcoes_funcionarios(): #mostra as opçoes que o usuario pode escolhe
     print('2 - Cadastrar funcionario')
     print('3 - Voltar ao menu')
 
-def checagem_funcionarios(): #checa a escolha q o usuario fez
+def checagem_funcionarios():  # Checa a escolha que o usuário fez
     while True:
         try:
             print('\nEscolha uma opção')
-            escolha_funcioanrio = int(input('\n-------------> '))
             
-            if escolha_funcioanrio == 1:
+            # Captura a entrada e remove espaços em branco
+            escolha_funcionario = input('\n-------------> ').strip()
+
+            # Verifica se a entrada está vazia
+            if not escolha_funcionario:
+                Funções_basicas.limpar_tela()
+                name_app()
+                mostrar_opcoes_funcionarios()
+                print('\nA escolha não pode ficar em branco.')
+                continue 
+
+            # Tenta converter para número inteiro
+            escolha_funcionario = int(escolha_funcionario)
+
+            # Verifica as opções
+            if escolha_funcionario == 1:
                 Funções_basicas.limpar_tela()
                 name_app()
                 mostrar_funcionarios()
                 menu_funcionacios()
                 break
-                
-            elif escolha_funcioanrio == 2:
+
+            elif escolha_funcionario == 2:
                 Funções_basicas.limpar_tela()
                 name_app()
                 cadastrar_funcionario()
@@ -162,15 +178,20 @@ def checagem_funcionarios(): #checa a escolha q o usuario fez
                 menu_funcionacios()
                 break
             
-        except:
+            else:
+                Funções_basicas.limpar_tela()
+                name_app()
+                mostrar_opcoes_funcionarios()
+                print('Por favor, escolha uma opção válida.')
+
+        except ValueError:  # Captura erros de conversão de string para int
             Funções_basicas.limpar_tela()
             name_app()
             mostrar_opcoes_funcionarios()
             Funções_basicas.erro_de_valor()
-            checagem_funcionarios()
-            break
-        
+     
 def main_funcionarios(): #executa as funções na ordem certo
+    Funções_basicas.limpar_tela()
     name_app()
     mostrar_opcoes_funcionarios()
     checagem_funcionarios()

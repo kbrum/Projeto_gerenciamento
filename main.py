@@ -29,22 +29,23 @@ def conferir_alternativas(): #Faz a checagem e autenticação da escolha
                     
             if escolha == 1:
                 Funções_basicas.limpar_tela()
-                Produtos.main_produtos()
+                #
+                # Produtos.main_produtos()
                 break
                         
             elif escolha == 2:
                 Funções_basicas.limpar_tela()
-                Estoque.main_estoque()
+                #Estoque.main_estoque()
                 break
             
             elif escolha == 3:
                 Funções_basicas.limpar_tela()
-                Financeiro.main_financeiro()
+                #Financeiro.main_financeiro()
                 break
                         
             elif escolha == 4:
                 Funções_basicas.limpar_tela()
-                Funcionarios.main_funcionarios()
+                #Funcionarios.main_funcionarios()
                 break
                         
             elif escolha == 5:

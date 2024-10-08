@@ -56,6 +56,7 @@ def cadastrar_despesa():
 
 def mostrar_saldo(): #mostra o saldo
     print(f'\nSeu saldo é de R${saldo}')
+    
 
 def mostrar_despesas(): # mostra as despesas
     print('\nSuas depesas:')
@@ -120,4 +121,4 @@ def main_financeiro(): #executa todas as funções na ordem certa
 def executar_programa(): #mostra o programa na tela
     main_financeiro()
 
-#executar_programa() #usado para testes unitarios
+executar_programa() #usado para testes unitarios
