@@ -93,7 +93,7 @@ produtos = []
 def solicitar_preco():  # Função para garantir que o preço seja numérico e positivo
     while True:
         try:
-            print('\nQual o valor do seu produto? (Insira apenas números)')
+            print('\nQual o preço do seu produto? (Insira apenas números)')
             preço = float(input('\n------------->').strip())
             if preço > 0:
                 return preço
@@ -149,19 +149,19 @@ def mostrar_produtos():  # Função para mostrar todos os produtos cadastrados
         print('\nNenhum produto cadastrado.')
         input('\nPressione Enter para continuar.')
     else:
-        print('\nSeus produtos são:\n')
+        print('\nSeus produtos são:')
         for produto in produtos:
             nome = produto['nome']
             tipo = produto['tipo']
             preço = produto['preço']
             codigo_de_produto = produto['codigo de produto']
-            print(f'\n--> Nome: {nome} | Seção: {tipo} | R$: {preço:.2f} | Código: {codigo_de_produto}')
+            print(f'\n--> Nome: {nome} | Seção: {tipo} | Preço R${preço:.2f} | Código: {codigo_de_produto}')
         input('\n(Digite Enter para continuar)')
         
 def cadastro_feito(): #mostra mensagem de cadastro bem sucedido
     Funções_basicas.limpar_tela()
     name_app()
-    print('\n Um codigo de produto foi gerado automaticamente a seu produto')
+    print('\n Um codigo de identificação foi gerado automaticamente a seu produto')
     print('\n Cadastro concluido com succeso')
     input('\n Pressione enter para continuar')
            
@@ -226,4 +226,4 @@ def main_produtos(): #executa todas as funções na ordem certa
 def executar_programa():#mostra o programa na tela
     main_produtos()
     
-executar_programa() #usado para testes unitarios(Por padrao desabilitado)
+#executar_programa() #usado para testes unitarios(Por padrao desabilitado)

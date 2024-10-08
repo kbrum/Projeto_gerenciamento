@@ -134,7 +134,7 @@ def mostrar_funcionarios():  # Função para mostrar os funcionários cadastrado
 def cadastro_feito(): #mostra mensagem de cadastro bem sucedido
     Funções_basicas.limpar_tela()
     name_app()
-    print('\n Um codigo de funcionario foi gerado automaticamente a seu funcinario')
+    print('\n Um codigo de identificação foi gerado automaticamente a seu funcinario')
     print('\n Cadastro concluido com succeso')
     input('\n Pressione Enter para continuar')
 
@@ -199,4 +199,4 @@ def main_funcionarios(): #executa as funções na ordem certo
 def executar_programa(): #executa o programa
     main_funcionarios()
 
-executar_programa() #usado para teste unitarios
+#executar_programa() #usado para teste unitarios

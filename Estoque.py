@@ -118,4 +118,4 @@ def main_estoque(): #executa todas as funções na ordem certa
 def executar_programa(): #mostra o programa na tela
     main_estoque()
 
-executar_programa() #usado para testes unitarios (Por padrao desabilitado)
+#executar_programa() #usado para testes unitarios (Por padrao desabilitado)
