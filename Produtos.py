@@ -5,7 +5,7 @@ def name_app():
 ██████╗░██████╗░░█████╗░██████╗░██╗░░░██╗████████╗░█████╗░░██████╗
 ██╔══██╗██╔══██╗██╔══██╗██╔══██╗██║░░░██║╚══██╔══╝██╔══██╗██╔════╝
 ██████╔╝██████╔╝██║░░██║██║░░██║██║░░░██║░░░██║░░░██║░░██║╚█████╗░
-██╔═══╝░██╔══██╗██║░░██║██║░░██║██║░░░██║░░░██║░░░██║░░██║░╚═══██╗
+██╔═══╝░██╔══██╗██║░░██║██║░░██║██║░░░██║░░░██║░ ░░██║░░██║░╚═══██╗
 ██║░░░░░██║░░██║╚█████╔╝██████╔╝╚██████╔╝░░░██║░░░╚█████╔╝██████╔╝
 ╚═╝░░░░░╚═╝░░╚═╝░╚════╝░╚═════╝░░╚═════╝░░░░╚═╝░░░░╚════╝░╚═════╝░''')
     
@@ -21,27 +21,38 @@ gerador = codigo_produto() #instacia do gerador de codigo
 def menu_produtos(): #pergunta ao usuario se quer voltar ao menu 
     while True:
         try:
+            Funções_basicas.limpar_tela()
+            name_app()
             print('\nDeseja voltar ao menu? ')
             print('1 - Sim')
             print('2 - Não')
-            menu = int(input('\n-------------> '))
             
-            if menu == 2:
+            menu = input('\n-------------> ').strip()
+            
+            if not menu: # verifica se a entrada do menu não é vazia
+                Funções_basicas.limpar_tela()
+                name_app()
+                print('\nEste campo não pode ficar em branco')
+                input('\n(Digite Enter para continuar)')
+                continue
+            
+            menu = int(menu)
+            
+            if menu == 2: # fecha o programa
                 Funções_basicas.limpar_tela()
                 print('Finalizado')
                 break
             
-            elif menu == 1:
+            elif menu == 1: # volta ao menu de produtos
                 Funções_basicas.limpar_tela()
                 main_produtos()
                 break
             
-        except:
+        except ValueError: #em caso de inserir algo que não é numero na opção
             Funções_basicas.limpar_tela()
             name_app()
             Funções_basicas.erro_de_valor()
-            menu_produtos()
-            break
+            input('\n(Digite Enter para continuar)')
 
 def cadastrar_outro_produto(): #pergunta se quer cadastrar outro produto
     while True:
@@ -51,86 +62,107 @@ def cadastrar_outro_produto(): #pergunta se quer cadastrar outro produto
             print('\nDeseja cadastrar outro produto?')
             print('1 - Sim')
             print('2 - Não')
-            Nv_produto = int(input('\n-------------> '))
             
-            if Nv_produto == 1:
+            nv_produto = input('\n-------------> ').strip()
+            
+            if not nv_produto:
+                Funções_basicas.limpar_tela()
+                name_app()
+                print('\nEste campo não pode ficar em branco')
+                input('\n(Digite Enter para continuar)')
+                continue
+                
+            nv_produto = int(nv_produto)
+    
+            if nv_produto == 1:
                 Funções_basicas.limpar_tela()
                 name_app()
                 cadastrar_produto()
             
-            elif Nv_produto == 2:
+            elif nv_produto == 2:
                 break
-        except:
+            
+        except ValueError:
             Funções_basicas.limpar_tela()
             name_app()
             Funções_basicas.erro_de_valor()
-            cadastrar_outro_produto()
-            break
+            input('\n(Digite Enter para continuar)')
 
 produtos = []
+
+def solicitar_preco():  # Função para garantir que o preço seja numérico e positivo
+    while True:
+        try:
+            print('\nQual o valor do seu produto? (Insira apenas números)')
+            preço = float(input('\n------------->').strip())
+            if preço > 0:
+                return preço
+            else:
+                Funções_basicas.limpar_tela()
+                name_app()
+                print('O preço do produto deve ser positivo.')
+        except ValueError:
+            Funções_basicas.limpar_tela()
+            name_app()
+            Funções_basicas.preço_erro()
+
+def solicitar_entrada(mensagem, tipo):  # Função para garantir que a entrada não esteja em branco
+    while True:
+        valor = input(f'\n{mensagem}\n------------->').strip()
+        if valor:
+            return valor
+        else:
+            Funções_basicas.limpar_tela()
+            name_app()
+            print(f'\nO {tipo} do seu produto não pode ficar em branco.')
 
 def cadastrar_produto():  # Função para cadastrar um novo produto
     while True:
         try:
-            print('\nQual o nome do seu produto?')
-            nome = input('\n------------->').strip()
-            while not nome: 
-                Funções_basicas.limpar_tela()
-                name_app() 
-                print("\nO nome do produto não pode ficar em branco.")
-                print('\nQual o nome do seu produto?')
-                nome = input('\n------------->').strip()
-                
-            print('\nQual o tipo do seu produto? (ex: Calçado, Vestuário, Eletrônico)')
-            tipo = input('\n------------->').strip()
-            while not tipo:  # Verifica se o tipo foi preenchido
-                Funções_basicas.limpar_tela()
-                name_app() 
-                print("\nO tipo do produto não pode ficar em branco.")
-                print('\nQual o tipo do seu produto? (ex: Calçado, Vestuário, Eletrônico)')
-                tipo = input('\n------------->').strip()
-        
-            print('\nQual o valor do seu produto? (Insira apenas números)')
-            preço = float(input('\n------------->'))
+            nome = solicitar_entrada('Qual o nome do seu produto?', 'nome')
+            tipo = solicitar_entrada('Qual o tipo do seu produto? (ex: Calçado, Vestuário, Eletrônico)', 'tipo')
+            preço = solicitar_preco()
             
-            codigo = gerador.pro_num()  # Substitua por sua função geradora de código
+            codigo_produto = gerador.pro_num()  # Substitua por sua função geradora de código
 
             #armazena um novo produto
             produto_di = {
                 'nome': nome,
                 'preço': preço,
                 'tipo': tipo,
-                'codigo de produto': codigo
-            }
+                'codigo de produto': codigo_produto}
+            
             produtos.append(produto_di)
             
             cadastro_feito()  # Confirma o cadastro do produto
             break 
 
-        except:
+        except ValueError:
             Funções_basicas.limpar_tela()
             name_app()
             Funções_basicas.preço_erro()
-            cadastrar_produto()
             
-
 def mostrar_produtos():  # Função para mostrar todos os produtos cadastrados
-    if produtos:
-        print('\nSeus produtos são:\n')
-        for produto in produtos:
-            nome = produto['nome']
-            tipo = produto['tipo']
-            preço = produto['preço']
-            codigo_de_produto = produto['codigo de produto']
-            print(f'--> {nome} | {tipo} | R$: {preço:.2f} | Código: {codigo_de_produto}')
-    else:
+    if not produtos:
         Funções_basicas.limpar_tela()
         name_app()
         print('\nNenhum produto cadastrado.')
         input('\nPressione Enter para continuar.')
 
+    
+    print('\nSeus produtos são:\n')
+    for produto in produtos:
+        nome = produto['nome']
+        tipo = produto['tipo']
+        preço = produto['preço']
+        codigo_de_produto = produto['codigo de produto']
+        print(f'--> {nome} | {tipo} | R$: {preço:.2f} | Código: {codigo_de_produto}')
+        input('\n(Digite Enter para continuar)')
+        
 def cadastro_feito(): #mostra mensagem de cadastro bem sucedido
-    print('\n Um codigo de produto foi dado automaticamente a seu produto')
+    Funções_basicas.limpar_tela()
+    name_app()
+    print('\n Um codigo de produto foi gerado automaticamente a seu produto')
     print('\n Cadastro concluido com succeso')
     input('\n Pressione enter para continuar')
            
@@ -181,4 +213,4 @@ def main_produtos(): #executa todas as funções na ordem certa
 def executar_programa(): #mostra o programa na tela
     main_produtos()
     
-executar_programa() #usado para testes unitarios
+#executar_programa() #usado para testes unitarios(Por padrao desabilitado)

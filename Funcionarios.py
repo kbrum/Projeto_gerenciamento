@@ -20,27 +20,38 @@ gerador = codigo_funcionario() #instacia do gerador de codigo
 def menu_funcionacios(): #pergunta ao usuario se quer voltar ao menu 
     while True:
         try:
+            Funções_basicas.limpar_tela()
+            name_app()
             print('\nDeseja voltar ao menu? ')
             print('1 - Sim')
             print('2 - Não')
-            menu = int(input('\n-------------> '))
             
-            if menu == 2:
+            menu = input('\n-------------> ').strip()
+            
+            if not menu: # verifica se a entrada do menu não é vazia
+                Funções_basicas.limpar_tela()
+                name_app()
+                print('\nEste campo não pode ficar em branco')
+                input('\n(Digite Enter para continuar)')
+                continue
+            
+            menu = int(menu)
+            
+            if menu == 2: # fecha o programa
                 Funções_basicas.limpar_tela()
                 print('Finalizado')
                 break
             
-            elif menu == 1:
+            elif menu == 1: # volta ao menu de funcionarios
                 Funções_basicas.limpar_tela()
                 main_funcionarios()
                 break
             
-        except:
+        except ValueError: #em caso de inserir algo que não é numero na opção
             Funções_basicas.limpar_tela()
             name_app()
             Funções_basicas.erro_de_valor()
-            menu_funcionacios()
-            break
+            input('\n(Digite Enter para continuar)')
 
 def cadastrar_outro_funcionario(): #pergunta se quer cadastrar outro funcionario
     while True:
@@ -67,26 +78,23 @@ def cadastrar_outro_funcionario(): #pergunta se quer cadastrar outro funcionario
             cadastrar_outro_funcionario()
             break
 
+def solicitar_entrada(mensagem, setor):  # Função para garantir que a entrada não esteja em branco
+    while True:
+        entrada = input(f'\n{mensagem}\n------------->').strip()
+        if entrada:
+            return entrada
+        else:
+            Funções_basicas.limpar_tela()
+            name_app()
+            print(f'\nO {setor} do seu funcionario não pode ficar em branco.')
+
 funcionarios = []
 
 def cadastrar_funcionario():  # Função para cadastrar um novo funcionário
     while True:
         try:
-            print('\nQual o nome do seu funcionário?')
-            nome = input('\n-------------> ').strip()
-            while not nome:
-                Funções_basicas.limpar_tela()
-                name_app()
-                print('\nEste campo não pode ficar em branco')
-                print('\nQual o nome do seu funcionário?')
-                nome = input('\n-------------> ').strip()
-
-            print('\nQual o setor do seu funcionário? (ex: RH, Administração, T.I)')
-            setor = input('\n-------------> ').strip()
-            while not setor:
-                print('\nEste campo não pode ficar em branco')
-                print('\nQual o setor do seu funcionário? (ex: RH, Administração, T.I)')
-                setor = input('\n-------------> ').strip()
+            nome = solicitar_entrada('Qual o nome do seu funcionario?', 'nome')
+            setor = solicitar_entrada('Qual o setor do seu funcionario?', 'setor')
 
             codigo_funcionario = gerador.pro_num()
 
@@ -94,8 +102,8 @@ def cadastrar_funcionario():  # Função para cadastrar um novo funcionário
             funcionario_di = {
                 'nome': nome,
                 'setor': setor,
-                'codigo_funcionario': codigo_funcionario
-            }
+                'codigo_funcionario': codigo_funcionario}
+            
             funcionarios.append(funcionario_di)
 
             cadastro_feito()  # Função para notificar que o cadastro foi feito
@@ -106,8 +114,6 @@ def cadastrar_funcionario():  # Função para cadastrar um novo funcionário
             name_app()
             print(f'\nErro: {e}')
             print('\nEste campo não pode ficar em branco.')
-            cadastrar_funcionario()
-            break
 
 def mostrar_funcionarios():  # Função para mostrar os funcionários cadastrados
     if funcionarios:
@@ -121,10 +127,12 @@ def mostrar_funcionarios():  # Função para mostrar os funcionários cadastrado
         Funções_basicas.limpar_tela()
         name_app()
         print('\nNenhum funcionário cadastrado.')
-        input('\nPressione Enter para continuar.')
+        input('\n(Digite Enter para continuar)')
 
 def cadastro_feito(): #mostra mensagem de cadastro bem sucedido
-    print('\n Um codigo de funcionario foi dado automaticamente a seu funcinario')
+    Funções_basicas.limpar_tela()
+    name_app()
+    print('\n Um codigo de funcionario foi gerado automaticamente a seu funcinario')
     print('\n Cadastro concluido com succeso')
     input('\n Pressione Enter para continuar')
 
