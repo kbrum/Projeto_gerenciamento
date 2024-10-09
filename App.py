@@ -1133,7 +1133,7 @@ class Funcionarios: #Funcionarios
     def executar_programa(): #executa o programa
         Funcionarios.main_funcionarios()
 
-class Main: #MAIN
+class Main: #MAIN.
     def name_app():     
         print('''
     ░██████╗░███████╗██████╗░███████╗███╗░░██╗░█████╗░██╗░█████╗░
