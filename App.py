@@ -363,7 +363,7 @@ class Estoque: #Estoque
         Estoque.mostrar_opcoes_estoque()
         Estoque.checagem_estoque()
 
-class Financeiro:
+class Financeiro: #Financeiro
     def name_app(): #titulo
         print('''
     ███████╗██╗███╗░░██╗░█████╗░███╗░░██╗░█████╗░███████╗██╗██████╗░░█████╗░

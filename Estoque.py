@@ -1,5 +1,5 @@
 import Funções_basicas
-
+import App
 class Estoque:
     def name_app(): # titulo    
         print('''

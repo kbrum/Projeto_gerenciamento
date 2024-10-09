@@ -1,4 +1,13 @@
 import Funções_basicas
+
+class codigo: #gera um codigo de produto autoincrementavel
+        def __init__(self):
+            self.codigo = 0
+            
+        def pro_num(self):
+            self.codigo +=1
+            return self.codigo
+        
 class Produtos:
     def name_app():
         print('''
@@ -9,14 +18,12 @@ class Produtos:
     ██║░░░░░██║░░██║╚█████╔╝██████╔╝╚██████╔╝░░░██║░░░╚█████╔╝██████╔╝
     ╚═╝░░░░░╚═╝░░╚═╝░╚════╝░╚═════╝░░╚═════╝░░░░╚═╝░░░░╚════╝░╚═════╝░''')
         
-    class codigo_produto: #gera um codigo de produto autoincrementavel
-        def __init__(self):
-            self.codigo = 0
-            
-        def pro_num(self):
-            self.codigo +=1
-            return self.codigo
-    gerador = codigo_produto() #instacia do gerador de codigo
+    class Produto:
+        def __init__(self,nome,tipo,subsecao,quantidade,preço):
+            pass    
+    
+    
+    gerador = codigo() #instacia do gerador de codigo
 
     def menu_produtos(): #pergunta ao usuario se quer voltar ao menu 
         while True:
@@ -106,6 +113,22 @@ class Produtos:
                 Produtos.name_app()
                 Funções_basicas.preço_erro()
 
+    def solicitar_quantidade(): #solicita a quantidade de produtos em estoque
+        while True:
+            try:
+                print('\nQual a quantidade do seu produto? (Insira apenas números)')
+                preço = int(input('\n------------->').strip())
+                if preço > 0:
+                    return preço
+                else:
+                    Funções_basicas.limpar_tela()
+                    Produtos.name_app()
+                    print('A quantidade do produto deve ser positiva.')
+            except ValueError:
+                Funções_basicas.limpar_tela()
+                Produtos.name_app()
+                Funções_basicas.preço_erro()
+        
     def solicitar_entrada(mensagem, tipo):  # Função para garantir que a entrada não esteja em branco
         while True:
             valor = input(f'\n{mensagem}\n------------->').strip()
@@ -122,6 +145,7 @@ class Produtos:
                 nome = Produtos.solicitar_entrada('Qual o nome do seu produto?', 'nome')
                 tipo = Produtos.solicitar_entrada('Qual o tipo do seu produto? (ex: Calçado, Vestuário, Eletrônico)', 'tipo')
                 subsecao = Produtos.solicitar_entrada('Qual a subseção do seu produto? (ex: Tenis, Camisa regata, Camisa social)', 'subseção')
+                quantidade = Produtos.solicitar_quantidade()
                 preço = Produtos.solicitar_preco()
                 
                 codigo_produto = Produtos.gerador.pro_num()  # Substitua por sua função geradora de código
@@ -129,9 +153,10 @@ class Produtos:
                 #armazena um novo produto
                 produto_di = {
                     'nome': nome,
-                    'preço': preço,
                     'tipo': tipo,
                     'subseção' : subsecao,
+                    'quantidade' : quantidade,
+                    'preço': preço,
                     'codigo de produto': codigo_produto}
                 
                 Produtos.produtos.append(produto_di)
@@ -156,9 +181,10 @@ class Produtos:
                 nome = produto['nome']
                 tipo = produto['tipo']
                 subsecao = produto['subseção']
+                quantidade = produto['subseção']
                 preço = produto['preço']
                 codigo_de_produto = produto['codigo de produto']
-                print(f'\n--> Nome: {nome} | Seção: {tipo} | Subseção: {subsecao} | Preço R${preço:.2f} | Código: {codigo_de_produto} |')
+                print(f'\n--> Nome: {nome} | Seção: {tipo} | Subseção: {subsecao} | Quantidade: {quantidade} Preço R${preço:.2f} | Código: {codigo_de_produto} |')
             input('\n(Digite Enter para continuar)')
             
     def cadastro_feito(): #mostra mensagem de cadastro bem sucedido
