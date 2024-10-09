@@ -115,7 +115,6 @@ class Estoque:
         Estoque.mostrar_opcoes_estoque()
         Estoque.checagem_estoque()
         
-
     def executar_programa(): #mostra o programa na tela
         Estoque.main_estoque()
         

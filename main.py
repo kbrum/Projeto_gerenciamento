@@ -14,7 +14,7 @@ class Funções_basicas: #Funções que sao muito usadas
     def limpar_tela(): #Meio óbvio...
         os.system('cls')
 
-class codigo: #gera um codigo de produto/funcionario/conta autoincrementavel
+class codigo: #Gera um codigo de produto/funcionario/conta autoincrementavel
     def __init__(self):
         self.codigo = 0
             
@@ -363,7 +363,7 @@ class Estoque: #Estoque
         Estoque.mostrar_opcoes_estoque()
         Estoque.checagem_estoque()
 
-class Financeiro: # Financeiro
+class Financeiro: #Financeiro
     def name_app(): #titulo
         print('''
     ███████╗██╗███╗░░██╗░█████╗░███╗░░██╗░█████╗░███████╗██╗██████╗░░█████╗░
@@ -374,14 +374,8 @@ class Financeiro: # Financeiro
     ╚═╝░░░░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝╚═╝░░╚══╝░╚════╝░╚══════╝╚═╝╚═╝░░╚═╝░╚════╝░''')
         
     saldo = 1000.00 #variavel que guarda o saldo
-    class codigo_conta: #gera um codigo de produto autoincrementavel
-        def __init__(self):
-            self.codigo = 0
-            
-        def pro_num(self):
-            self.codigo +=1
-            return self.codigo
-    gerador = codigo_conta() #instacia do gerador de codigo
+
+    gerador = codigo() #instacia do gerador de codigo
 
     def menu_financeiro(): #pergunta ao usuario se quer voltar ao menu financeiro
         while True:
@@ -725,14 +719,8 @@ class Funcionarios: #Funcionarios
     ██╔══╝░░╚██████╔╝██║░░░██║██║██╔═══╝░██╔══╝░░
     ███████╗░╚═██╔═╝░╚██████╔╝██║██║░░░░░███████╗
     ╚══════╝░░░╚═╝░░░░╚═════╝░╚═╝╚═╝░░░░░╚══════╝''')
-    class codigo_funcionario: #gera um codigo de produto autoincrementavel
-        def __init__(self):
-            self.codigo = 0
-            
-        def pro_num(self):
-            self.codigo +=1
-            return self.codigo
-    gerador = codigo_funcionario() #instacia do gerador de codigo
+
+    gerador = codigo() #instacia do gerador de codigo
         
     def menu_funcionacios(): #pergunta ao usuario se quer voltar ao menu 
         while True:
@@ -914,7 +902,7 @@ class Funcionarios: #Funcionarios
     def executar_programa(): #executa o programa
         Funcionarios.main_funcionarios()
 
-class Main: # MAIN
+class Main: #MAIN
     def name_app():     
         print('''
     ░██████╗░███████╗██████╗░███████╗███╗░░██╗░█████╗░██╗░█████╗░
