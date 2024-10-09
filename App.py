@@ -22,7 +22,7 @@ class codigo: #Gera um codigo de produto/funcionario/conta autoincrementavel
         self.codigo +=1
         return self.codigo
     
-class Produtos: #Produtos
+class Produtos:
     def name_app():
         print('''
     ██████╗░██████╗░░█████╗░██████╗░██╗░░░██╗████████╗░█████╗░░██████╗
@@ -32,10 +32,18 @@ class Produtos: #Produtos
     ██║░░░░░██║░░██║╚█████╔╝██████╔╝╚██████╔╝░░░██║░░░╚█████╔╝██████╔╝
     ╚═╝░░░░░╚═╝░░╚═╝░╚════╝░╚═════╝░░╚═════╝░░░░╚═╝░░░░╚════╝░╚═════╝░''')
         
-
+    class Produto:
+        def __init__(self,nome,tipo,subsecao,quantidade,preço,codigo):
+            self.nome = nome
+            self.tipo = tipo
+            self.subsecao = subsecao
+            self.quantidade = quantidade
+            self.preço = preço
+            self.codigo = codigo
+    
     gerador = codigo() #instacia do gerador de codigo
 
-    def menu_produtos(): #pergunta ao usuario se quer voltar ao menu produtos
+    def menu_produtos(): #pergunta ao usuario se quer voltar ao menu 
         while True:
                 try:
                     Funções_basicas.limpar_tela()
@@ -105,6 +113,8 @@ class Produtos: #Produtos
                 Funções_basicas.erro_de_valor()
                 input('\n(Digite Enter para continuar)')
 
+    produtos = []
+
     def solicitar_preco():  # Função para garantir que o preço seja numérico e positivo
         while True:
             try:
@@ -121,6 +131,22 @@ class Produtos: #Produtos
                 Produtos.name_app()
                 Funções_basicas.preço_erro()
 
+    def solicitar_quantidade(): #solicita a quantidade de produtos em estoque
+        while True:
+            try:
+                print('\nQual a quantidade do seu produto? (Insira apenas números)')
+                preço = int(input('\n------------->').strip())
+                if preço > 0:
+                    return preço
+                else:
+                    Funções_basicas.limpar_tela()
+                    Produtos.name_app()
+                    print('A quantidade do produto deve ser positiva.')
+            except ValueError:
+                Funções_basicas.limpar_tela()
+                Produtos.name_app()
+                Funções_basicas.preço_erro()
+        
     def solicitar_entrada(mensagem, tipo):  # Função para garantir que a entrada não esteja em branco
         while True:
             valor = input(f'\n{mensagem}\n------------->').strip()
@@ -131,27 +157,22 @@ class Produtos: #Produtos
                 Produtos.name_app()
                 print(f'\nA parte de {tipo} do seu produto não pode ficar em branco.')
 
-    produtos = []
-    
     def cadastrar_produto():  # Função para cadastrar um novo produto
         while True:
             try:
                 nome = Produtos.solicitar_entrada('Qual o nome do seu produto?', 'nome')
                 tipo = Produtos.solicitar_entrada('Qual o tipo do seu produto? (ex: Calçado, Vestuário, Eletrônico)', 'tipo')
                 subsecao = Produtos.solicitar_entrada('Qual a subseção do seu produto? (ex: Tenis, Camisa regata, Camisa social)', 'subseção')
+                quantidade = Produtos.solicitar_quantidade()
                 preço = Produtos.solicitar_preco()
                 
                 codigo_produto = Produtos.gerador.pro_num()  # Substitua por sua função geradora de código
 
-                #armazena um novo produto
-                produto_di = {
-                    'nome': nome,
-                    'preço': preço,
-                    'tipo': tipo,
-                    'subseção' : subsecao,
-                    'codigo de produto': codigo_produto}
                 
-                Produtos.produtos.append(produto_di)
+                
+                final = Produtos.Produto(nome,tipo,subsecao,quantidade,preço,codigo_produto)
+                
+                Produtos.produtos.append(final)
                 
                 Produtos.cadastro_feito()  # Confirma o cadastro do produto
                 break 
@@ -162,21 +183,14 @@ class Produtos: #Produtos
                 Funções_basicas.preço_erro()
                 
     def mostrar_produtos():  # Função para mostrar todos os produtos cadastrados
-        if not Produtos.produtos:
-            Funções_basicas.limpar_tela()
-            Produtos.name_app()
+        if len(Produtos.produtos) == 0:
             print('\nNenhum produto cadastrado.')
-            input('\nPressione Enter para continuar.')
         else:
-            print('\nSeus produtos são:')
-            for produto in Produtos.produtos:
-                nome = produto['nome']
-                tipo = produto['tipo']
-                subsecao = produto['subseção']
-                preço = produto['preço']
-                codigo_de_produto = produto['codigo de produto']
-                print(f'\n--> Nome: {nome} | Seção: {tipo} | Subseção: {subsecao} | Preço: R${preço:.2f} | Código: {codigo_de_produto} |')
-            input('\n(Digite Enter para continuar)')
+            print('\nLista de produtos cadastrados:')
+            for i, produto in enumerate(Produtos.produtos, start=1):
+                print(f'{i}. Nome: {produto.nome} | Tipo: {produto.tipo} | Subseção: {produto.subsecao} | Quantidade: {produto.quantidade} | Preço: {produto.preço} | Código: {produto.codigo}')
+            
+        input('\n(Digite Enter para continuar)')
             
     def cadastro_feito(): #mostra mensagem de cadastro bem sucedido
         Funções_basicas.limpar_tela()
@@ -228,6 +242,7 @@ class Produtos: #Produtos
                 elif escolha_funcionario == 3:
                     Funções_basicas.limpar_tela()
                     Main.main()
+                    break
                 
                 else:
                     Funções_basicas.limpar_tela()
@@ -242,6 +257,14 @@ class Produtos: #Produtos
                 Funções_basicas.erro_de_valor()
         
     def main_produtos(): #executa todas as funções na ordem certa
+        Funções_basicas.limpar_tela()
+        Produtos.name_app()
+        Produtos.mostrar_opcoes_produtos()
+        Produtos.checagem_produtos()
+
+    def executar_programa():#mostra o programa na tela
+        Produtos.main_produtos()
+        Produtos.main_produtos()
         Funções_basicas.limpar_tela()
         Produtos.name_app()
         Produtos.mostrar_opcoes_produtos()
@@ -348,6 +371,7 @@ class Estoque: #Estoque
                 elif escolha_financeiro == 3:
                     Funções_basicas.limpar_tela()
                     Main.main()
+                    break
             
             except:
                 Funções_basicas.limpar_tela()
@@ -366,13 +390,20 @@ class Estoque: #Estoque
 class Financeiro: #Financeiro
     def name_app(): #titulo
         print('''
-    ███████╗██╗███╗░░██╗░█████╗░███╗░░██╗░█████╗░███████╗██╗██████╗░░█████╗░
-    ██╔════╝██║████╗░██║██╔══██╗████╗░██║██╔══██╗██╔════╝██║██╔══██╗██╔══██╗
-    █████╗░░██║██╔██╗██║███████║██╔██╗██║██║░░╚═╝█████╗░░██║██████╔╝██║░░██║
-    ██╔══╝░░██║██║╚████║██╔══██║██║╚████║██║░░██╗██╔══╝░░██║██╔══██╗██║░░██║
-    ██║░░░░░██║██║░╚███║██║░░██║██║░╚███║╚█████╔╝███████╗██║██║░░██║╚█████╔╝
-    ╚═╝░░░░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝╚═╝░░╚══╝░╚════╝░╚══════╝╚═╝╚═╝░░╚═╝░╚════╝░''')
-        
+███████╗██╗███╗░░██╗░█████╗░███╗░░██╗░█████╗░███████╗██╗██████╗░░█████╗░
+██╔════╝██║████╗░██║██╔══██╗████╗░██║██╔══██╗██╔════╝██║██╔══██╗██╔══██╗
+█████╗░░██║██╔██╗██║███████║██╔██╗██║██║░░╚═╝█████╗░░██║██████╔╝██║░░██║
+██╔══╝░░██║██║╚████║██╔══██║██║╚████║██║░░██╗██╔══╝░░██║██╔══██╗██║░░██║
+██║░░░░░██║██║░╚███║██║░░██║██║░╚███║╚█████╔╝███████╗██║██║░░██║╚█████╔╝
+╚═╝░░░░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝╚═╝░░╚══╝░╚════╝░╚══════╝╚═╝╚═╝░░╚═╝░╚════╝░''')
+    
+    class conta: #construtor das contas
+        def __init__(self,nome,tipo,dado,valor,codigo):
+            self.nome = nome
+            self.tipo = tipo
+            self.dado = dado
+            self.valor = valor
+            self.codigo = codigo
 
     gerador = codigo() #instacia do gerador de codigo
 
@@ -506,7 +537,8 @@ class Financeiro: #Financeiro
                     
                     elif escolha == 4:
                         Funções_basicas.limpar_tela()
-                        #Main.main()
+                        Main.main()
+                        break
                     
                     else:
                         Funções_basicas.limpar_tela()
@@ -577,7 +609,7 @@ class Financeiro: #Financeiro
         def solicitar_dados():
             while True:
                 try:
-                    print('Digite o CPF ou CNPJ do recebedor')
+                    print('\nDigite o CPF ou CNPJ do recebedor')
                     dados = input('\n------------->').strip()
                     if len(dados) == 11:
                         dados = Financeiro.formatar_cpf(dados)
@@ -625,23 +657,15 @@ class Financeiro: #Financeiro
                     input('\n(Digite Enter para continuar)')
 
         def mostrar_contas(): # mostra as contas a pagar
-            if not Financeiro.Contas_a_pagar.contas_a_pagar:
-                Funções_basicas.limpar_tela()
-                Financeiro.name_app()
-                print('\nNenhuma conta cadastrada.')
-                input('\nPressione Enter para continuar.')
+            if len(Financeiro.Contas_a_pagar.contas_a_pagar) == 0:
+                print('\nNenhum produto cadastrado.')
             else:
-                print('\nSuas contas:')
-                for conta in Financeiro.Contas_a_pagar.contas_a_pagar:
-                    nome = conta['nome']
-                    tipo = conta['tipo']
-                    dados_recebedor = conta['dados do recebedor']
-                    valor = conta['valor']
-                    codigo_de_conta = conta['codigo de conta']
-                    
-                    print(f'\n--> Nome: {nome} | Tipo: {tipo} | CPF/CNPJ do recebedor: {dados_recebedor} | Valor R${valor:.2f} | Código: {codigo_de_conta}')
-                    
-                input('\n(Digite Enter para continuar)')
+                print('\nLista de produtos cadastrados:')
+                for i, conta in enumerate(Financeiro.Contas_a_pagar.contas_a_pagar, start=1):
+                    print(f'\n{i}. Nome: {conta.nome} | Tipo: {conta.tipo} |  CPF/CNPJ Do Recebedor: {conta.dado} |  Valor: {conta.valor} | Código: {conta.codigo}')
+            
+            input('\n(Digite Enter para continuar)')
+            
         
         def cadastrar_conta(): #cadastra uma conta a pagar
             while True:
@@ -652,16 +676,10 @@ class Financeiro: #Financeiro
                     valor = Financeiro.solicitar_valor()
                     
                     codigo_conta = Financeiro.gerador.pro_num() 
-
-                    #armazena uma nova conta
-                    contas_di = {
-                        'nome': nome,
-                        'tipo': tipo,
-                        'dados do recebedor' : dados_recebedor,
-                        'valor': valor,
-                        'codigo de conta': codigo_conta}
                     
-                    Financeiro.Contas_a_pagar.contas_a_pagar.append(contas_di)
+                    lista_conta = Financeiro.conta(nome,tipo,dados_recebedor,valor,codigo_conta)
+                    
+                    Financeiro.Contas_a_pagar.contas_a_pagar.append(lista_conta)
                     
                     Financeiro.cadastro_feito()  # Confirma o cadastro da conta
                     break 
@@ -700,7 +718,7 @@ class Financeiro: #Financeiro
                         Funções_basicas.limpar_tela()
                         Financeiro.name_app()
                         Financeiro.Contas_a_pagar.mostrar_contas()
-                        Financeiro.Contas_a_pagarmenu()
+                        Financeiro.Contas_a_pagar.menu()
                         break
 
                     elif escolha == 2:
@@ -713,7 +731,7 @@ class Financeiro: #Financeiro
                     
                     elif escolha == 3:
                         Financeiro.Principal.main_financeiro()
-                    
+                        break
                     else:
                         Funções_basicas.limpar_tela()
                         Financeiro.name_app()
@@ -774,7 +792,7 @@ class Financeiro: #Financeiro
         def solicitar_dados():
             while True:
                 try:
-                    print('Digite o CPF ou CNPJ do pagante')
+                    print('\nDigite o CPF ou CNPJ do pagante')
                     dados = input('\n------------->').strip()
                     if len(dados) == 11:
                         dados = Financeiro.formatar_cpf(dados)
@@ -832,14 +850,9 @@ class Financeiro: #Financeiro
                     codigo_conta = Financeiro.gerador.pro_num()
 
                     #armazena uma nova conta
-                    contas_di = {
-                        'nome': nome,
-                        'tipo': tipo,
-                        'dados do paganter' : dados_pagante,
-                        'valor': valor,
-                        'codigo de conta': codigo_conta}
+                    lista_contas = Financeiro.conta(nome,tipo,dados_pagante,valor,codigo_conta)
                     
-                    Financeiro.Contas_a_receber.contas_a_receber.append(contas_di)
+                    Financeiro.Contas_a_receber.contas_a_receber.append(lista_contas)
                     
                     Financeiro.cadastro_feito()  # Confirma o cadastro da conta
                     break 
@@ -850,34 +863,13 @@ class Financeiro: #Financeiro
                     Funções_basicas.preço_erro()     
 
         def mostrar_contas(): # mostra as contas a pagar
-            if not Financeiro.contas_a_receber:
-                Funções_basicas.limpar_tela()
-                Financeiro.name_app()
-                print('\nNenhuma conta cadastrada.')
-                input('\nPressione Enter para continuar.')
+            if len(Financeiro.Contas_a_receber.contas_a_pagar) == 0:
+                print('\nNenhum produto cadastrado.')
             else:
-                print('\nSuas contas:')
-                for conta in Financeiro.Contas_a_receber.contas_a_receber:
-                    nome = conta['nome']
-                    tipo = conta['tipo']
-                    dados_pagante = conta['dados do pagante']
-                    valor = conta['valor']
-                    codigo_de_conta = conta['codigo de conta']
-                    
-                    try:
-                        if len(dados_pagante) == 11:
-                            dados_pagante = Financeiro.formatar_cpf(dados_pagante)
-                        elif len(dados_pagante) == 14:
-                            dados_pagante = Financeiro.formatar_cnpj(dados_pagante)
-                        else:
-                            raise ValueError("CPF/CNPJ inválido.")
-                    except ValueError as e:
-                        print(f"\nErro: {e}. Não foi possível formatar o CPF/CNPJ.")
-                    
-                    print(f'\n--> Nome: {nome} | Tipo: {tipo} | CPF/CNPJ do pagante: {dados_pagante} | Valor R${valor:.2f} | Código: {codigo_de_conta}')
-                    
-                input('\n(Digite Enter para continuar)')
-                
+                print('\nLista de produtos cadastrados:')
+                for i, conta in enumerate(Financeiro.Contas_a_receber.contas_a_receber, start=1):
+                    print(f'\n{i}. Nome: {conta.nome} | Tipo: {conta.tipo} |  CPF/CNPJ Do Pagante: {conta.dado} |  Valor: {conta.valor} | Código: {conta.codigo}')
+            
             input('\n(Digite Enter para continuar)')
 
         def mostrar_opcoes(): #mostra as opções que o usuario pode escolher
@@ -922,7 +914,7 @@ class Financeiro: #Financeiro
                     
                     elif escolha == 3:
                         Financeiro.Principal.main_financeiro()
-                    
+                        break
                     else:
                         Funções_basicas.limpar_tela()
                         Financeiro.name_app()
@@ -1117,6 +1109,7 @@ class Funcionarios: #Funcionarios
                 else:
                     Funções_basicas.limpar_tela()
                     Main.main()
+                    break
 
             except ValueError:  # Captura erros de conversão de string para int
                 Funções_basicas.limpar_tela()
@@ -1193,16 +1186,8 @@ class Main: #MAIN.
                 
                 elif escolha_funcionario == 5:
                     Funções_basicas.limpar_tela()
-                    Main.name_app()
-                    confirmacao = input('\nTem certeza que deseja sair? (s/n): ').strip()
-                    if confirmacao == 's' or 'S':
-                        Funções_basicas.limpar_tela()
-                        print('\nFINALIZADO')
-                        break
-                    else:
-                        Funções_basicas.limpar_tela()
-                        Main.name_app()
-                        Main.mostrar_opcoes()
+                    print('FINALIZADO')
+                    break
                 
                 else:
                     Funções_basicas.limpar_tela()

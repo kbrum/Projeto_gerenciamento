@@ -1,4 +1,4 @@
-import Funções_basicas
+from Funções_basicas import Funções_basicas
 
 class codigo: #gera um codigo de produto autoincrementavel
         def __init__(self):
@@ -19,9 +19,13 @@ class Produtos:
     ╚═╝░░░░░╚═╝░░╚═╝░╚════╝░╚═════╝░░╚═════╝░░░░╚═╝░░░░╚════╝░╚═════╝░''')
         
     class Produto:
-        def __init__(self,nome,tipo,subsecao,quantidade,preço):
-            pass    
-    
+        def __init__(self,nome,tipo,subsecao,quantidade,preço,codigo):
+            self.nome = nome
+            self.tipo = tipo
+            self.subsecao = subsecao
+            self.quantidade = quantidade
+            self.preço = preço
+            self.codigo = codigo
     
     gerador = codigo() #instacia do gerador de codigo
 
@@ -150,16 +154,11 @@ class Produtos:
                 
                 codigo_produto = Produtos.gerador.pro_num()  # Substitua por sua função geradora de código
 
-                #armazena um novo produto
-                produto_di = {
-                    'nome': nome,
-                    'tipo': tipo,
-                    'subseção' : subsecao,
-                    'quantidade' : quantidade,
-                    'preço': preço,
-                    'codigo de produto': codigo_produto}
                 
-                Produtos.produtos.append(produto_di)
+                
+                final = Produtos.Produto(nome,tipo,subsecao,quantidade,preço,codigo_produto)
+                
+                Produtos.produtos.append(final)
                 
                 Produtos.cadastro_feito()  # Confirma o cadastro do produto
                 break 
@@ -170,22 +169,14 @@ class Produtos:
                 Funções_basicas.preço_erro()
                 
     def mostrar_produtos():  # Função para mostrar todos os produtos cadastrados
-        if not Produtos.produtos:
-            Funções_basicas.limpar_tela()
-            Produtos.name_app()
+        if len(Produtos.produtos) == 0:
             print('\nNenhum produto cadastrado.')
-            input('\nPressione Enter para continuar.')
         else:
-            print('\nSeus produtos são:')
-            for produto in Produtos.produtos:
-                nome = produto['nome']
-                tipo = produto['tipo']
-                subsecao = produto['subseção']
-                quantidade = produto['subseção']
-                preço = produto['preço']
-                codigo_de_produto = produto['codigo de produto']
-                print(f'\n--> Nome: {nome} | Seção: {tipo} | Subseção: {subsecao} | Quantidade: {quantidade} Preço R${preço:.2f} | Código: {codigo_de_produto} |')
-            input('\n(Digite Enter para continuar)')
+            print('\nLista de produtos cadastrados:')
+            for i, produto in enumerate(Produtos.produtos, start=1):
+                print(f'{i}. Nome: {produto.nome} | Tipo: {produto.tipo} | Subseção: {produto.subsecao} | Quantidade: {produto.quantidade} | Preço: {produto.preço} | Código: {produto.codigo}')
+            
+        input('\n(Digite Enter para continuar)')
             
     def cadastro_feito(): #mostra mensagem de cadastro bem sucedido
         Funções_basicas.limpar_tela()
@@ -236,7 +227,8 @@ class Produtos:
                 
                 elif escolha_funcionario == 3:
                     Funções_basicas.limpar_tela()
-                    (print('erro'))
+                    Main.main()
+                    break
                 
                 else:
                     Funções_basicas.limpar_tela()

@@ -8,7 +8,7 @@ class codigo: #gera um codigo de produto autoincrementavel
             self.codigo +=1
             return self.codigo
 
-class Financeiro:
+class Financeiro: #Financeiro
     def name_app(): #titulo
         print('''
     ███████╗██╗███╗░░██╗░█████╗░███╗░░██╗░█████╗░███████╗██╗██████╗░░█████╗░
@@ -18,6 +18,13 @@ class Financeiro:
     ██║░░░░░██║██║░╚███║██║░░██║██║░╚███║╚█████╔╝███████╗██║██║░░██║╚█████╔╝
     ╚═╝░░░░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝╚═╝░░╚══╝░╚════╝░╚══════╝╚═╝╚═╝░░╚═╝░╚════╝░''')
         
+    class conta:
+        def __init__(self,nome,tipo,dado,valor,codigo):
+            self.nome = nome
+            self.tipo = tipo
+            self.dado = dado
+            self.valor = valor
+            self.codigo = codigo
 
     gerador = codigo() #instacia do gerador de codigo
 
@@ -151,7 +158,8 @@ class Financeiro:
                     
                     elif escolha == 4:
                         Funções_basicas.limpar_tela()
-                        #Main.main()
+                        Main.main()
+                        break
                     
                     else:
                         Funções_basicas.limpar_tela()
@@ -222,7 +230,7 @@ class Financeiro:
         def solicitar_dados():
             while True:
                 try:
-                    print('Digite o CPF ou CNPJ do recebedor')
+                    print('\nDigite o CPF ou CNPJ do recebedor')
                     dados = input('\n------------->').strip()
                     if len(dados) == 11:
                         dados = Financeiro.formatar_cpf(dados)
@@ -270,23 +278,15 @@ class Financeiro:
                     input('\n(Digite Enter para continuar)')
 
         def mostrar_contas(): # mostra as contas a pagar
-            if not Financeiro.Contas_a_pagar.contas_a_pagar:
-                Funções_basicas.limpar_tela()
-                Financeiro.name_app()
-                print('\nNenhuma conta cadastrada.')
-                input('\nPressione Enter para continuar.')
+            if len(Financeiro.Contas_a_pagar.contas_a_pagar) == 0:
+                print('\nNenhum produto cadastrado.')
             else:
-                print('\nSuas contas:')
-                for conta in Financeiro.Contas_a_pagar.contas_a_pagar:
-                    nome = conta['nome']
-                    tipo = conta['tipo']
-                    dados_recebedor = conta['dados do recebedor']
-                    valor = conta['valor']
-                    codigo_de_conta = conta['codigo de conta']
-                    
-                    print(f'\n--> Nome: {nome} | Tipo: {tipo} | CPF/CNPJ do recebedor: {dados_recebedor} | Valor R${valor:.2f} | Código: {codigo_de_conta}')
-                    
-                input('\n(Digite Enter para continuar)')
+                print('\nLista de produtos cadastrados:')
+                for i, conta in enumerate(Financeiro.Contas_a_pagar.contas_a_pagar, start=1):
+                    print(f'\n{i}. Nome: {conta.nome} | Tipo: {conta.tipo} |  CPF/CNPJ Do Recebedor: {conta.dado} |  Valor: {conta.valor} | Código: {conta.codigo}')
+            
+            input('\n(Digite Enter para continuar)')
+            
         
         def cadastrar_conta(): #cadastra uma conta a pagar
             while True:
@@ -297,16 +297,10 @@ class Financeiro:
                     valor = Financeiro.solicitar_valor()
                     
                     codigo_conta = Financeiro.gerador.pro_num() 
-
-                    #armazena uma nova conta
-                    contas_di = {
-                        'nome': nome,
-                        'tipo': tipo,
-                        'dados do recebedor' : dados_recebedor,
-                        'valor': valor,
-                        'codigo de conta': codigo_conta}
                     
-                    Financeiro.Contas_a_pagar.contas_a_pagar.append(contas_di)
+                    lista_conta = Financeiro.conta(nome,tipo,dados_recebedor,valor,codigo_conta)
+                    
+                    Financeiro.Contas_a_pagar.contas_a_pagar.append(lista_conta)
                     
                     Financeiro.cadastro_feito()  # Confirma o cadastro da conta
                     break 
@@ -345,7 +339,7 @@ class Financeiro:
                         Funções_basicas.limpar_tela()
                         Financeiro.name_app()
                         Financeiro.Contas_a_pagar.mostrar_contas()
-                        Financeiro.Contas_a_pagarmenu()
+                        Financeiro.Contas_a_pagar.menu()
                         break
 
                     elif escolha == 2:
@@ -358,7 +352,7 @@ class Financeiro:
                     
                     elif escolha == 3:
                         Financeiro.Principal.main_financeiro()
-                    
+                        break
                     else:
                         Funções_basicas.limpar_tela()
                         Financeiro.name_app()
@@ -419,7 +413,7 @@ class Financeiro:
         def solicitar_dados():
             while True:
                 try:
-                    print('Digite o CPF ou CNPJ do pagante')
+                    print('\nDigite o CPF ou CNPJ do pagante')
                     dados = input('\n------------->').strip()
                     if len(dados) == 11:
                         dados = Financeiro.formatar_cpf(dados)
@@ -477,14 +471,9 @@ class Financeiro:
                     codigo_conta = Financeiro.gerador.pro_num()
 
                     #armazena uma nova conta
-                    contas_di = {
-                        'nome': nome,
-                        'tipo': tipo,
-                        'dados do paganter' : dados_pagante,
-                        'valor': valor,
-                        'codigo de conta': codigo_conta}
+                    lista_contas = Financeiro.conta(nome,tipo,dados_pagante,valor,codigo_conta)
                     
-                    Financeiro.Contas_a_receber.contas_a_receber.append(contas_di)
+                    Financeiro.Contas_a_receber.contas_a_receber.append(lista_contas)
                     
                     Financeiro.cadastro_feito()  # Confirma o cadastro da conta
                     break 
@@ -495,34 +484,13 @@ class Financeiro:
                     Funções_basicas.preço_erro()     
 
         def mostrar_contas(): # mostra as contas a pagar
-            if not Financeiro.contas_a_receber:
-                Funções_basicas.limpar_tela()
-                Financeiro.name_app()
-                print('\nNenhuma conta cadastrada.')
-                input('\nPressione Enter para continuar.')
+            if len(Financeiro.Contas_a_receber.contas_a_pagar) == 0:
+                print('\nNenhum produto cadastrado.')
             else:
-                print('\nSuas contas:')
-                for conta in Financeiro.Contas_a_receber.contas_a_receber:
-                    nome = conta['nome']
-                    tipo = conta['tipo']
-                    dados_pagante = conta['dados do pagante']
-                    valor = conta['valor']
-                    codigo_de_conta = conta['codigo de conta']
-                    
-                    try:
-                        if len(dados_pagante) == 11:
-                            dados_pagante = Financeiro.formatar_cpf(dados_pagante)
-                        elif len(dados_pagante) == 14:
-                            dados_pagante = Financeiro.formatar_cnpj(dados_pagante)
-                        else:
-                            raise ValueError("CPF/CNPJ inválido.")
-                    except ValueError as e:
-                        print(f"\nErro: {e}. Não foi possível formatar o CPF/CNPJ.")
-                    
-                    print(f'\n--> Nome: {nome} | Tipo: {tipo} | CPF/CNPJ do pagante: {dados_pagante} | Valor R${valor:.2f} | Código: {codigo_de_conta}')
-                    
-                input('\n(Digite Enter para continuar)')
-                
+                print('\nLista de produtos cadastrados:')
+                for i, conta in enumerate(Financeiro.Contas_a_receber.contas_a_receber, start=1):
+                    print(f'\n{i}. Nome: {conta.nome} | Tipo: {conta.tipo} |  CPF/CNPJ Do Pagante: {conta.dado} |  Valor: {conta.valor} | Código: {conta.codigo}')
+            
             input('\n(Digite Enter para continuar)')
 
         def mostrar_opcoes(): #mostra as opções que o usuario pode escolher
@@ -567,7 +535,7 @@ class Financeiro:
                     
                     elif escolha == 3:
                         Financeiro.Principal.main_financeiro()
-                    
+                        break
                     else:
                         Funções_basicas.limpar_tela()
                         Financeiro.name_app()
@@ -585,5 +553,6 @@ class Financeiro:
             Financeiro.name_app()
             Financeiro.mostrar_opcoes_contas_a_receber()
             Financeiro.checagem_contas_a_receber()
+
 
 Financeiro.Principal.executar_programa() #usado para testes unitarios

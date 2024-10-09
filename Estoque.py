@@ -1,5 +1,4 @@
-import Funções_basicas
-import App
+from Funções_basicas import Funções_basicas
 class Estoque:
     def name_app(): # titulo    
         print('''
@@ -100,6 +99,8 @@ class Estoque:
                 
                 elif escolha_financeiro == 3:
                     Funções_basicas.limpar_tela()
+                    Main.Main()
+                    break
             
             except:
                 Funções_basicas.limpar_tela()

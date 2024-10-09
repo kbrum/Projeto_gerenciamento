@@ -1,4 +1,4 @@
-import Funções_basicas
+from Funções_basicas import Funções_basicas
 class Funcionarios:
     def name_app():
         print('''
@@ -16,7 +16,14 @@ class Funcionarios:
             self.codigo +=1
             return self.codigo
     gerador = codigo_funcionario() #instacia do gerador de codigo
-        
+    
+    class Funcionario: #construtor de funcionario
+        def __init__(self,nome,setor,nivel,codigo):
+            self.nome = nome
+            self.setor = setor
+            self.nivel = nivel
+            self.codigo = codigo
+            
     def menu_funcionacios(): #pergunta ao usuario se quer voltar ao menu 
         while True:
             try:
@@ -95,16 +102,14 @@ class Funcionarios:
             try:
                 nome = Funcionarios.solicitar_entrada('Qual o nome do seu funcionario?', 'nome')
                 setor = Funcionarios.solicitar_entrada('Qual o setor do seu funcionario?', 'setor')
+                nivel = Funcionarios.solicitar_entrada('Qual o nivel hierárquico do seu funcionario? (ex: Estágiario, Chefe De Setor, Etc)', 'nivel hierárquico')
 
                 codigo_funcionario = Funcionarios.gerador.pro_num()
 
                 # Armazena o novo funcionário
-                funcionario_di = {
-                    'nome': nome,
-                    'setor': setor,
-                    'codigo_funcionario': codigo_funcionario}
+                lista_funcionarios = Funcionarios.Funcionario(nome,setor,nivel,codigo_funcionario)
                 
-                Funcionarios.funcionarios.append(funcionario_di)
+                Funcionarios.funcionarios.append(lista_funcionarios)
 
                 Funcionarios.cadastro_feito()  # Função para notificar que o cadastro foi feito
                 break
@@ -116,20 +121,14 @@ class Funcionarios:
                 print('\nEste campo não pode ficar em branco.')
 
     def mostrar_funcionarios():  # Função para mostrar os funcionários cadastrados
-        if not Funcionarios.funcionarios:
-            Funções_basicas.limpar_tela()
-            Funcionarios.name_app()
-            print('\nNenhum funcionário cadastrado.')
-            input('\n(Digite Enter para continuar)')
-        
+        if len(Funcionarios.funcionarios) == 0:
+            print('\nNenhum produto cadastrado.')
         else:
-            print('\nSeus funcionários são:')
-            for funcionario in Funcionarios.funcionarios:
-                nome = funcionario['nome']
-                setor = funcionario['setor']
-                codigo_funcionario = funcionario['codigo_funcionario']    
-                print(f'\n--> Nome: {nome} | Setor: {setor} | Código: {codigo_funcionario}')
-            input('\n(Digite Enter para continuar)')
+            print('\nLista de produtos cadastrados:')
+            for i, funcionario in enumerate(Funcionarios.funcionarios, start=1):
+                print(f'{i}. Nome: {funcionario.nome} | Setor: {funcionario.setor} | Nivel Hierárquico: {funcionario.nivel} | Código: {funcionario.codigo}')
+        
+        input('\n(Digite Enter para continuar)')    
                 
     def cadastro_feito(): #mostra mensagem de cadastro bem sucedido
         Funções_basicas.limpar_tela()
@@ -176,6 +175,11 @@ class Funcionarios:
                     Funcionarios.cadastrar_funcionario()
                     Funcionarios.cadastrar_outro_funcionario()
                     Funcionarios.menu_funcionacios()
+                    break
+                
+                elif escolha_funcionario == 3:
+                    Funções_basicas.limpar_tela()
+                    Main.main('')
                     break
                 
                 else:
