@@ -35,7 +35,7 @@ class Produtos: #Produtos
 
     gerador = codigo() #instacia do gerador de codigo
 
-    def menu_produtos(): #pergunta ao usuario se quer voltar ao menu 
+    def menu_produtos(): #pergunta ao usuario se quer voltar ao menu produtos
         while True:
                 try:
                     Funções_basicas.limpar_tela()
@@ -175,7 +175,7 @@ class Produtos: #Produtos
                 subsecao = produto['subseção']
                 preço = produto['preço']
                 codigo_de_produto = produto['codigo de produto']
-                print(f'\n--> Nome: {nome} | Seção: {tipo} | Subseção: {subsecao} | Preço R${preço:.2f} | Código: {codigo_de_produto} |')
+                print(f'\n--> Nome: {nome} | Seção: {tipo} | Subseção: {subsecao} | Preço: R${preço:.2f} | Código: {codigo_de_produto} |')
             input('\n(Digite Enter para continuar)')
             
     def cadastro_feito(): #mostra mensagem de cadastro bem sucedido
@@ -534,7 +534,7 @@ class Financeiro: # Financeiro
             try:
                 nome = Financeiro.solicitar_entrada('Qual o nome da sua conta?', 'nome')
                 tipo = Financeiro.solicitar_entrada('Qual o tipo da sua conta? (ex: Salário, Água, luz)', 'tipo')
-                dados_recebedor = Financeiro.solicitar_entrada('Qual o CPF ou CNPJ do recebed', 'dado do recebedor')
+                dados_recebedor = Financeiro.solicitar_entrada('Qual o CPF ou CNPJ do recebedor', 'dado do recebedor')
                 valor = Financeiro.solicitar_valor()
                 
                 codigo_conta = Financeiro.gerador.pro_num()  # Substitua por sua função geradora de código
@@ -693,9 +693,7 @@ class Financeiro: # Financeiro
                 
                 else:
                     Funções_basicas.limpar_tela()
-                    Financeiro.name_app()
-                    Financeiro.mostrar_opcoes_financeiro()
-                    print('Por favor, escolha uma opção válida.')
+                    Main.main()
 
             except ValueError:  # Captura erros de conversão de string para int
                 Funções_basicas.limpar_tela()
@@ -718,7 +716,7 @@ class Financeiro: # Financeiro
     def executar_programa(): #mostra o programa na tela
         Financeiro.main_financeiro()
 
-class Funcionarios:
+class Funcionarios: #Funcionarios
     def name_app():
         print('''
     ███████╗░██████╗░██╗░░░██╗██╗██████╗░███████╗
@@ -899,9 +897,7 @@ class Funcionarios:
                 
                 else:
                     Funções_basicas.limpar_tela()
-                    Funcionarios.name_app()
-                    Funcionarios.mostrar_opcoes_funcionarios()
-                    print('Por favor, escolha uma opção válida.')
+                    Main.main()
 
             except ValueError:  # Captura erros de conversão de string para int
                 Funções_basicas.limpar_tela()
@@ -979,8 +975,8 @@ class Main: # MAIN
                 elif escolha_funcionario == 5:
                     Funções_basicas.limpar_tela()
                     Main.name_app()
-                    confirmacao = input('\nTem certeza que deseja sair? (s/n): ').strip().lower()
-                    if confirmacao == 's':
+                    confirmacao = input('\nTem certeza que deseja sair? (s/n): ').strip()
+                    if confirmacao == 's' or 'S':
                         Funções_basicas.limpar_tela()
                         print('\nFINALIZADO')
                         break
