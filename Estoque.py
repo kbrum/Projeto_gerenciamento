@@ -59,7 +59,7 @@ class Estoque:
             print('\nNenhum produto cadastrado.')
             input('\nPressione Enter para continuar.')
                 
-    def todos_em_estoque(): #mostra todo o estoque
+    def mostra_estoque(): #mostra todo o estoque
         if Estoque.produtos_em_estoque:
             print('\nProdutos em estoque:')
             for produtos in Estoque.produtos_em_estoque:
@@ -84,7 +84,7 @@ class Estoque:
                 if escolha_financeiro == 1:
                     Funções_basicas.limpar_tela()
                     Estoque.name_app()
-                    Estoque.todos_em_estoque()
+                    Estoque.mostra_estoque()
                     print('\n')
                     Estoque.menu_estoque()
                     break
