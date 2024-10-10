@@ -79,25 +79,34 @@ class Estoque:
         while True:
             try:
                 print('\nEscolha uma opção')
-                escolha_financeiro = int(input('\n-------------> '))
                 
-                if escolha_financeiro == 1:
+                escolha = input('\n-------------> ').strip
+                
+                if not escolha:
+                    Funções_basicas.limpar_tela()
+                    Estoque.name_app()
+                    Estoque.mostrar_opcoes_estoque()
+                    print('\nA escolha não pode ficar em branco.')
+                    continue 
+
+                # Tenta converter para número inteiro
+                escolha = int(escolha)
+                
+                if escolha == 1:
                     Funções_basicas.limpar_tela()
                     Estoque.name_app()
                     Estoque.mostra_estoque()
-                    print('\n')
                     Estoque.menu_estoque()
                     break
                 
-                elif escolha_financeiro == 2:
+                elif escolha == 2:
                     Funções_basicas.limpar_tela()
                     Estoque.name_app()
                     Estoque.Produtos_em_falta()
-                    print('\n')
                     Estoque.menu_estoque()
                     break
                 
-                elif escolha_financeiro == 3:
+                elif escolha == 3:
                     Funções_basicas.limpar_tela()
                     Main.Main()
                     break
@@ -107,8 +116,6 @@ class Estoque:
                 Estoque.name_app()
                 Estoque.mostrar_opcoes_estoque()
                 Funções_basicas.erro_de_valor()
-                Estoque.checagem_estoque()
-                break
         
     def main_estoque(): #executa todas as funções na ordem certa
         Funções_basicas.limpar_tela()

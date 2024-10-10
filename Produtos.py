@@ -153,8 +153,6 @@ class Produtos:
                 preço = Produtos.solicitar_preco()
                 
                 codigo_produto = Produtos.gerador.pro_num()  # Substitua por sua função geradora de código
-
-                
                 
                 final = Produtos.Produto(nome,tipo,subsecao,quantidade,preço,codigo_produto)
                 
@@ -196,10 +194,10 @@ class Produtos:
                 print('\nEscolha uma opção')
                 
                 # Captura a entrada e remove espaços em branco
-                escolha_funcionario = input('\n-------------> ').strip()
+                escolha = input('\n-------------> ').strip()
         
                 # Verifica se a entrada está vazia
-                if not escolha_funcionario:
+                if not escolha:
                     Funções_basicas.limpar_tela()
                     Produtos.name_app()
                     Produtos.mostrar_opcoes_produtos()
@@ -207,17 +205,17 @@ class Produtos:
                     continue 
 
                 # Tenta converter para número inteiro
-                escolha_funcionario = int(escolha_funcionario)
+                escolha = int(escolha)
 
                 # Verifica as opções
-                if escolha_funcionario == 1:
+                if escolha == 1:
                     Funções_basicas.limpar_tela()
                     Produtos.name_app()
                     Produtos.mostrar_produtos()
                     Produtos.menu_produtos()
                     break
 
-                elif escolha_funcionario == 2:
+                elif escolha == 2:
                     Funções_basicas.limpar_tela()
                     Produtos.name_app()
                     Produtos.cadastrar_produto()
@@ -225,7 +223,7 @@ class Produtos:
                     Produtos.menu_produtos()
                     break
                 
-                elif escolha_funcionario == 3:
+                elif escolha == 3:
                     Funções_basicas.limpar_tela()
                     Main.main()
                     break

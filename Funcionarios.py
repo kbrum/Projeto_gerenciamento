@@ -1,5 +1,5 @@
 from Funções_basicas import Funções_basicas
-class Funcionarios:
+class Funcionarios: #Funcionarios
     def name_app():
         print('''
     ███████╗░██████╗░██╗░░░██╗██╗██████╗░███████╗
@@ -8,22 +8,9 @@ class Funcionarios:
     ██╔══╝░░╚██████╔╝██║░░░██║██║██╔═══╝░██╔══╝░░
     ███████╗░╚═██╔═╝░╚██████╔╝██║██║░░░░░███████╗
     ╚══════╝░░░╚═╝░░░░╚═════╝░╚═╝╚═╝░░░░░╚══════╝''')
-    class codigo_funcionario: #gera um codigo de produto autoincrementavel
-        def __init__(self):
-            self.codigo = 0
-            
-        def pro_num(self):
-            self.codigo +=1
-            return self.codigo
-    gerador = codigo_funcionario() #instacia do gerador de codigo
-    
-    class Funcionario: #construtor de funcionario
-        def __init__(self,nome,setor,nivel,codigo):
-            self.nome = nome
-            self.setor = setor
-            self.nivel = nivel
-            self.codigo = codigo
-            
+
+    gerador = codigo() #instacia do gerador de codigo
+        
     def menu_funcionacios(): #pergunta ao usuario se quer voltar ao menu 
         while True:
             try:
@@ -102,14 +89,16 @@ class Funcionarios:
             try:
                 nome = Funcionarios.solicitar_entrada('Qual o nome do seu funcionario?', 'nome')
                 setor = Funcionarios.solicitar_entrada('Qual o setor do seu funcionario?', 'setor')
-                nivel = Funcionarios.solicitar_entrada('Qual o nivel hierárquico do seu funcionario? (ex: Estágiario, Chefe De Setor, Etc)', 'nivel hierárquico')
 
                 codigo_funcionario = Funcionarios.gerador.pro_num()
 
                 # Armazena o novo funcionário
-                lista_funcionarios = Funcionarios.Funcionario(nome,setor,nivel,codigo_funcionario)
+                funcionario_di = {
+                    'nome': nome,
+                    'setor': setor,
+                    'codigo_funcionario': codigo_funcionario}
                 
-                Funcionarios.funcionarios.append(lista_funcionarios)
+                Funcionarios.funcionarios.append(funcionario_di)
 
                 Funcionarios.cadastro_feito()  # Função para notificar que o cadastro foi feito
                 break
@@ -121,14 +110,20 @@ class Funcionarios:
                 print('\nEste campo não pode ficar em branco.')
 
     def mostrar_funcionarios():  # Função para mostrar os funcionários cadastrados
-        if len(Funcionarios.funcionarios) == 0:
-            print('\nNenhum produto cadastrado.')
-        else:
-            print('\nLista de produtos cadastrados:')
-            for i, funcionario in enumerate(Funcionarios.funcionarios, start=1):
-                print(f'{i}. Nome: {funcionario.nome} | Setor: {funcionario.setor} | Nivel Hierárquico: {funcionario.nivel} | Código: {funcionario.codigo}')
+        if not Funcionarios.funcionarios:
+            Funções_basicas.limpar_tela()
+            Funcionarios.name_app()
+            print('\nNenhum funcionário cadastrado.')
+            input('\n(Digite Enter para continuar)')
         
-        input('\n(Digite Enter para continuar)')    
+        else:
+            print('\nSeus funcionários são:')
+            for funcionario in Funcionarios.funcionarios:
+                nome = funcionario['nome']
+                setor = funcionario['setor']
+                codigo_funcionario = funcionario['codigo_funcionario']    
+                print(f'\n--> Nome: {nome} | Setor: {setor} | Código: {codigo_funcionario}')
+            input('\n(Digite Enter para continuar)')
                 
     def cadastro_feito(): #mostra mensagem de cadastro bem sucedido
         Funções_basicas.limpar_tela()
@@ -140,7 +135,7 @@ class Funcionarios:
     def mostrar_opcoes_funcionarios(): #mostra as opçoes que o usuario pode escolher
         print('\n1 - Todos os funcionarios')
         print('2 - Cadastrar funcionario')
-        print('3 - Voltar ao menu')
+        print('3 - Voltar ao menu principal')
 
     def checagem_funcionarios():  # Checa a escolha que o usuário fez
         while True:
@@ -148,10 +143,10 @@ class Funcionarios:
                 print('\nEscolha uma opção')
                 
                 # Captura a entrada e remove espaços em branco
-                escolha_funcionario = input('\n-------------> ').strip()
+                escolha = input('\n-------------> ').strip()
 
                 # Verifica se a entrada está vazia
-                if not escolha_funcionario:
+                if not escolha:
                     Funções_basicas.limpar_tela()
                     Funcionarios.name_app()
                     Funcionarios.mostrar_opcoes_funcionarios()
@@ -159,17 +154,17 @@ class Funcionarios:
                     continue 
 
                 # Tenta converter para número inteiro
-                escolha_funcionario = int(escolha_funcionario)
+                escolha = int(escolha)
 
                 # Verifica as opções
-                if escolha_funcionario == 1:
+                if escolha == 1:
                     Funções_basicas.limpar_tela()
                     Funcionarios.name_app()
                     Funcionarios.mostrar_funcionarios()
                     Funcionarios.menu_funcionacios()
                     break
 
-                elif escolha_funcionario == 2:
+                elif escolha == 2:
                     Funções_basicas.limpar_tela()
                     Funcionarios.name_app()
                     Funcionarios.cadastrar_funcionario()
@@ -177,16 +172,10 @@ class Funcionarios:
                     Funcionarios.menu_funcionacios()
                     break
                 
-                elif escolha_funcionario == 3:
-                    Funções_basicas.limpar_tela()
-                    Main.main('')
-                    break
-                
                 else:
                     Funções_basicas.limpar_tela()
-                    Funcionarios.name_app()
-                    Funcionarios.mostrar_opcoes_funcionarios()
-                    print('Por favor, escolha uma opção válida.')
+                    Main.main()
+                    break
 
             except ValueError:  # Captura erros de conversão de string para int
                 Funções_basicas.limpar_tela()
@@ -195,6 +184,10 @@ class Funcionarios:
                 Funções_basicas.erro_de_valor()
         
     def main_funcionarios(): #executa as funções na ordem certo
+        Funções_basicas.limpar_tela()
+        Funcionarios.name_app()
+        Funcionarios.mostrar_opcoes_funcionarios()
+        Funcionarios.checagem_funcionarios()
         Funções_basicas.limpar_tela()
         Funcionarios.name_app()
         Funcionarios.mostrar_opcoes_funcionarios()
