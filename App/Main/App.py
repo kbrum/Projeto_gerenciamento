@@ -1,27 +1,8 @@
 import os
 import sys
+from App.Funcionabilidades.Funções_basicas import Funções_basicas
+from App.Funcionabilidades.Gerador_codigo import codigo 
 
-class Funções_basicas: #Funções que sao muito usadas
-    
-    def variavel_em_branco(): #caso o usuario na digite nada
-        print('\nEste campo não pode ficar em branco')
-
-    def preço_erro(): #erro de preço de produto
-        print('\n Insira um Preço valido(APENAS NUMEROS)')
-
-    def erro_de_valor(): # aparece quando se digita algo que não é numero
-        print('\nPor favor, selecione uma opção valida\n')
-
-    def limpar_tela(): #Meio óbvio...
-        os.system('cls')
-
-class codigo: #Gera um codigo de produto/funcionario/conta autoincrementavel
-    def __init__(self):
-        self.codigo = 0
-            
-    def pro_num(self):
-        self.codigo +=1
-        return self.codigo
     
 class Produtos:
     def name_app():

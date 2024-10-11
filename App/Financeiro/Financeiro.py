@@ -1,5 +1,5 @@
-from App.Funções_basicas import Funções_basicas
-
+from App.Funcionabilidades.Funções_basicas import Funções_basicas
+import App.Financeiro.Contas_a_pagar
 class codigo: #gera um codigo de produto autoincrementavel
         def __init__(self):
             self.codigo = 0
@@ -18,16 +18,6 @@ class Financeiro: #Financeiro
     ██║░░░░░██║██║░╚███║██║░░██║██║░╚███║╚█████╔╝███████╗██║██║░░██║╚█████╔╝
     ╚═╝░░░░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝╚═╝░░╚══╝░╚════╝░╚══════╝╚═╝╚═╝░░╚═╝░╚════╝░''')
         
-    class conta:
-        def __init__(self,nome,tipo,dado,valor,codigo):
-            self.nome = nome
-            self.tipo = tipo
-            self.dado = dado
-            self.valor = valor
-            self.codigo = codigo
-
-    gerador = codigo() #instacia do gerador de codigo
-
     def menu_financeiro(): #pergunta ao usuario se quer voltar ao menu financeiro
         while True:
             try:
@@ -63,51 +53,6 @@ class Financeiro: #Financeiro
                 Financeiro.name_app()
                 Funções_basicas.erro_de_valor()
                 input('\n(Digite Enter para continuar)')
-
-    def formatar_cpf(cpf): #formata um cpf
-        cpf = ''.join(filter(str.isdigit, cpf))  # Remove qualquer caractere que não seja dígito
-        if len(cpf) != 11:
-            raise ValueError("O CPF deve ter 11 dígitos.")
-        return f'{cpf[:3]}.{cpf[3:6]}.{cpf[6:9]}-{cpf[9:]}'
-
-    def formatar_cnpj(cnpj): #formata um cnpj
-        cnpj = ''.join(filter(str.isdigit, cnpj))  # Remove qualquer caractere que não seja dígito
-        if len(cnpj) != 14:
-            raise ValueError("O CNPJ deve ter 14 dígitos.")
-        return f'{cnpj[:2]}.{cnpj[2:5]}.{cnpj[5:8]}/{cnpj[8:12]}-{cnpj[12:]}'
-    
-    def solicitar_entrada(mensagem, tipo):  # Função para garantir que a entrada não esteja em branco
-        while True:
-            valor = input(f'\n{mensagem}\n------------->').strip()
-            if valor:
-                return valor
-            else:
-                Funções_basicas.limpar_tela()
-                Financeiro.name_app()
-                print(f'\nO {tipo} do seu produto não pode ficar em branco.')
-    
-    def solicitar_valor():  # Função para garantir que o preço seja numérico
-        while True:
-            try:
-                print('\nQual o valor da sua conta? (Insira apenas números)')
-                preço = float(input('\n------------->').strip())
-                if preço > 0:
-                    return preço
-                else:
-                    Funções_basicas.limpar_tela()
-                    Financeiro.name_app()
-                    print('O valor do produto deve ser positivo.')
-            except ValueError:
-                Funções_basicas.limpar_tela()
-                Financeiro.name_app()
-                Funções_basicas.preço_erro()
-        
-    def cadastro_feito(): #mostra mensagem de cadastro bem sucedido
-        Funções_basicas.limpar_tela()
-        Financeiro.name_app()
-        print('\n Um codigo de identificação foi gerado automaticamente a sua despesa')
-        print('\n Cadastro concluido com succeso')
-        input('\n Pressione enter para continuar')
     
     class Principal:
         
@@ -185,7 +130,7 @@ class Financeiro: #Financeiro
     class Saldo:
         saldo = 1000.00 #variavel que guarda o saldo
         def mostrar_saldo(): #mostra o saldo
-            print(f'\n Seu saldo é de R$: {Financeiro.Saldo.saldo} ')
+            print(f'\n Seu saldo é de R$: {Saldo.saldo} ')
             input('\n Digite Enter para continuar')
             
     class Contas_a_pagar:

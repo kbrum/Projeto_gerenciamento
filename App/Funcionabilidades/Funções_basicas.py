@@ -1,4 +1,5 @@
 import os
+
 class Funções_basicas:
     def variavel_em_branco(): #caso o usuario na digite nada
         print('\nEste campo não pode ficar em branco')

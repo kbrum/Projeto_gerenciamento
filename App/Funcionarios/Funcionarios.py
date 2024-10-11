@@ -1,4 +1,4 @@
-from App.Funções_basicas import Funções_basicas
+from App.Funcionabilidades.Funções_basicas import Funções_basicas
 class Funcionarios: #Funcionarios
     def name_app():
         print('''
