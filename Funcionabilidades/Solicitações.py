@@ -1,5 +1,5 @@
-from App.Funcionabilidades.Funções_basicas import Funções_basicas
-from App.Funcionabilidades.Formatadores import Formatar
+from Funcionabilidades.Funções_basicas import Funções_basicas
+from Funcionabilidades.Formatadores import Formatar
 
 class Solicitar:
     def solicitar_entrada(mensagem, tipo):  # Função para garantir que a entrada não esteja em branco

@@ -1,7 +1,7 @@
-from App.Funcionabilidades.Funções_basicas import Funções_basicas
-from App.Funcionabilidades.Formatadores import Formatar 
-from App.Funcionabilidades.Gerador_codigo import Codigo
-from App.Funcionabilidades.Solicitações import Solicitar
+from Funcionabilidades.Funções_basicas import Funções_basicas
+from Funcionabilidades.Formatadores import Formatar 
+from Funcionabilidades.Gerador_codigo import Codigo
+from Funcionabilidades.Solicitações import Solicitar
 
 class Nova_conta: #contrutor de uma nova conta
         def __init__(self,nome,tipo,dado,valor,codigo):

@@ -1,5 +1,5 @@
-from App.Funcionabilidades.Funções_basicas import Funções_basicas
-import App.Financeiro.Contas_a_pagar
+from Funcionabilidades.Funções_basicas import Funções_basicas
+import Financeiro.Contas_a_pagar
 class codigo: #gera um codigo de produto autoincrementavel
         def __init__(self):
             self.codigo = 0

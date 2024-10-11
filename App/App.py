@@ -1,7 +1,7 @@
 import os
 import sys
-from App.Funcionabilidades.Funções_basicas import Funções_basicas
-from App.Funcionabilidades.Gerador_codigo import codigo 
+from Funcionabilidades.Funções_basicas import Funções_basicas
+from Funcionabilidades.Gerador_codigo import Codigo
 
     
 class Produtos:
@@ -23,7 +23,7 @@ class Produtos:
             self.preço = preço
             self.codigo = codigo
     
-    gerador = codigo() #instacia do gerador de codigo
+    gerador = Codigo() #instacia do gerador de codigo
 
     def menu_produtos(): #pergunta ao usuario se quer voltar ao menu 
         while True:
