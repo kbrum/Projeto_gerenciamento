@@ -13,10 +13,17 @@ def solicitar_entrada(mensagem, tipo, quem_chama):  # Faz checagem de entrada nu
             limpar_tela()
             print(f'\nO {tipo} do seu produto não pode ficar em branco.')
 
-def solicitar_valor_conta():  # Solicita o valor da conta a ser cadastrada
+def solicitar_valor(quem_chama):  # Solicita o valor da conta a ser cadastrada
     while True:        
         try:
-            print('\nQual o valor da sua conta? (Insira apenas números)')
+            dado = None
+            if quem_chama ==  'Contas_a_pagar' or quem_chama == 'Contas_a_receber':
+                dado = 'da sua conta'
+            
+            elif quem_chama == 'Produtos':
+                dado == 'do seu produto'
+            
+            print(f'\nQual o valor {dado}? (Insira apenas números)')
             preço = float(input('\n------------->').strip())
             if preço > 0: # Função para garantir que o preço seja numérico
                 return preço
