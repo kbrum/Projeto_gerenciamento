@@ -754,97 +754,23 @@ class Funcionarios: #Funcionarios
     ╚══════╝░░░╚═╝░░░░╚═════╝░╚═╝╚═╝░░░░░╚══════╝''')
 
     gerador = Codigo() #instacia do gerador de codigo
-        
-    def menu_funcionacios(): #pergunta ao usuario se quer voltar ao menu 
-        while True:
-            try:
-                limpar_tela()
-                Funcionarios.name_app()
-                print('\nDeseja voltar ao menu? ')
-                print('1 - Sim')
-                print('2 - Não')
-                
-                menu = input('\n-------------> ').strip()
-                
-                if not menu: # verifica se a entrada do menu não é vazia
-                    limpar_tela()
-                    Funcionarios.name_app()
-                    print('\nEste campo não pode ficar em branco')
-                    input('\n(Digite Enter para continuar)')
-                    continue
-                
-                menu = int(menu)
-                
-                if menu == 2: # fecha o programa
-                    limpar_tela()
-                    print('Finalizado')
-                    break
-                
-                elif menu == 1: # volta ao menu de funcionarios
-                    limpar_tela()
-                    Funcionarios.main_funcionarios()
-                    break
-                
-            except ValueError: #em caso de inserir algo que não é numero na opção
-                limpar_tela()
-                Funcionarios.name_app()
-                erro_de_valor()
-                input('\n(Digite Enter para continuar)')
 
-    def cadastrar_outro_funcionario(): #pergunta se quer cadastrar outro funcionario
-        while True:
-            try:
-                limpar_tela()
-                Funcionarios.name_app()
-                print('\nDeseja cadastrar outro funcionario')
-                print('1 - Sim')
-                print('2 - Não')
-                nv_funcionario = int(input('\n------------->'))
-        
-                if nv_funcionario == 1:
-                    limpar_tela()
-                    Funcionarios.name_app()
-                    Funcionarios.cadastrar_funcionario()
-                
-                elif nv_funcionario == 2:
-                    break
-                
-            except:
-                limpar_tela()
-                Funcionarios.name_app()
-                erro_de_valor()
-                Funcionarios.cadastrar_outro_funcionario()
-                break
-
-    def solicitar_entrada(mensagem, setor):  # Função para garantir que a entrada não esteja em branco
-        while True:
-            entrada = input(f'\n{mensagem}\n------------->').strip()
-            if entrada:
-                return entrada
-            else:
-                limpar_tela()
-                Funcionarios.name_app()
-                print(f'\nO {setor} do seu funcionario não pode ficar em branco.')
-
-    funcionarios = []
+    lista_funcionarios = []
 
     def cadastrar_funcionario():  # Função para cadastrar um novo funcionário
         while True:
             try:
-                nome = Funcionarios.solicitar_entrada('Qual o nome do seu funcionario?', 'nome')
-                setor = Funcionarios.solicitar_entrada('Qual o setor do seu funcionario?', 'setor')
-
-                codigo_funcionario = Funcionarios.gerador.pro_num()
-
-                # Armazena o novo funcionário
-                funcionario_di = {
-                    'nome': nome,
-                    'setor': setor,
-                    'codigo_funcionario': codigo_funcionario}
+                nome = solicitar_entrada('Qual o nome do seu funcionario?', 'nome', Funcionarios)
+                setor = solicitar_entrada('Qual o setor do seu funcionario?', 'setor', Funcionarios)
+                posicao = solicitar_entrada('Qual a posição desse funcionario? (ex: Analista, Tecnico, Estagiarios)', 'posição', Funcionarios)
+                codigo = Funcionarios.gerador.pro_num()
+                status = True
                 
-                Funcionarios.funcionarios.append(funcionario_di)
+                # Armazena o novo funcionário
+                funcionario_di = Novo_funcionario(nome,setor,posicao,codigo,status)
+                Funcionarios.lista_funcionarios.append(funcionario_di)
 
-                Funcionarios.cadastro_feito()  # Função para notificar que o cadastro foi feito
+                cadastro_feito(Funcionarios)  # Função para notificar que o cadastro foi feito
                 break
 
             except Exception as e:
@@ -854,34 +780,22 @@ class Funcionarios: #Funcionarios
                 print('\nEste campo não pode ficar em branco.')
 
     def mostrar_funcionarios():  # Função para mostrar os funcionários cadastrados
-        if not Funcionarios.funcionarios:
-            limpar_tela()
-            Funcionarios.name_app()
-            print('\nNenhum funcionário cadastrado.')
-            input('\n(Digite Enter para continuar)')
+        if len(Funcionarios.lista_funcionarios) == 0:
+            print('\nNenhum funcioanrio cadastrado.')
         
         else:
             print('\nSeus funcionários são:')
-            for funcionario in Funcionarios.funcionarios:
-                nome = funcionario['nome']
-                setor = funcionario['setor']
-                codigo_funcionario = funcionario['codigo_funcionario']    
-                print(f'\n--> Nome: {nome} | Setor: {setor} | Código: {codigo_funcionario}')
+            for funcionario in Funcionarios.lista_funcionarios:
+                status_funcionarios = 'Ativo' if funcionario.status else 'desligado'    
+                print(f'\n--> Nome: {funcionario.nome} | Setor: {funcionario.setor} | Posição: {funcionario.posicao} | Código: {funcionario.codigo} | Status do contrato: {status_funcionarios}')
             input('\n(Digite Enter para continuar)')
-                
-    def cadastro_feito(): #mostra mensagem de cadastro bem sucedido
-        limpar_tela()
-        Funcionarios.name_app()
-        print('\n Um codigo de identificação foi gerado automaticamente a seu funcinario')
-        print('\n Cadastro concluido com succeso')
-        input('\n Pressione Enter para continuar')
 
-    def mostrar_opcoes_funcionarios(): #mostra as opçoes que o usuario pode escolher
+    def mostrar_opcoes(): #mostra as opçoes que o usuario pode escolher
         print('\n1 - Todos os funcionarios')
         print('2 - Cadastrar funcionario')
         print('3 - Voltar ao menu principal')
 
-    def checagem_funcionarios():  # Checa a escolha que o usuário fez
+    def checagem():  # Checa a escolha que o usuário fez
         while True:
             try:
                 print('\nEscolha uma opção')
@@ -905,33 +819,32 @@ class Funcionarios: #Funcionarios
                     limpar_tela()
                     Funcionarios.name_app()
                     Funcionarios.mostrar_funcionarios()
-                    Funcionarios.menu_funcionacios()
+                    Funcionarios.executar_programa()
                     break
 
                 elif escolha == 2:
                     limpar_tela()
                     Funcionarios.name_app()
                     Funcionarios.cadastrar_funcionario()
-                    Funcionarios.cadastrar_outro_funcionario()
-                    Funcionarios.menu_funcionacios()
+                    cadastrar_outro(Funcionarios)
+                    Funcionarios.executar_programa()
                     break
                 
                 else:
                     limpar_tela()
-                    Main.main()
                     break
 
             except ValueError:  # Captura erros de conversão de string para int
                 limpar_tela()
                 Funcionarios.name_app()
-                Funcionarios.mostrar_opcoes_funcionarios()
-                erro_de_valor()
+                Funcionarios.mostrar_opcoes()
+                erro_de_valor()     
         
-    def main_funcionarios(): #executa as funções na ordem certo
+    def executar_programa(): #executa o programa
         limpar_tela()
         Funcionarios.name_app()
-        Funcionarios.mostrar_opcoes_funcionarios()
-        Funcionarios.checagem_funcionarios()
+        Funcionarios.mostrar_opcoes()
+        Funcionarios.checagem()
 
 class Main: #MAIN.
     def name_app():     
@@ -952,7 +865,7 @@ class Main: #MAIN.
         print('5 - Funcionarios')
         print('6 - Sair')
 
-    def checagem_main(): #Faz a checagem e autenticação da escolha
+    def checagem(): #Faz a checagem e autenticação da escolha
         while True:
             try:
                 print('\nEscolha uma opção')
@@ -992,7 +905,7 @@ class Main: #MAIN.
                     break
                 
                 elif escolha == 5:
-                    Funcionarios.main_funcionarios()
+                    Funcionarios.executar_programa()
                     Main.executar_programa()
                     break
                 
@@ -1017,6 +930,6 @@ class Main: #MAIN.
         limpar_tela()
         Main.name_app()
         Main.mostrar_opcoes()
-        Main.checagem_main()
+        Main.checagem()
         
 Main.executar_programa()# mostra o programa na tela 

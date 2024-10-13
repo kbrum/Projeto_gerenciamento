@@ -105,4 +105,4 @@ class Funcionarios: #Funcionarios
         Funcionarios.mostrar_opcoes()
         Funcionarios.checagem()
 
-Funcionarios.executar_programa() #usado para teste unitarios
+#Funcionarios.executar_programa() #usado para teste unitarios
