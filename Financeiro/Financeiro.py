@@ -1,5 +1,5 @@
-from Funcionabilidades.Funções_basicas import Funções_basicas
-import Financeiro.Contas_a_pagar
+from Funcionalidades import Funções_basicas 
+ 
 class codigo: #gera um codigo de produto autoincrementavel
         def __init__(self):
             self.codigo = 0
@@ -130,7 +130,7 @@ class Financeiro: #Financeiro
     class Saldo:
         saldo = 1000.00 #variavel que guarda o saldo
         def mostrar_saldo(): #mostra o saldo
-            print(f'\n Seu saldo é de R$: {Saldo.saldo} ')
+            print(f'\n Seu saldo é de R$: {Financeiro.saldo} ')
             input('\n Digite Enter para continuar')
             
     class Contas_a_pagar:

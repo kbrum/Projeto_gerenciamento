@@ -1,7 +1,7 @@
 import os
 import sys
-from Funcionabilidades.Funções_basicas import Funções_basicas
-from Funcionabilidades.Gerador_codigo import Codigo
+from Funcionalidades.Funções_basicas import *
+from Funcionalidades.Gerador_codigo import *
 
     
 class Produtos:
@@ -274,7 +274,7 @@ class Pedidos: #Pedidos
             else:
                 print(f"Pedido {self.codigo} já está finalizado.")
         
-    gerador = codigo() #instacia do gerador de codigo
+    gerador = Codigo() #instacia do gerador de codigo
     
     class FazerPedido: # para fazer um novo pedido
         

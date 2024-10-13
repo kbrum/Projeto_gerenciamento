@@ -1,4 +1,4 @@
-from Funcionabilidades.Funções_basicas import Funções_basicas
+from Funcionalidades.Funções_basicas import Funções_basicas
 
 class codigo: #gera um codigo de pedido autoincrementavel
         def __init__(self):

@@ -1,4 +1,3 @@
-import Funcionabilidades
 
 class Saldo:
     saldo = 1000.00 #variavel que guarda o saldo

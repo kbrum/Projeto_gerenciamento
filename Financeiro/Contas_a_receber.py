@@ -1,7 +1,6 @@
-from Funcionabilidades.Funções_basicas import Funções_basicas
-from Funcionabilidades.Formatadores import Formatar 
-from Funcionabilidades.Gerador_codigo import Codigo
-from Funcionabilidades.Solicitações import Solicitar
+from Funcionalidades import Funções_basicas 
+from Funcionalidades import Gerador_codigo 
+from Funcionalidades import Solicitações 
 
 class Nova_conta: #contrutor de uma nova conta
         def __init__(self,nome,tipo,dado,valor,codigo):
@@ -14,22 +13,14 @@ class Nova_conta: #contrutor de uma nova conta
 class Contas_a_receber:
     def name_app():
         print('''
-    ░█████╗░░█████╗░███╗░░██╗████████╗░█████╗░░██████╗  ░█████╗░    
-    ██╔══██╗██╔══██╗████╗░██║╚══██╔══╝██╔══██╗██╔════╝  ██╔══██╗        
-    ██║░░╚═╝██║░░██║██╔██╗██║░░░██║░░░███████║╚█████╗░  ███████║
-    ██║░░██╗██║░░██║██║╚████║░░░██║░░░██╔══██║░╚═══██╗  ██╔══██║
-    ╚█████╔╝╚█████╔╝██║░╚███║░░░██║░░░██║░░██║██████╔╝  ██║░░██║
-    ░╚════╝░░╚════╝░╚═╝░░╚══╝░░░╚═╝░░░╚═╝░░╚═╝╚═════╝░  ╚═╝░░╚═╝
-
-    ██████╗░███████╗░█████╗░███████╗██████╗░███████╗██████╗░
-    ██╔══██╗██╔════╝██╔══██╗██╔════╝██╔══██╗██╔════╝██╔══██╗
-    ██████╔╝█████╗░░██║░░╚═╝█████╗░░██████╦╝█████╗░░██████╔╝
-    ██╔══██╗██╔══╝░░██║░░██╗██╔══╝░░██╔══██╗██╔══╝░░██╔══██╗
-    ██║░░██║███████╗╚█████╔╝███████╗██████╦╝███████╗██║░░██║
-    ╚═╝░░╚═╝╚══════╝░╚════╝░╚══════╝╚═════╝░╚══════╝╚═╝░░╚═╝''')
+    ░█████╗░░█████╗░███╗░░██╗████████╗░█████╗░░██████╗  ░█████╗░  ██████╗░███████╗░█████╗░███████╗██████╗░███████╗██████╗░
+    ██╔══██╗██╔══██╗████╗░██║╚══██╔══╝██╔══██╗██╔════╝  ██╔══██╗  ██╔══██╗██╔════╝██╔══██╗██╔════╝██╔══██╗██╔════╝██╔══██╗    
+    ██║░░╚═╝██║░░██║██╔██╗██║░░░██║░░░███████║╚█████╗░  ███████║  ██████╔╝█████╗░░██║░░╚═╝█████╗░░██████╦╝█████╗░░██████╔
+    ██║░░██╗██║░░██║██║╚████║░░░██║░░░██╔══██║░╚═══██╗  ██╔══██║  ██╔══██╗██╔══╝░░██║░░██╗██╔══╝░░██╔══██╗██╔══╝░░██╔══██╗
+    ╚█████╔╝╚█████╔╝██║░╚███║░░░██║░░░██║░░██║██████╔╝  ██║░░██║  ██║░░██║███████╗╚█████╔╝███████╗██████╦╝███████╗██║░░██║
+    ░╚════╝░░╚════╝░╚═╝░░╚══╝░░░╚═╝░░░╚═╝░░╚═╝╚═════╝░  ╚═╝░░╚═╝  ╚═╝░░╚═╝╚══════╝░╚════╝░╚══════╝╚═════╝░╚══════╝╚═╝░░╚═╝''')
         
-        
-    gerador = Codigo() #instacia do gerador de codigo
+    gerador = Gerador_codigo.Codigo() #instacia do gerador de codigo
 
     lista_Contas_a_receber = [] #lista de contas a pagar
         
@@ -74,39 +65,7 @@ class Contas_a_receber:
         Contas_a_receber.name_app()
         print('\n Um codigo de identificação foi gerado automaticamente a sua conta')
         print('\n Cadastro concluido com succeso')
-        input('\n Pressione enter para continuar')
-        
-    def solicitar_dados(): # Solicita o cpf ou cnpj de quem vai ser pago
-        while True:
-            try:
-                print('\nDigite o CPF ou CNPJ do recebedor')
-                dados = input('\n------------->').strip()
-                if len(dados) == 11:
-                    dados = Formatadores.formatar_cpf(dados)
-                    break
-                elif len(dados) == 14:
-                    dados = Formatadores.formatar_cnpj(dados)
-                    break
-                else:
-                    raise ValueError("CPF/CNPJ inválido.")
-            except ValueError as e:
-                print(f"\nErro: {e}. Não foi possível formatar o CPF/CNPJ.")
-    
-    def solicitar_valor():  # Função para garantir que o preço seja numérico
-        while True:
-            try:
-                print('\nQual o valor da sua conta? (Insira apenas números)')
-                preço = float(input('\n------------->').strip())
-                if preço > 0:
-                    return preço
-                else:
-                    Funções_basicas.limpar_tela()
-                    Contas_a_receber.name_app()
-                    print('O valor do produto deve ser positivo.')
-            except ValueError:
-                Funções_basicas.limpar_tela()
-                Contas_a_receber.name_app()
-                Funções_basicas.preço_erro()
+        input('\n (Digite Enter para continuar)')
         
     def cadastrar_outra_conta(): #pergunta se quer cadastrar outra conta a pagar
         while True:
@@ -157,7 +116,7 @@ class Contas_a_receber:
             try:
                 nome = Solicitações.solicitar_entrada('Qual o nome da sua conta?', 'nome')
                 tipo = Solicitações.solicitar_entrada('Qual o tipo da sua conta? (ex: Salário, Água, luz)', 'tipo')
-                dados_recebedor = Contas_a_receber.solicitar_dados()
+                dados_recebedor = Solicitações.solicitar_dados('Contas_a_receber')
                 valor = Contas_a_receber.solicitar_valor()
                 codigo_conta = Contas_a_receber.gerador.pro_num() 
                 

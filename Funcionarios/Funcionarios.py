@@ -1,4 +1,6 @@
-from Funcionabilidades.Funções_basicas import Funções_basicas
+from Funcionalidades.Funções_basicas import Funções_basicas
+from Funcionalidades.Gerador_codigo import Codigo
+
 class Funcionarios: #Funcionarios
     def name_app():
         print('''
@@ -9,7 +11,7 @@ class Funcionarios: #Funcionarios
     ███████╗░╚═██╔═╝░╚██████╔╝██║██║░░░░░███████╗
     ╚══════╝░░░╚═╝░░░░╚═════╝░╚═╝╚═╝░░░░░╚══════╝''')
 
-    gerador = codigo() #instacia do gerador de codigo
+    gerador = Codigo() #instacia do gerador de codigo
         
     def menu_funcionacios(): #pergunta ao usuario se quer voltar ao menu 
         while True:
