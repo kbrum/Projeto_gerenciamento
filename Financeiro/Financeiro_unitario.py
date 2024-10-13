@@ -62,7 +62,6 @@ class Financeiro: #Financeiro
                 
                 elif escolha == 4:
                     limpar_tela()
-                    #Main.main()
                     break
                 
                 else:
