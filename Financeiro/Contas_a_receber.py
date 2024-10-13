@@ -51,10 +51,38 @@ class Contas_a_receber:
                 Contas_a_receber.name_app()
                 preço_erro()          
 
+    def finalizar_conta(): # Solicita ao usuário o código do pedido para finalizar
+        while True:
+            try:
+                limpar_tela()
+                Contas_a_receber.name_app()
+                codigo = int(input('\nDigite o código do pedido que deseja finalizar: ').strip())
+                
+                # Busca a conta com o código informado
+                conta_encontrada = None
+                for conta in Contas_a_receber.lista_Contas_a_receber: # procurando o codigo na lista
+                    if conta.codigo == codigo:
+                        conta_encontrada == conta
+                    
+                    else:
+                        print(f'\nConta de código {codigo} não encontrada.') #caso a conta não seja encontrado
+                if conta.status == True:
+                    conta.status = False
+                    limpar_tela()
+                    Contas_a_receber.name_app()
+                    print(f'\nA conta "{conta.nome}" de código {conta.codigo} {'ainda esta Pendente' if conta.status else 'foi Paga com sucesso'}')
+                    
+                    input('\n(Pressione Enter para continuar)')
+                    break
+                	
+            except ValueError:
+                print('Erro: O código da conta deve ser um número inteiro.') # caso digite uma letra ou deixe vazio
+    
     def mostrar_opcoes(): #mostra as opções que o usuario pode escolher no contas a pagar
         print('\n1 - Ver todas as contas a pagar')
         print('2 - Cadastrar contas')
-        print('3 - Voltar ao menu financeiro')
+        print('3 - Marcar conta como recebida')
+        print('4 - Voltar ao menu financeiro')
 
     def checagem(): #faz a checagem doq foi no contas a pagar
         while True:
@@ -91,6 +119,13 @@ class Contas_a_receber:
                     break
                 
                 elif escolha == 3:
+                    limpar_tela()
+                    Contas_a_receber.name_app()
+                    Contas_a_receber.finalizar_conta()
+                    Contas_a_receber.executar_programa()
+                    break
+                
+                elif escolha == 4:
                     break
                 
                 else:

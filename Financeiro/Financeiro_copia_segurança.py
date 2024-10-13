@@ -83,4 +83,4 @@ class Financeiro: #Financeiro
         Financeiro.mostrar_opcoes_financeiro()
         Financeiro.checagem_financeiro()
             
-#Financeiro.executar_programa() #usado para testes unitarios
+Financeiro.executar_programa() #usado para testes unitarios
