@@ -1,4 +1,4 @@
-from Funcionalidades.Funções_basicas import Funções_basicas
+from Funcionalidades.Utils import Funções_basicas
 class Estoque:
     def name_app(): # titulo    
         print('''

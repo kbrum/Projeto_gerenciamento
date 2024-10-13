@@ -1,4 +1,4 @@
-from Funcionalidades.Funções_basicas import Funções_basicas
+from Funcionalidades.Utils import Funções_basicas
 from Funcionalidades.Gerador_codigo import Codigo
 
 class Funcionarios: #Funcionarios

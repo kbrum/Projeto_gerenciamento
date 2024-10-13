@@ -1,9 +1,10 @@
-import os
 import sys
-from Funcionalidades.Funções_basicas import *
+from Funcionalidades.Utils import *
 from Funcionalidades.Gerador_codigo import *
+from Financeiro.Contas_a_pagar import *
+from Financeiro.Contas_a_receber import *
+from Financeiro.Saldo import *
 
-    
 class Produtos:
     def name_app():
         print('''
@@ -28,7 +29,7 @@ class Produtos:
     def menu_produtos(): #pergunta ao usuario se quer voltar ao menu 
         while True:
                 try:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Produtos.name_app()
                     print('\nDeseja voltar ao menu? ')
                     print('1 - Sim')
@@ -37,7 +38,7 @@ class Produtos:
                     menu = input('\n-------------> ').strip()
                     
                     if not menu: # verifica se a entrada do menu não é vazia
-                        Funções_basicas.limpar_tela()
+                        limpar_tela()
                         Produtos.name_app()
                         print('\nEste campo não pode ficar em branco')
                         input('\n(Digite Enter para continuar)')
@@ -46,25 +47,25 @@ class Produtos:
                     menu = int(menu)
                     
                     if menu == 2: # fecha o programa
-                        Funções_basicas.limpar_tela()
+                        limpar_tela()
                         print('Finalizado')
                         break
                     
                     elif menu == 1: # volta ao menu de produtos
-                        Funções_basicas.limpar_tela()
+                        limpar_tela()
                         Produtos.main_produtos()
                         break
                     
                 except ValueError: #em caso de inserir algo que não é numero na opção
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Produtos.name_app()
-                    Funções_basicas.erro_de_valor()
+                    erro_de_valor()
                     input('\n(Digite Enter para continuar)')
 
     def cadastrar_outro_produto(): #pergunta se quer cadastrar outro produto
         while True:
             try:
-                Funções_basicas.limpar_tela()
+                limpar_tela()
                 Produtos.name_app()
                 print('\nDeseja cadastrar outro produto?')
                 print('1 - Sim')
@@ -73,7 +74,7 @@ class Produtos:
                 nv_produto = input('\n-------------> ').strip()
                 
                 if not nv_produto:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Produtos.name_app()
                     print('\nEste campo não pode ficar em branco')
                     input('\n(Digite Enter para continuar)')
@@ -82,7 +83,7 @@ class Produtos:
                 nv_produto = int(nv_produto)
         
                 if nv_produto == 1:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Produtos.name_app()
                     Produtos.cadastrar_produto()
                 
@@ -90,9 +91,9 @@ class Produtos:
                     break
                 
             except ValueError:
-                Funções_basicas.limpar_tela()
+                limpar_tela()
                 Produtos.name_app()
-                Funções_basicas.erro_de_valor()
+                erro_de_valor()
                 input('\n(Digite Enter para continuar)')
 
     produtos = []
@@ -105,13 +106,13 @@ class Produtos:
                 if preço > 0:
                     return preço
                 else:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Produtos.name_app()
                     print('O preço do produto deve ser positivo.')
             except ValueError:
-                Funções_basicas.limpar_tela()
+                limpar_tela()
                 Produtos.name_app()
-                Funções_basicas.preço_erro()
+                preço_erro()
 
     def solicitar_quantidade(): #solicita a quantidade de produtos em estoque
         while True:
@@ -121,13 +122,13 @@ class Produtos:
                 if preço > 0:
                     return preço
                 else:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Produtos.name_app()
                     print('A quantidade do produto deve ser positiva.')
             except ValueError:
-                Funções_basicas.limpar_tela()
+                limpar_tela()
                 Produtos.name_app()
-                Funções_basicas.preço_erro()
+                preço_erro()
         
     def solicitar_entrada(mensagem, tipo):  # Função para garantir que a entrada não esteja em branco
         while True:
@@ -135,7 +136,7 @@ class Produtos:
             if valor:
                 return valor
             else:
-                Funções_basicas.limpar_tela()
+                limpar_tela()
                 Produtos.name_app()
                 print(f'\nA parte de {tipo} do seu produto não pode ficar em branco.')
 
@@ -158,9 +159,9 @@ class Produtos:
                 break 
 
             except ValueError:
-                Funções_basicas.limpar_tela()
+                limpar_tela()
                 Produtos.name_app()
-                Funções_basicas.preço_erro()
+                preço_erro()
                 
     def mostrar_produtos():  # Função para mostrar todos os produtos cadastrados
         if len(Produtos.produtos) == 0:
@@ -173,7 +174,7 @@ class Produtos:
         input('\n(Digite Enter para continuar)')
             
     def cadastro_feito(): #mostra mensagem de cadastro bem sucedido
-        Funções_basicas.limpar_tela()
+        limpar_tela()
         Produtos.name_app()
         print('\n Um codigo de identificação foi gerado automaticamente a seu produto')
         print('\n Cadastro concluido com succeso')
@@ -194,7 +195,7 @@ class Produtos:
         
                 # Verifica se a entrada está vazia
                 if not escolha:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Produtos.name_app()
                     Produtos.mostrar_opcoes_produtos()
                     print('\nA escolha não pode ficar em branco.')
@@ -205,14 +206,14 @@ class Produtos:
 
                 # Verifica as opções
                 if escolha == 1:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Produtos.name_app()
                     Produtos.mostrar_produtos()
                     Produtos.menu_produtos()
                     break
 
                 elif escolha == 2:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Produtos.name_app()
                     Produtos.cadastrar_produto()
                     Produtos.cadastrar_outro_produto()
@@ -220,24 +221,24 @@ class Produtos:
                     break
                 
                 elif escolha == 3:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Main.main()
                     break
                 
                 else:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Produtos.name_app()
                     Produtos.mostrar_opcoes_produtos()
                     print('Por favor, escolha uma opção válida.')
 
             except ValueError:  # Captura erros de conversão de string para int
-                Funções_basicas.limpar_tela()
+                limpar_tela()
                 Produtos.name_app()
                 Produtos.mostrar_opcoes_produtos()
-                Funções_basicas.erro_de_valor()
+                erro_de_valor()
         
     def main_produtos(): #executa todas as funções na ordem certa
-        Funções_basicas.limpar_tela()
+        limpar_tela()
         Produtos.name_app()
         Produtos.mostrar_opcoes_produtos()
         Produtos.checagem_produtos()
@@ -286,18 +287,18 @@ class Pedidos: #Pedidos
                     if valor > 0:
                         return valor
                     else:
-                        Funções_basicas.limpar_tela()
+                        limpar_tela()
                         Pedidos.name_app()
                         print('O valor do pedido deve ser positivo.')
                 except ValueError:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Pedidos.name_app()
-                    Funções_basicas.preço_erro()
+                    preço_erro()
         
         def solicitar_pagamento(): #Pergunta a forma de pagamento
             while True:
                 try:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Pedidos.name_app()
                     print('\nQual a forma de pagamento? ')
                     print('1 - Cartão de Débito')
@@ -307,7 +308,7 @@ class Pedidos: #Pedidos
                     pagamento = input('\n-------------> ').strip()
                     
                     if not pagamento: # verifica se a entrada do pagamento não é vazia
-                        Funções_basicas.limpar_tela()
+                        limpar_tela()
                         Pedidos.name_app()
                         print('\nEste campo não pode ficar em branco')
                         input('\n(Digite Enter para continuar)')
@@ -316,24 +317,24 @@ class Pedidos: #Pedidos
                     pagamento = int(pagamento)
                     
                     if pagamento == 1: # pagar com debito
-                        Funções_basicas.limpar_tela()
+                        limpar_tela()
                         pagamento = 'Cartão de Débito'
                         break
                     
                     elif pagamento == 2: # pagar com credito
-                        Funções_basicas.limpar_tela()
+                        limpar_tela()
                         pagamento = 'Cartão Crédito'
                         break
                     
                     elif pagamento == 3: # pagar com pix
-                        Funções_basicas.limpar_tela()
+                        limpar_tela()
                         pagamento = 'Pix'
                         break
                     
                 except ValueError: #em caso de inserir algo que não é numero na opção
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Pedidos.name_app()
-                    Funções_basicas.erro_de_valor()
+                    erro_de_valor()
                     input('\n(Digite Enter para continuar)')
  
             return pagamento
@@ -346,13 +347,13 @@ class Pedidos: #Pedidos
                     if preço > 0:
                         return preço
                     else:
-                        Funções_basicas.limpar_tela()
+                        limpar_tela()
                         Pedidos.name_app()
                         print('A quantidade do produto deve ser positiva.')
                 except ValueError:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Pedidos.name_app()
-                    Funções_basicas.preço_erro()
+                    preço_erro()
     
         def solicitar_numero(): # solicta um numero para contato
                 while True:
@@ -370,7 +371,7 @@ class Pedidos: #Pedidos
                 return numero
             
         def pedido_feito(): #mostra mensagem de pedido bem sucedido
-            Funções_basicas.limpar_tela()
+            limpar_tela()
             Pedidos.name_app()
             print('\n Um codigo de identificação foi gerado automaticamente a seu Pedido')
             print('\n Pedido realizado com succeso')
@@ -398,14 +399,14 @@ class Pedidos: #Pedidos
                     break 
 
                 except ValueError:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Pedidos.name_app()
-                    Funções_basicas.preço_erro()
+                    preço_erro()
                            
     def menu_pedidos(): #pergunta ao usuario se quer voltar ao menu financeiro
         while True:
             try:
-                Funções_basicas.limpar_tela()
+                limpar_tela()
                 Pedidos.name_app()
                 print('\nDeseja voltar ao menu? ')
                 print('1 - Sim')
@@ -414,7 +415,7 @@ class Pedidos: #Pedidos
                 menu = input('\n-------------> ').strip()
                 
                 if not menu: # verifica se a entrada do menu não é vazia
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Pedidos.name_app()
                     print('\nEste campo não pode ficar em branco')
                     input('\n(Digite Enter para continuar)')
@@ -423,19 +424,19 @@ class Pedidos: #Pedidos
                 menu = int(menu)
                 
                 if menu == 2: # fecha o programa
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     print('Finalizado')
                     break
                 
                 elif menu == 1: # volta ao menu de pedidos
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Pedidos.main_pedidos()
                     break
                 
             except ValueError: #em caso de inserir algo que não é numero na opção
-                Funções_basicas.limpar_tela()
+                limpar_tela()
                 Pedidos.name_app()
-                Funções_basicas.erro_de_valor()
+                erro_de_valor()
                 input('\n(Digite Enter para continuar)')
     
     def formatar_numero(numero): #formata um numero
@@ -450,7 +451,7 @@ class Pedidos: #Pedidos
             if valor:
                 return valor
             else:
-                Funções_basicas.limpar_tela()
+                limpar_tela()
                 Pedidos.name_app()
                 print(f'\nO {tipo} do seu produto não pode ficar em branco.')  
     
@@ -483,7 +484,7 @@ class Pedidos: #Pedidos
     def alterar_status_pedido(): # Solicita ao usuário o código do pedido para finalizar
         while True:
             try:
-                Funções_basicas.limpar_tela()
+                limpar_tela()
                 Pedidos.name_app()
                 codigo = int(input('Digite o código do pedido que deseja finalizar: ').strip())
                 
@@ -498,7 +499,7 @@ class Pedidos: #Pedidos
                     
                     print('\nStatus dos pedidos após alteração:') #informa que o pedido x foi finalizado com sucesso
                     for pedido in Pedidos.FazerPedido.pedidos:
-                        Funções_basicas.limpar_tela()
+                        limpar_tela()
                         Pedidos.name_app()
                         print(f'\nO pedido de código {pedido.codigo} foi {'Ativo' if pedido.status else 'Finalizado'} com sucesso') # mensagem de finalizado
                         
@@ -525,47 +526,47 @@ class Pedidos: #Pedidos
                 escolha = int(input('\n-------------> '))
                 
                 if escolha == 1:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Pedidos.name_app()
                     Pedidos.mostrar_todos()
                     Pedidos.menu_pedidos()
                     break
                 
                 elif escolha == 2:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Pedidos.name_app()
                     Pedidos.mostrar_ativos()
                     Pedidos.menu_pedidos()
                     break
                 
                 elif escolha== 3:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Pedidos.name_app()
                     Pedidos.FazerPedido.cadastrar_pedido()
                     Pedidos.menu_pedidos()
                     break
                 
                 elif escolha == 4:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Pedidos.name_app()
                     Pedidos.alterar_status_pedido()
                     Pedidos.menu_pedidos()
                     break
                 
                 elif escolha == 5:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Main.main()
                     break
             
             except ValueError:
-                Funções_basicas.limpar_tela()
+                limpar_tela()
                 Pedidos.name_app()
                 Pedidos.mostrar_opcoes()
-                Funções_basicas.erro_de_valor()
+                erro_de_valor()
                 Pedidos.checagem()
     
     def main_pedidos(): # executa as funçoes na ordem
-        Funções_basicas.limpar_tela()
+        limpar_tela()
         Pedidos.name_app()
         Pedidos.mostrar_opcoes()
         Pedidos.checagem()
@@ -589,7 +590,7 @@ class Estoque:
     def menu_estoque(): #pergunta ao usuario se quer voltar ao menu 
         while True:
             try:
-                Funções_basicas.limpar_tela()
+                limpar_tela()
                 Estoque.name_app()
                 print('\nDeseja voltar ao menu? ')
                 print('1 - Sim')
@@ -598,7 +599,7 @@ class Estoque:
                 menu = input('\n-------------> ').strip()
                 
                 if not menu: # verifica se a entrada do menu não é vazia
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Estoque.name_app()
                     print('\nEste campo não pode ficar em branco')
                     input('\n(Digite Enter para continuar)')
@@ -607,19 +608,19 @@ class Estoque:
                 menu = int(menu)
                 
                 if menu == 2: # fecha o programa
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     print('Finalizado')
                     break
                 
                 elif menu == 1: # volta ao menu de estoque
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Estoque.main_estoque()
                     break
                 
             except ValueError: #em caso de inserir algo que não é numero na opção
-                Funções_basicas.limpar_tela()
+                limpar_tela()
                 Estoque.name_app()
-                Funções_basicas.erro_de_valor()
+                erro_de_valor()
                 input('\n(Digite Enter para continuar)')
 
     def Produtos_em_falta():#mostra os produtos em falta
@@ -628,7 +629,7 @@ class Estoque:
             for produtos_em_falta in Estoque.em_falta:
                 print(f'.{produtos_em_falta}')
         else:
-            Funções_basicas.limpar_tela()
+            limpar_tela()
             Estoque.name_app()
             print('\nNenhum produto cadastrado.')
             input('\nPressione Enter para continuar.')
@@ -639,7 +640,7 @@ class Estoque:
             for produtos in Estoque.produtos_em_estoque:
                 print(f'.{produtos}')
         else:
-            Funções_basicas.limpar_tela()
+            limpar_tela()
             Estoque.name_app()
             print('\nNenhum produto cadastrado.')
             input('\nPressione Enter para continuar.')
@@ -657,7 +658,7 @@ class Estoque:
                 escolha = input('\n-------------> ').strip
                 
                 if not escolha:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Estoque.name_app()
                     Estoque.mostrar_opcoes_estoque()
                     print('\nA escolha não pode ficar em branco.')
@@ -667,32 +668,32 @@ class Estoque:
                 escolha = int(escolha)
                 
                 if escolha == 1:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Estoque.name_app()
                     Estoque.mostra_estoque()
                     Estoque.menu_estoque()
                     break
                 
                 elif escolha == 2:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Estoque.name_app()
                     Estoque.Produtos_em_falta()
                     Estoque.menu_estoque()
                     break
                 
                 elif escolha == 3:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Main.Main()
                     break
             
             except:
-                Funções_basicas.limpar_tela()
+                limpar_tela()
                 Estoque.name_app()
                 Estoque.mostrar_opcoes_estoque()
-                Funções_basicas.erro_de_valor()
+                erro_de_valor()
         
     def main_estoque(): #executa todas as funções na ordem certa
-        Funções_basicas.limpar_tela()
+        limpar_tela()
         Estoque.name_app()
         Estoque.mostrar_opcoes_estoque()
         Estoque.checagem_estoque()
@@ -703,549 +704,81 @@ class Estoque:
 class Financeiro: #Financeiro
     def name_app(): #titulo
         print('''
-███████╗██╗███╗░░██╗░█████╗░███╗░░██╗░█████╗░███████╗██╗██████╗░░█████╗░
-██╔════╝██║████╗░██║██╔══██╗████╗░██║██╔══██╗██╔════╝██║██╔══██╗██╔══██╗
-█████╗░░██║██╔██╗██║███████║██╔██╗██║██║░░╚═╝█████╗░░██║██████╔╝██║░░██║
-██╔══╝░░██║██║╚████║██╔══██║██║╚████║██║░░██╗██╔══╝░░██║██╔══██╗██║░░██║
-██║░░░░░██║██║░╚███║██║░░██║██║░╚███║╚█████╔╝███████╗██║██║░░██║╚█████╔╝
-╚═╝░░░░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝╚═╝░░╚══╝░╚════╝░╚══════╝╚═╝╚═╝░░╚═╝░╚════╝░''')
-    
-    class conta: #construtor das contas
-        def __init__(self,nome,tipo,dado,valor,codigo):
-            self.nome = nome
-            self.tipo = tipo
-            self.dado = dado
-            self.valor = valor
-            self.codigo = codigo
+    ███████╗██╗███╗░░██╗░█████╗░███╗░░██╗░█████╗░███████╗██╗██████╗░░█████╗░
+    ██╔════╝██║████╗░██║██╔══██╗████╗░██║██╔══██╗██╔════╝██║██╔══██╗██╔══██╗
+    █████╗░░██║██╔██╗██║███████║██╔██╗██║██║░░╚═╝█████╗░░██║██████╔╝██║░░██║
+    ██╔══╝░░██║██║╚████║██╔══██║██║╚████║██║░░██╗██╔══╝░░██║██╔══██╗██║░░██║
+    ██║░░░░░██║██║░╚███║██║░░██║██║░╚███║╚█████╔╝███████╗██║██║░░██║╚█████╔╝
+    ╚═╝░░░░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝╚═╝░░╚══╝░╚════╝░╚══════╝╚═╝╚═╝░░╚═╝░╚════╝░''')
+              
+    def mostrar_opcoes_financeiro(): #mostra as opções que o usuario pode escolher
+        print('\n1 - Ver Saldo')
+        print('2 - Contas a pagar')
+        print('3 - Contas a receber')
+        print('4 - Voltar ao menu inicial')
 
-    gerador = codigo() #instacia do gerador de codigo
-
-    def menu_financeiro(): #pergunta ao usuario se quer voltar ao menu financeiro
+    def checagem_financeiro(): #faz a checagem doq foi escolhido entre os mostrados acima
         while True:
             try:
-                Funções_basicas.limpar_tela()
-                Financeiro.name_app()
-                print('\nDeseja voltar ao menu? ')
-                print('1 - Sim')
-                print('2 - Não')
+                print('\nEscolha uma opção')
                 
-                menu = input('\n-------------> ').strip()
-                
-                if not menu: # verifica se a entrada do menu não é vazia
-                    Funções_basicas.limpar_tela()
+                # Captura a entrada e remove espaços em branco
+                escolha = input('\n-------------> ').strip()
+        
+                # Verifica se a entrada está vazia
+                if not escolha:
+                    limpar_tela()
                     Financeiro.name_app()
-                    print('\nEste campo não pode ficar em branco')
-                    input('\n(Digite Enter para continuar)')
-                    continue
-                
-                menu = int(menu)
-                
-                if menu == 2: # fecha o programa
-                    Funções_basicas.limpar_tela()
-                    print('Finalizado')
+                    Financeiro.mostrar_opcoes_financeiro()
+                    print('\nA escolha não pode ficar em branco.')
+                    continue 
+
+                # Tenta converter para número inteiro
+                escolha = int(escolha)
+
+                # Verifica as opções
+                if escolha == 1:
+                    limpar_tela()
+                    Financeiro.name_app()
+                    Saldo.mostrar_saldo()
+                    Financeiro.executar_programa()
+                    break
+
+                elif escolha == 2:
+                    limpar_tela()
+                    Financeiro.name_app()
+                    Contas_a_pagar.executar_programa()
+                    Financeiro.executar_programa()
                     break
                 
-                elif menu == 1: # volta ao menu de financeiro
-                    Funções_basicas.limpar_tela()
-                    Financeiro.Principal.main_financeiro()
+                elif escolha == 3:
+                    limpar_tela()
+                    Financeiro.name_app()
+                    Contas_a_receber.executar_programa()
+                    Financeiro.executar_programa()
                     break
                 
-            except ValueError: #em caso de inserir algo que não é numero na opção
-                Funções_basicas.limpar_tela()
-                Financeiro.name_app()
-                Funções_basicas.erro_de_valor()
-                input('\n(Digite Enter para continuar)')
-
-    def formatar_cpf(cpf): #formata um cpf
-        cpf = ''.join(filter(str.isdigit, cpf))  # Remove qualquer caractere que não seja dígito
-        if len(cpf) != 11:
-            raise ValueError("O CPF deve ter 11 dígitos.")
-        return f'{cpf[:3]}.{cpf[3:6]}.{cpf[6:9]}-{cpf[9:]}'
-
-    def formatar_cnpj(cnpj): #formata um cnpj
-        cnpj = ''.join(filter(str.isdigit, cnpj))  # Remove qualquer caractere que não seja dígito
-        if len(cnpj) != 14:
-            raise ValueError("O CNPJ deve ter 14 dígitos.")
-        return f'{cnpj[:2]}.{cnpj[2:5]}.{cnpj[5:8]}/{cnpj[8:12]}-{cnpj[12:]}'
-    
-    def solicitar_entrada(mensagem, tipo):  # Função para garantir que a entrada não esteja em branco
-        while True:
-            valor = input(f'\n{mensagem}\n------------->').strip()
-            if valor:
-                return valor
-            else:
-                Funções_basicas.limpar_tela()
-                Financeiro.name_app()
-                print(f'\nO {tipo} do seu produto não pode ficar em branco.')
-    
-    def solicitar_valor():  # Função para garantir que o preço seja numérico
-        while True:
-            try:
-                print('\nQual o valor da sua conta? (Insira apenas números)')
-                preço = float(input('\n------------->').strip())
-                if preço > 0:
-                    return preço
+                elif escolha == 4:
+                    limpar_tela()
+                    break
+                
                 else:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Financeiro.name_app()
-                    print('O valor do produto deve ser positivo.')
-            except ValueError:
-                Funções_basicas.limpar_tela()
+                    Financeiro.mostrar_opcoes_financeiro()
+                    print('Por favor, escolha uma opção válida.')
+
+            except ValueError:  # Captura erros de conversão de string para int
+                limpar_tela()
                 Financeiro.name_app()
-                Funções_basicas.preço_erro()
+                Financeiro.mostrar_opcoes_financeiro()
+                erro_de_valor()
         
-    def cadastro_feito(): #mostra mensagem de cadastro bem sucedido
-        Funções_basicas.limpar_tela()
+    def executar_programa(): #executa todas as funções na ordem certa
+        limpar_tela()
         Financeiro.name_app()
-        print('\n Um codigo de identificação foi gerado automaticamente a sua despesa')
-        print('\n Cadastro concluido com succeso')
-        input('\n Pressione enter para continuar')
-    
-    class Principal:
-        
-        def mostrar_opcoes_financeiro(): #mostra as opções que o usuario pode escolher
-            print('\n1 - Ver Saldo')
-            print('2 - Contas a pagar')
-            print('3 - Contas a receber')
-            print('4 - Voltar ao menu principal')
-
-        def checagem_financeiro(): #faz a checagem doq foi escolhido entre os mostrados acima
-            while True:
-                try:
-                    print('\nEscolha uma opção')
-                    
-                    # Captura a entrada e remove espaços em branco
-                    escolha = input('\n-------------> ').strip()
-            
-                    # Verifica se a entrada está vazia
-                    if not escolha:
-                        Funções_basicas.limpar_tela()
-                        Financeiro.name_app()
-                        Financeiro.mostrar_opcoes_financeiro()
-                        print('\nA escolha não pode ficar em branco.')
-                        continue 
-
-                    # Tenta converter para número inteiro
-                    escolha = int(escolha)
-
-                    # Verifica as opções
-                    if escolha == 1:
-                        Funções_basicas.limpar_tela()
-                        Financeiro.name_app()
-                        Financeiro.Saldo.mostrar_saldo()
-                        Financeiro.menu_financeiro()
-                        break
-
-                    elif escolha == 2:
-                        Funções_basicas.limpar_tela()
-                        Financeiro.name_app()
-                        Financeiro.Contas_a_pagar.main_contas_a_pagar()
-                        break
-                    
-                    elif escolha == 3:
-                        Funções_basicas.limpar_tela()
-                        Financeiro.name_app()
-                        Financeiro.Contas_a_receber.main_contas_a_receber()
-                        break
-                    
-                    elif escolha == 4:
-                        Funções_basicas.limpar_tela()
-                        Main.main()
-                        break
-                    
-                    else:
-                        Funções_basicas.limpar_tela()
-                        Financeiro.name_app()
-                        Financeiro.Principal.mostrar_opcoes_financeiro()
-                        print('Por favor, escolha uma opção válida.')
-
-                except ValueError:  # Captura erros de conversão de string para int
-                    Funções_basicas.limpar_tela()
-                    Financeiro.name_app()
-                    Financeiro.Principal.mostrar_opcoes_financeiro()
-                    Funções_basicas.erro_de_valor()
-            
-        def main_financeiro(): #executa todas as funções na ordem certa
-            Funções_basicas.limpar_tela()
-            Financeiro.name_app()
-            Financeiro.Principal.mostrar_opcoes_financeiro()
-            Financeiro.Principal.checagem_financeiro()
-            
-        def executar_programa(): #mostra o programa na tela
-            Financeiro.Principal.main_financeiro()
-    
-    class Saldo:
-        saldo = 1000.00 #variavel que guarda o saldo
-        def mostrar_saldo(): #mostra o saldo
-            print(f'\n Seu saldo é de R$: {Financeiro.Saldo.saldo} ')
-            input('\n Digite Enter para continuar')
-            
-    class Contas_a_pagar:
-        contas_a_pagar = [] #lista do contas a pagar
-         
-        def menu(): #pergunta ao usuario se quer voltar ao menu contas a pagar
-            while True:
-                try:
-                    Funções_basicas.limpar_tela()
-                    Financeiro.name_app()
-                    print('\nDeseja voltar ao menu contas a pagar? ')
-                    print('1 - Sim')
-                    print('2 - Não')
-                    
-                    menu = input('\n-------------> ').strip()
-                    
-                    if not menu: # verifica se a entrada do menu não é vazia
-                        Funções_basicas.limpar_tela()
-                        Financeiro.name_app()
-                        print('\nEste campo não pode ficar em branco')
-                        input('\n(Digite Enter para continuar)')
-                        continue
-                    
-                    menu = int(menu)
-                    
-                    if menu == 2: # fecha o programa
-                        Funções_basicas.limpar_tela()
-                        print('Finalizado')
-                        break
-                    
-                    elif menu == 1: # volta ao menu de financeiro
-                        Funções_basicas.limpar_tela()
-                        Financeiro.Contas_a_pagar.main_contas_a_pagar()
-                        break
-                    
-                except ValueError: #em caso de inserir algo que não é numero na opção
-                    Funções_basicas.limpar_tela()
-                    Financeiro.name_app()
-                    Funções_basicas.erro_de_valor()
-                    input('\n(Digite Enter para continuar)')
-         
-        def solicitar_dados():
-            while True:
-                try:
-                    print('\nDigite o CPF ou CNPJ do recebedor')
-                    dados = input('\n------------->').strip()
-                    if len(dados) == 11:
-                        dados = Financeiro.formatar_cpf(dados)
-                        break
-                    elif len(dados) == 14:
-                        dados = Financeiro.formatar_cnpj(dados)
-                        break
-                    else:
-                        raise ValueError("CPF/CNPJ inválido.")
-                except ValueError as e:
-                    print(f"\nErro: {e}. Não foi possível formatar o CPF/CNPJ.")
-            
-        def cadastrar_outra_conta(): #pergunta se quer cadastrar outra conta a pagar
-            while True:
-                try:
-                    Funções_basicas.limpar_tela()
-                    Financeiro.name_app()
-                    print('\nDeseja cadastrar outra conta?')
-                    print('1 - Sim')
-                    print('2 - Não')
-                    
-                    nv_produto = input('\n-------------> ').strip()
-                    
-                    if not nv_produto:
-                        Funções_basicas.limpar_tela()
-                        Financeiro.name_app()
-                        print('\nEste campo não pode ficar em branco')
-                        input('\n(Digite Enter para continuar)')
-                        continue
-                        
-                    nv_produto = int(nv_produto)
-            
-                    if nv_produto == 1:
-                        Funções_basicas.limpar_tela()
-                        Financeiro.name_app()
-                        Financeiro.Contas_a_pagar.cadastrar_conta()
-                    
-                    elif nv_produto == 2:
-                        break
-                    
-                except ValueError:
-                    Funções_basicas.limpar_tela()
-                    Financeiro.name_app()
-                    Funções_basicas.erro_de_valor()
-                    input('\n(Digite Enter para continuar)')
-
-        def mostrar_contas(): # mostra as contas a pagar
-            if len(Financeiro.Contas_a_pagar.contas_a_pagar) == 0:
-                print('\nNenhum produto cadastrado.')
-            else:
-                print('\nLista de produtos cadastrados:')
-                for i, conta in enumerate(Financeiro.Contas_a_pagar.contas_a_pagar, start=1):
-                    print(f'\n{i}. Nome: {conta.nome} | Tipo: {conta.tipo} |  CPF/CNPJ Do Recebedor: {conta.dado} |  Valor: {conta.valor} | Código: {conta.codigo}')
-            
-            input('\n(Digite Enter para continuar)')
-            
-        
-        def cadastrar_conta(): #cadastra uma conta a pagar
-            while True:
-                try:
-                    nome = Financeiro.solicitar_entrada('Qual o nome da sua conta?', 'nome')
-                    tipo = Financeiro.solicitar_entrada('Qual o tipo da sua conta? (ex: Salário, Água, luz)', 'tipo')
-                    dados_recebedor = Financeiro.Contas_a_pagar.solicitar_dados()
-                    valor = Financeiro.solicitar_valor()
-                    
-                    codigo_conta = Financeiro.gerador.pro_num() 
-                    
-                    lista_conta = Financeiro.conta(nome,tipo,dados_recebedor,valor,codigo_conta)
-                    
-                    Financeiro.Contas_a_pagar.contas_a_pagar.append(lista_conta)
-                    
-                    Financeiro.cadastro_feito()  # Confirma o cadastro da conta
-                    break 
-
-                except ValueError:
-                    Funções_basicas.limpar_tela()
-                    Financeiro.name_app()
-                    Funções_basicas.preço_erro()          
-    
-        def mostrar_opcoes(): #mostra as opções que o usuario pode escolher no contas a pagar
-            print('\n1 - Ver todas as contas a pagar')
-            print('2 - Cadastrar contas')
-            print('3 - Voltar ao menu financeiro')
-
-        def checagem(): #faz a checagem doq foi no contas a pagar
-            while True:
-                try:
-                    print('\nEscolha uma opção')
-                    
-                    # Captura a entrada e remove espaços em branco
-                    escolha = input('\n-------------> ').strip()
-            
-                    # Verifica se a entrada está vazia
-                    if not escolha:
-                        Funções_basicas.limpar_tela()
-                        Financeiro.name_app()
-                        Financeiro.Contas_a_pagar.mostrar_opcoes()
-                        print('\nA escolha não pode ficar em branco.')
-                        continue 
-
-                    # Tenta converter para número inteiro
-                    escolha = int(escolha)
-
-                    # Verifica as opções
-                    if escolha == 1:
-                        Funções_basicas.limpar_tela()
-                        Financeiro.name_app()
-                        Financeiro.Contas_a_pagar.mostrar_contas()
-                        Financeiro.Contas_a_pagar.menu()
-                        break
-
-                    elif escolha == 2:
-                        Funções_basicas.limpar_tela()
-                        Financeiro.name_app()
-                        Financeiro.Contas_a_pagar.cadastrar_conta()
-                        Financeiro.Contas_a_pagar.cadastrar_outra_conta()
-                        Financeiro.Contas_a_pagar.menu()
-                        break
-                    
-                    elif escolha == 3:
-                        Financeiro.Principal.main_financeiro()
-                        break
-                    
-                    else:
-                        Funções_basicas.limpar_tela()
-                        Financeiro.name_app()
-                        Financeiro.Contas_a_pagar.mostrar_opcoes()
-                        print('Por favor, escolha uma opção válida.')
-
-                except ValueError:  # Captura erros de conversão de string para int
-                    Funções_basicas.limpar_tela()
-                    Financeiro.name_app()
-                    Financeiro.Contas_a_pagar.mostrar_opcoes()
-                    Funções_basicas.erro_de_valor()
-
-        def main_contas_a_pagar(): # agrupa e executa as funçoes do conta a pagar
-            Funções_basicas.limpar_tela()
-            Financeiro.name_app()
-            Financeiro.Contas_a_pagar.mostrar_opcoes()
-            Financeiro.Contas_a_pagar.checagem()
-    
-    class Contas_a_receber:
-        contas_a_receber = [] #lista de contas a receber
-
-        def menu(): #pergunta ao usuario se quer voltar ao menu contas a pagar
-            while True:
-                try:
-                    Funções_basicas.limpar_tela()
-                    Financeiro.name_app()
-                    print('\nDeseja voltar ao menu contas a receber? ')
-                    print('1 - Sim')
-                    print('2 - Não')
-                    
-                    menu = input('\n-------------> ').strip()
-                    
-                    if not menu: # verifica se a entrada do menu não é vazia
-                        Funções_basicas.limpar_tela()
-                        Financeiro.name_app()
-                        print('\nEste campo não pode ficar em branco')
-                        input('\n(Digite Enter para continuar)')
-                        continue
-                    
-                    menu = int(menu)
-                    
-                    if menu == 2: # fecha o programa
-                        Funções_basicas.limpar_tela()
-                        print('Finalizado')
-                        break
-                    
-                    elif menu == 1: # volta ao menu de financeiro
-                        Funções_basicas.limpar_tela()
-                        Financeiro.Contas_a_receber.main_contas_a_receber()
-                        break
-                    
-                except ValueError: #em caso de inserir algo que não é numero na opção
-                    Funções_basicas.limpar_tela()
-                    Financeiro.name_app()
-                    Funções_basicas.erro_de_valor()
-                    input('\n(Digite Enter para continuar)')
-        
-        def solicitar_dados():
-            while True:
-                try:
-                    print('\nDigite o CPF ou CNPJ do pagante')
-                    dados = input('\n------------->').strip()
-                    if len(dados) == 11:
-                        dados = Financeiro.formatar_cpf(dados)
-                        break
-                    elif len(dados) == 14:
-                        dados = Financeiro.formatar_cnpj(dados)
-                        break
-                    else:
-                        raise ValueError("CPF/CNPJ inválido.")
-                except ValueError as e:
-                    print(f"\nErro: {e}. Não foi possível formatar o CPF/CNPJ.")
-        
-        def cadastrar_outra_conta(): #pergunta se quer cadastrar outra conta a receber
-            while True:
-                try:
-                    Funções_basicas.limpar_tela()
-                    Financeiro.name_app()
-                    print('\nDeseja cadastrar outra conta?')
-                    print('1 - Sim')
-                    print('2 - Não')
-                    
-                    nv_conta = input('\n-------------> ').strip()
-                    
-                    if not nv_conta:
-                        Funções_basicas.limpar_tela()
-                        Financeiro.name_app()
-                        print('\nEste campo não pode ficar em branco')
-                        input('\n(Digite Enter para continuar)')
-                        continue
-                        
-                    nv_conta = int(nv_conta)
-            
-                    if nv_conta == 1:
-                        Funções_basicas.limpar_tela()
-                        Financeiro.name_app()
-                        Financeiro.Contas_a_receber.cadastrar_conta()
-                    
-                    elif nv_conta == 2:
-                        break
-                    
-                except ValueError:
-                    Funções_basicas.limpar_tela()
-                    Financeiro.name_app()
-                    Funções_basicas.erro_de_valor()
-                    input('\n(Digite Enter para continuar)')
-        
-        def cadastrar_conta(): #cadastra uma conta a receber
-            while True:
-                try:
-                    nome = Financeiro.solicitar_entrada('Qual o nome da sua conta?', 'nome')
-                    tipo = Financeiro.solicitar_entrada('Qual o tipo da sua conta? (ex: Salário, Contas mensais)', 'tipo')
-                    dados_pagante = Financeiro.Contas_a_receber.solicitar_dados()
-                    valor = Financeiro.solicitar_valor()
-                    
-                    codigo_conta = Financeiro.gerador.pro_num()
-
-                    #armazena uma nova conta
-                    lista_contas = Financeiro.conta(nome,tipo,dados_pagante,valor,codigo_conta)
-                    
-                    Financeiro.Contas_a_receber.contas_a_receber.append(lista_contas)
-                    
-                    Financeiro.cadastro_feito()  # Confirma o cadastro da conta
-                    break 
-
-                except ValueError:
-                    Funções_basicas.limpar_tela()
-                    Financeiro.name_app()
-                    Funções_basicas.preço_erro()     
-
-        def mostrar_contas(): # mostra as contas a pagar
-            if len(Financeiro.Contas_a_receber.contas_a_pagar) == 0:
-                print('\nNenhum produto cadastrado.')
-            else:
-                print('\nLista de produtos cadastrados:')
-                for i, conta in enumerate(Financeiro.Contas_a_receber.contas_a_receber, start=1):
-                    print(f'\n{i}. Nome: {conta.nome} | Tipo: {conta.tipo} |  CPF/CNPJ Do Pagante: {conta.dado} |  Valor: {conta.valor} | Código: {conta.codigo}')
-            
-            input('\n(Digite Enter para continuar)')
-
-        def mostrar_opcoes(): #mostra as opções que o usuario pode escolher
-            print('\n1 - Ver todas as contas a receber')
-            print('2 - Cadastrar contas')
-            print('3 - Voltar ao menu financeiro')
-
-        def checagem(): #faz a checagem doq foi no contas a receber
-            while True:
-                try:
-                    print('\nEscolha uma opção')
-                    
-                    # Captura a entrada e remove espaços em branco
-                    escolha = input('\n-------------> ').strip()
-            
-                    # Verifica se a entrada está vazia
-                    if not escolha:
-                        Funções_basicas.limpar_tela()
-                        Financeiro.name_app()
-                        Financeiro.Contas_a_receber.mostrar_opcoes()
-                        print('\nA escolha não pode ficar em branco.')
-                        continue 
-
-                    # Tenta converter para número inteiro
-                    escolha = int(escolha)
-
-                    # Verifica as opções
-                    if escolha == 1:
-                        Funções_basicas.limpar_tela()
-                        Financeiro.name_app()
-                        Financeiro.Contas_a_receber.mostrar_contas()
-                        Financeiro.Contas_a_receber.menu()
-                        break
-
-                    elif escolha == 2:
-                        Funções_basicas.limpar_tela()
-                        Financeiro.name_app()
-                        Financeiro.Contas_a_receber.cadastrar_conta()
-                        Financeiro.Contas_a_receber.cadastrar_outra_conta()
-                        Financeiro.Contas_a_receber.menu()
-                        break
-                    
-                    elif escolha == 3:
-                        Financeiro.Principal.main_financeiro()
-                        break
-                    else:
-                        Funções_basicas.limpar_tela()
-                        Financeiro.name_app()
-                        Financeiro.Contas_a_receber.mostrar_opcoes()
-                        print('Por favor, escolha uma opção válida.')
-
-                except ValueError:  # Captura erros de conversão de string para int
-                    Funções_basicas.limpar_tela()
-                    Financeiro.name_app()
-                    Financeiro.Contas_a_receber.mostrar_opcoes()
-                    Funções_basicas.erro_de_valor()
-
-        def main_contas_a_receber(): # agrupa e executa as funçoes do conta a pagar
-            Funções_basicas.limpar_tela()
-            Financeiro.name_app()
-            Financeiro.mostrar_opcoes_contas_a_receber()
-            Financeiro.checagem_contas_a_receber()
+        Financeiro.mostrar_opcoes_financeiro()
+        Financeiro.checagem_financeiro()
 
 class Funcionarios: #Funcionarios
     def name_app():
@@ -1257,12 +790,12 @@ class Funcionarios: #Funcionarios
     ███████╗░╚═██╔═╝░╚██████╔╝██║██║░░░░░███████╗
     ╚══════╝░░░╚═╝░░░░╚═════╝░╚═╝╚═╝░░░░░╚══════╝''')
 
-    gerador = codigo() #instacia do gerador de codigo
+    gerador = Codigo() #instacia do gerador de codigo
         
     def menu_funcionacios(): #pergunta ao usuario se quer voltar ao menu 
         while True:
             try:
-                Funções_basicas.limpar_tela()
+                limpar_tela()
                 Funcionarios.name_app()
                 print('\nDeseja voltar ao menu? ')
                 print('1 - Sim')
@@ -1271,7 +804,7 @@ class Funcionarios: #Funcionarios
                 menu = input('\n-------------> ').strip()
                 
                 if not menu: # verifica se a entrada do menu não é vazia
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Funcionarios.name_app()
                     print('\nEste campo não pode ficar em branco')
                     input('\n(Digite Enter para continuar)')
@@ -1280,25 +813,25 @@ class Funcionarios: #Funcionarios
                 menu = int(menu)
                 
                 if menu == 2: # fecha o programa
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     print('Finalizado')
                     break
                 
                 elif menu == 1: # volta ao menu de funcionarios
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Funcionarios.main_funcionarios()
                     break
                 
             except ValueError: #em caso de inserir algo que não é numero na opção
-                Funções_basicas.limpar_tela()
+                limpar_tela()
                 Funcionarios.name_app()
-                Funções_basicas.erro_de_valor()
+                erro_de_valor()
                 input('\n(Digite Enter para continuar)')
 
     def cadastrar_outro_funcionario(): #pergunta se quer cadastrar outro funcionario
         while True:
             try:
-                Funções_basicas.limpar_tela()
+                limpar_tela()
                 Funcionarios.name_app()
                 print('\nDeseja cadastrar outro funcionario')
                 print('1 - Sim')
@@ -1306,7 +839,7 @@ class Funcionarios: #Funcionarios
                 nv_funcionario = int(input('\n------------->'))
         
                 if nv_funcionario == 1:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Funcionarios.name_app()
                     Funcionarios.cadastrar_funcionario()
                 
@@ -1314,9 +847,9 @@ class Funcionarios: #Funcionarios
                     break
                 
             except:
-                Funções_basicas.limpar_tela()
+                limpar_tela()
                 Funcionarios.name_app()
-                Funções_basicas.erro_de_valor()
+                erro_de_valor()
                 Funcionarios.cadastrar_outro_funcionario()
                 break
 
@@ -1326,7 +859,7 @@ class Funcionarios: #Funcionarios
             if entrada:
                 return entrada
             else:
-                Funções_basicas.limpar_tela()
+                limpar_tela()
                 Funcionarios.name_app()
                 print(f'\nO {setor} do seu funcionario não pode ficar em branco.')
 
@@ -1352,14 +885,14 @@ class Funcionarios: #Funcionarios
                 break
 
             except Exception as e:
-                Funções_basicas.limpar_tela()
+                limpar_tela()
                 Funcionarios.name_app()
                 print(f'\nErro: {e}')
                 print('\nEste campo não pode ficar em branco.')
 
     def mostrar_funcionarios():  # Função para mostrar os funcionários cadastrados
         if not Funcionarios.funcionarios:
-            Funções_basicas.limpar_tela()
+            limpar_tela()
             Funcionarios.name_app()
             print('\nNenhum funcionário cadastrado.')
             input('\n(Digite Enter para continuar)')
@@ -1374,7 +907,7 @@ class Funcionarios: #Funcionarios
             input('\n(Digite Enter para continuar)')
                 
     def cadastro_feito(): #mostra mensagem de cadastro bem sucedido
-        Funções_basicas.limpar_tela()
+        limpar_tela()
         Funcionarios.name_app()
         print('\n Um codigo de identificação foi gerado automaticamente a seu funcinario')
         print('\n Cadastro concluido com succeso')
@@ -1395,7 +928,7 @@ class Funcionarios: #Funcionarios
 
                 # Verifica se a entrada está vazia
                 if not escolha:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Funcionarios.name_app()
                     Funcionarios.mostrar_opcoes_funcionarios()
                     print('\nA escolha não pode ficar em branco.')
@@ -1406,14 +939,14 @@ class Funcionarios: #Funcionarios
 
                 # Verifica as opções
                 if escolha == 1:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Funcionarios.name_app()
                     Funcionarios.mostrar_funcionarios()
                     Funcionarios.menu_funcionacios()
                     break
 
                 elif escolha == 2:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Funcionarios.name_app()
                     Funcionarios.cadastrar_funcionario()
                     Funcionarios.cadastrar_outro_funcionario()
@@ -1421,18 +954,18 @@ class Funcionarios: #Funcionarios
                     break
                 
                 else:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Main.main()
                     break
 
             except ValueError:  # Captura erros de conversão de string para int
-                Funções_basicas.limpar_tela()
+                limpar_tela()
                 Funcionarios.name_app()
                 Funcionarios.mostrar_opcoes_funcionarios()
-                Funções_basicas.erro_de_valor()
+                erro_de_valor()
         
     def main_funcionarios(): #executa as funções na ordem certo
-        Funções_basicas.limpar_tela()
+        limpar_tela()
         Funcionarios.name_app()
         Funcionarios.mostrar_opcoes_funcionarios()
         Funcionarios.checagem_funcionarios()
@@ -1466,7 +999,7 @@ class Main: #MAIN.
         
                 # Verifica se a entrada está vazia
                 if not escolha:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Main.name_app()
                     Main.mostrar_opcoes()
                     print('\nA escolha não pode ficar em branco.')
@@ -1478,47 +1011,49 @@ class Main: #MAIN.
                 # Verifica as opções
                 if escolha == 1:
                     Produtos.main_produtos()
+                    Main.executar_programa()
                     break
                 
                 elif escolha == 2:
                     Pedidos.main_pedidos()
-                
+                    Main.executar_programa()
+                    break
                 elif escolha == 3:
                     Estoque.main_estoque()
+                    Main.executar_programa()
                     break
                 
                 elif escolha == 4:
-                    Financeiro.Principal.main_financeiro()
+                    Financeiro.executar_programa()
+                    Main.executar_programa()
                     break
                 
                 elif escolha == 5:
                     Funcionarios.main_funcionarios()
+                    Main.executar_programa()
                     break
                 
                 elif escolha == 6:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     print('FINALIZADO')
                     sys.exit()
                 
                 else:
-                    Funções_basicas.limpar_tela()
+                    limpar_tela()
                     Main.name_app()
                     Main.mostrar_opcoes()
                     print('Por favor, escolha uma opção válida.')
 
             except ValueError:  # Captura erros de conversão de string para int
-                Funções_basicas.limpar_tela()
+                limpar_tela()
                 Main.name_app()
                 Main.mostrar_opcoes()
-                Funções_basicas.erro_de_valor()
+                erro_de_valor()    
         
-    def main():
-        Funções_basicas.limpar_tela()
+    def executar_programa():#executa o programa 
+        limpar_tela()
         Main.name_app()
         Main.mostrar_opcoes()
         Main.checagem_main()
-        
-    def executar_programa():#executa o programa 
-        Main.main()
         
 Main.executar_programa()# mostra o programa na tela 
