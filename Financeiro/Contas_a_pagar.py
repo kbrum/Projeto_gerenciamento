@@ -1,8 +1,7 @@
 from Funcionalidades.Utils import *
 from Funcionalidades.Solicitações import *
-from Funcionalidades.Gerador_codigo import *
+from Funcionalidades.Geradorores import *
 from Funcionalidades.Construtores import Nova_conta
-from Funcionalidades.Construtores import *
 
 class Contas_a_pagar:
     def name_app():

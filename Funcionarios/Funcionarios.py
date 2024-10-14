@@ -1,5 +1,5 @@
 from Funcionalidades.Utils import *
-from Funcionalidades.Gerador_codigo import *
+from Funcionalidades.Geradorores import *
 from Funcionalidades.Solicitações import *
 from Funcionalidades.Construtores import Novo_funcionario
 class Funcionarios: #Funcionarios
