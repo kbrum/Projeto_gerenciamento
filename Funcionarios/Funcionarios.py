@@ -19,8 +19,8 @@ class Funcionarios: #Funcionarios
     def cadastrar_funcionario():  # Função para cadastrar um novo funcionário
         while True:
             try:
-                nome = solicitar_entrada('Qual o nome do seu funcionario?', 'nome', Funcionarios).title()
-                setor = solicitar_entrada('Qual o setor do seu funcionario?', 'setor', Funcionarios)
+                nome = solicitar_entrada('Qual o nome do seu funcionario?', 'nome', Funcionarios).upper()
+                setor = solicitar_entrada('Qual o setor do seu funcionario?', 'setor', Funcionarios).upper()
                 posicao = solicitar_entrada('Qual a posição desse funcionario? (ex: Analista, Tecnico, Estagiarios)', 'posição', Funcionarios)
                 codigo = Funcionarios.gerador.pro_num()
                 status = True

@@ -20,9 +20,9 @@ class Produtos:
     def cadastrar_produto():  # Função para cadastrar um novo produto
         while True:
             try:
-                nome = solicitar_entrada('Qual o nome do seu produto?', 'nome', Produtos).title()
-                tipo = solicitar_entrada('Qual o tipo do seu produto? (ex: Calçado, Vestuário, Eletrônico)', 'tipo', Produtos)
-                subsecao = solicitar_entrada('Qual a subseção do seu produto? (ex: Tenis, Camisa regata, Camisa social)', 'subseção', Produtos)
+                nome = solicitar_entrada('Qual o nome do seu produto?', 'nome', Produtos).upper()
+                tipo = solicitar_entrada('Qual o tipo do seu produto? (ex: Calçado, Vestuário, Eletrônico)', 'tipo', Produtos).upper()
+                subsecao = solicitar_entrada('Qual a subseção do seu produto? (ex: Tenis, Camisa regata, Camisa social)', 'subseção', Produtos).upper()
                 quantidade = solicitar_quantidade(Produtos)
                 valor = solicitar_valor('Produtos')
                 codigo_produto = Produtos.gerador.pro_num() 

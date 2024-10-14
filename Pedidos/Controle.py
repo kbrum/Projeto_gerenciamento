@@ -11,9 +11,9 @@ class Controle_pedido:
     def fazer_pedido(quem_chama, quem_chama_str):  #quem_chama se refere a classe que esta importando a função, quem_chama_str é apenas uma representação do nome dessam classe em formato de string
             while True:
                 try: # Função para cadastrar um novo produto
-                    nome = solicitar_entrada('Qual o nome do cliente que está fazendo o pedido?', 'nome', quem_chama).title()
+                    nome = solicitar_entrada('Qual o nome do cliente que está fazendo o pedido?', 'nome', quem_chama).upper()
                     seçao = solicitar_seçao(quem_chama)
-                    tipo = solicitar_entrada('Qual o tipo do seu pedido? (ex: Bolo, Centro de salgado)', 'tipo', quem_chama)
+                    tipo = solicitar_entrada('Qual o tipo do seu pedido? (ex: Bolo, Centro de salgado)', 'tipo', quem_chama).upper()
                     quantidade = solicitar_quantidade(quem_chama)
                     numero = solicitar_numero()
                     valor = solicitar_valor(quem_chama_str)
