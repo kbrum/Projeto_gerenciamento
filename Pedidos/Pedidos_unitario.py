@@ -39,7 +39,6 @@ class Pedidos: #Pedidos
                     break
                 
                 elif escolha== 3:
-                    limpar_tela()
                     Controle_pedido.fazer_pedido(Pedidos, 'Pedidos')
                     Pedidos.executar_programa()
                     break                

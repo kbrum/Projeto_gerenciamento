@@ -33,9 +33,9 @@ class Contas_a_receber:
             try:
                 nome = solicitar_entrada('Qual o nome da sua conta?', 'nome', Contas_a_receber).upper()
                 tipo = solicitar_entrada('Qual o tipo da sua conta? (ex: Salário, Água, luz)', 'tipo', Contas_a_receber).upper()
-                dados_recebedor = solicitar_dados('Contas_a_receber')
+                dados_recebedor = solicitar_dados(Contas_a_receber,'Contas_a_receber')
                 valor = solicitar_valor(Contas_a_receber,'Contas_a_receber')
-                data = solicitar_data('Contas_a_receber')
+                data = solicitar_data(Contas_a_receber,'Contas_a_receber')
                 codigo_conta = Contas_a_receber.gerador.pro_num()
                 status = True
                 
@@ -111,8 +111,6 @@ class Contas_a_receber:
                     break
                 
                 elif escolha == 2:
-                    limpar_tela()
-                    Contas_a_receber.name_app()
                     Contas_a_receber.cadastrar_conta()
                     cadastrar_outro(Contas_a_receber)
                     Contas_a_receber.executar_programa()

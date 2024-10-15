@@ -81,7 +81,6 @@ class Produtos:
                     break
 
                 elif escolha == 2:
-                    limpar_tela()
                     Produtos.cadastrar_produto()
                     cadastrar_outro(Produtos)
                     Produtos.executar_programa()

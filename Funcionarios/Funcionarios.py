@@ -82,8 +82,6 @@ class Funcionarios: #Funcionarios
                     break
 
                 elif escolha == 2:
-                    limpar_tela()
-                    Funcionarios.name_app()
                     Funcionarios.cadastrar_funcionario()
                     cadastrar_outro(Funcionarios)
                     Funcionarios.executar_programa()

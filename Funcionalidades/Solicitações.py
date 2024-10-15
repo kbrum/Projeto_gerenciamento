@@ -40,7 +40,7 @@ def solicitar_valor(quem_chama,quem_chama_str):  # Solicita o valor da conta a s
             limpar_tela()
             preço_erro()
             
-def solicitar_dados(quem_chama): # Solicita o cpf ou cnpj de quem vai ser pago ou vai pagar
+def solicitar_dados(quem_chama,quem_chama_str): # Solicita o cpf ou cnpj de quem vai ser pago ou vai pagar
     while True:
         try:
             limpar_tela()
@@ -49,7 +49,7 @@ def solicitar_dados(quem_chama): # Solicita o cpf ou cnpj de quem vai ser pago o
             if quem_chama == 'Contas_a_pagar': # se for chamado pelo contas a pagar
                 dado = 'recebedor'
             
-            elif quem_chama == 'Contas_a_receber': # se for chamado pelo contas a receber
+            elif quem_chama_str == 'Contas_a_receber': # se for chamado pelo contas a receber
                 dado = 'pagante'
             
             print(f'\nDigite o CPF ou CNPJ do {dado}')
@@ -67,12 +67,12 @@ def solicitar_dados(quem_chama): # Solicita o cpf ou cnpj de quem vai ser pago o
     
     return dados
 
-def solicitar_data(quem_chama): # Solicita a data
+def solicitar_data(quem_chama,quem_chama_str): # Solicita a data
     while True:
         limpar_tela()
         quem_chama.name_app()
         dado = None # variavel vazia para guardar que modulo chamou a funçao
-        if quem_chama == 'Contas_a_pagar' or quem_chama == 'Contas_a_receber':
+        if quem_chama_str == 'Contas_a_pagar' or quem_chama_str == 'Contas_a_receber':
             dado = 'de abertura da conta'
             
         data = input(f'\nDigite a data {dado}: (dd/mm/aaaa): ').strip()
