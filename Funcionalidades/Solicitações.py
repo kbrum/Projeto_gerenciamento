@@ -4,6 +4,7 @@ from datetime import datetime
 
 def solicitar_entrada(mensagem, tipo, quem_chama):  # Faz checagem de entrada nula/vazia nos inputs+                                 
     while True:
+        limpar_tela()
         quem_chama.name_app()
         valor = input(f'\n{mensagem}\n------------->').strip()
         if valor:

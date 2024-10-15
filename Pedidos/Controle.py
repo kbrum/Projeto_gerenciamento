@@ -56,7 +56,7 @@ class Controle_pedido:
                         pedido.status = False
                         limpar_tela()
                         quem_chama.name_app()
-                        print(f'\nA pedido "{pedido.nome}" de código {pedido.codigo} {'ainda esta Pendente' if pedido.status else 'foi Paga com sucesso'}')
+                        print(f'\nO pedido "{pedido.tipo}" do cliente "{pedido.nome}" de código {pedido.codigo} {'ainda esta Pendente' if pedido.status else 'foi Finalizado com sucesso'}')
                         
                         input('\n(Pressione Enter para continuar)')
                         break
