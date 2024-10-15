@@ -26,11 +26,11 @@ class Produtos:
     def cadastrar_produto():  # Função para cadastrar um novo produto
         while True:
             try:
-                nome = solicitar_entrada('Qual o nome do seu produto?', 'nome', Produtos)
-                tipo = solicitar_entrada('Qual o tipo do seu produto? (ex: Calçado, Vestuário, Eletrônico)', 'tipo', Produtos)
-                subsecao = solicitar_entrada('Qual a subseção do seu produto? (ex: Tenis, Camisa regata, Camisa social)', 'subseção', Produtos)
+                nome = solicitar_entrada('Qual o nome do seu produto?', 'nome', Produtos).upper()
+                tipo = solicitar_entrada('Qual o tipo do seu produto? (ex: Calçado, Vestuário, Eletrônico)', 'tipo', Produtos).upper()
+                subsecao = solicitar_entrada('Qual a subseção do seu produto? (ex: Tenis, Camisa regata, Camisa social)', 'subseção', Produtos).upper()
                 quantidade = solicitar_quantidade(Produtos)
-                valor = solicitar_valor('Produtos')
+                valor = solicitar_valor(Produtos,'Produtos')
                 codigo_produto = Produtos.gerador.pro_num() 
                 final = Novo_produto(nome,tipo,subsecao,quantidade,valor,codigo_produto)
                 
@@ -124,8 +124,7 @@ class Pedidos: #Pedidos
     ██╔═══╝░██╔══╝░░██║░░██║██║██║░░██║██║░░██║░╚═══██╗
     ██║░░░░░███████╗██████╔╝██║██████╔╝╚█████╔╝██████╔╝
     ╚═╝░░░░░╚══════╝╚═════╝░╚═╝╚═════╝░░╚════╝░╚═════╝░''')
- 
-        
+    
     def mostrar_opcoes(): # mostra as oções que podem ser escolhidas
         print('\n1 - Seção de doces')
         print('2 - Seção de salgados')
@@ -359,8 +358,8 @@ class Funcionarios: #Funcionarios
     def cadastrar_funcionario():  # Função para cadastrar um novo funcionário
         while True:
             try:
-                nome = solicitar_entrada('Qual o nome do seu funcionario?', 'nome', Funcionarios)
-                setor = solicitar_entrada('Qual o setor do seu funcionario?', 'setor', Funcionarios)
+                nome = solicitar_entrada('Qual o nome do seu funcionario?', 'nome', Funcionarios).upper()
+                setor = solicitar_entrada('Qual o setor do seu funcionario?', 'setor', Funcionarios).upper()
                 posicao = solicitar_entrada('Qual a posição desse funcionario? (ex: Analista, Tecnico, Estagiarios)', 'posição', Funcionarios)
                 codigo = Funcionarios.gerador.pro_num()
                 status = True
