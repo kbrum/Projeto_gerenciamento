@@ -9,7 +9,7 @@ from Financeiro.Contas_a_pagar import *
 from Financeiro.Contas_a_receber import *
 from Financeiro.Saldo import *
 
-class Produtos:
+class Produtos: #menu de produtos
     def name_app():
         print('''
     ██████╗░██████╗░░█████╗░██████╗░██╗░░░██╗████████╗░█████╗░░██████╗
@@ -26,11 +26,11 @@ class Produtos:
     def cadastrar_produto():  # Função para cadastrar um novo produto
         while True:
             try:
-                nome = solicitar_entrada('Qual o nome do seu produto?', 'nome', Produtos).upper()
-                tipo = solicitar_entrada('Qual o tipo do seu produto? (ex: Calçado, Vestuário, Eletrônico)', 'tipo', Produtos).upper()
-                subsecao = solicitar_entrada('Qual a subseção do seu produto? (ex: Tenis, Camisa regata, Camisa social)', 'subseção', Produtos).upper()
+                nome = solicitar_entrada('Qual o nome do seu produto?','nome', Produtos).upper()
+                tipo = solicitar_entrada('Qual o tipo do seu produto? (ex: Calçado, Vestuário, Eletrônico)','tipo', Produtos).upper()
+                subsecao = solicitar_entrada('Qual a subseção do seu produto? (ex: Tenis, Camisa regata, Camisa social)','subseção', Produtos).upper()
                 quantidade = solicitar_quantidade(Produtos)
-                valor = solicitar_valor(Produtos,'Produtos')
+                valor = solicitar_valor('Produtos',Produtos)
                 codigo_produto = Produtos.gerador.pro_num() 
                 final = Novo_produto(nome,tipo,subsecao,quantidade,valor,codigo_produto)
                 
@@ -87,9 +87,8 @@ class Produtos:
                     break
 
                 elif escolha == 2:
-                    limpar_tela()
                     Produtos.cadastrar_produto()
-                    cadastrar_outro(Produtos)
+                    cadastrar_outro(Produtos, Produtos.cadastrar_produto)
                     Produtos.executar_programa()
                     break
                 
@@ -115,7 +114,7 @@ class Produtos:
         Produtos.mostrar_opcoes()
         Produtos.checagem()
 
-class Pedidos: #Pedidos
+class Pedidos: #menu de pedidos
     def name_app():
         print('''
     ██████╗░███████╗██████╗░██╗██████╗░░█████╗░░██████╗
@@ -135,7 +134,9 @@ class Pedidos: #Pedidos
         while True:
             try:
                 print('\nEscolha uma opção')
-                escolha = int(input('\n-------------> '))
+                escolha = input('\n-------------> ').strip()
+                
+                escolha = int(escolha)
                 
                 if escolha == 1:
                     limpar_tela()
@@ -150,7 +151,6 @@ class Pedidos: #Pedidos
                     break
                 
                 elif escolha== 3:
-                    limpar_tela()
                     Controle_pedido.fazer_pedido(Pedidos, 'Pedidos')
                     Pedidos.executar_programa()
                     break                
@@ -164,7 +164,6 @@ class Pedidos: #Pedidos
                 Pedidos.name_app()
                 Pedidos.mostrar_opcoes()
                 erro_de_valor()
-                Pedidos.checagem()
             
     def executar_programa(): # mostra na tela
         limpar_tela()
@@ -172,9 +171,7 @@ class Pedidos: #Pedidos
         Pedidos.mostrar_opcoes()
         Pedidos.checagem()
 
-from Funcionalidades.Utils import *
-
-class Estoque:
+class Estoque: #menu de estoque
     def name_app(): # titulo    
         print('''
     ███████╗░██████╗████████╗░█████╗░░██████╗░██╗░░░██╗███████╗
@@ -209,12 +206,12 @@ class Estoque:
             print('\nNenhum produto cadastrado.')
             input('\nPressione Enter para continuar.')
             
-    def mostrar_opcoes_estoque(): #mostra a opções q o usuario pode escolher
+    def mostrar_opcoes(): #mostra a opções q o usuario pode escolher
         print('\n1 - Ver todos')
         print('2 - Em falta')
         print('3 - Voltar ao menu inicial')
 
-    def checagem_estoque(): #faz a checagem doq foi escolhido entre os mostrados acima
+    def checagem(): #faz a checagem doq foi escolhido entre os mostrados acima
         while True:
             try:
                 print('\nEscolha uma opção')
@@ -252,19 +249,16 @@ class Estoque:
             except:
                 limpar_tela()
                 Estoque.name_app()
-                Estoque.mostrar_opcoes_estoque()
+                Estoque.mostrar_opcoes()
                 erro_de_valor()
         
-    def main_estoque(): #executa todas as funções na ordem certa
+    def executar_programa(): #mostra o programa na tela
         limpar_tela()
         Estoque.name_app()
-        Estoque.mostrar_opcoes_estoque()
-        Estoque.checagem_estoque()
+        Estoque.mostrar_opcoes()
+        Estoque.checagem()
         
-    def executar_programa(): #mostra o programa na tela
-        Estoque.main_estoque()
-
-class Financeiro: #Financeiro
+class Financeiro: #menu de financeiro
     def name_app(): #titulo
         print('''
     ███████╗██╗███╗░░██╗░█████╗░███╗░░██╗░█████╗░███████╗██╗██████╗░░█████╗░
@@ -343,15 +337,15 @@ class Financeiro: #Financeiro
         Financeiro.mostrar_opcoes_financeiro()
         Financeiro.checagem_financeiro()
 
-class Funcionarios: #Funcionarios
+class Funcionarios: #menu de funcionarios
     def name_app():
         print('''
-    ███████╗░██████╗░██╗░░░██╗██╗██████╗░███████╗
-    ██╔════╝██╔═══██╗██║░░░██║██║██╔══██╗██╔════╝
-    █████╗░░██║██╗██║██║░░░██║██║██████╔╝█████╗░░
-    ██╔══╝░░╚██████╔╝██║░░░██║██║██╔═══╝░██╔══╝░░
-    ███████╗░╚═██╔═╝░╚██████╔╝██║██║░░░░░███████╗
-    ╚══════╝░░░╚═╝░░░░╚═════╝░╚═╝╚═╝░░░░░╚══════╝''')
+    ███████╗██╗░░░██╗███╗░░██╗░█████╗░██╗░█████╗░███╗░░██╗░█████╗░██████╗░██╗░█████╗░░██████╗
+    ██╔════╝██║░░░██║████╗░██║██╔══██╗██║██╔══██╗████╗░██║██╔══██╗██╔══██╗██║██╔══██╗██╔════╝
+    █████╗░░██║░░░██║██╔██╗██║██║░░╚═╝██║██║░░██║██╔██╗██║███████║██████╔╝██║██║░░██║╚█████╗░
+    ██╔══╝░░██║░░░██║██║╚████║██║░░██╗██║██║░░██║██║╚████║██╔══██║██╔══██╗██║██║░░██║░╚═══██╗
+    ██║░░░░░╚██████╔╝██║░╚███║╚█████╔╝██║╚█████╔╝██║░╚███║██║░░██║██║░░██║██║╚█████╔╝██████╔╝
+    ╚═╝░░░░░░╚═════╝░╚═╝░░╚══╝░╚════╝░╚═╝░╚════╝░╚═╝░░╚══╝╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░╚════╝░╚═════╝░''')
 
     gerador = Codigo() #instacia do gerador de codigo
 
@@ -362,7 +356,7 @@ class Funcionarios: #Funcionarios
             try:
                 nome = solicitar_entrada('Qual o nome do seu funcionario?', 'nome', Funcionarios).upper()
                 setor = solicitar_entrada('Qual o setor do seu funcionario?', 'setor', Funcionarios).upper()
-                posicao = solicitar_entrada('Qual a posição desse funcionario? (ex: Analista, Tecnico, Estagiarios)', 'posição', Funcionarios)
+                posicao = solicitar_entrada('Qual a posição desse funcionario? (ex: Analista, Tecnico, Estagiario)', 'posição', Funcionarios)
                 codigo = Funcionarios.gerador.pro_num()
                 status = True
                 
@@ -388,7 +382,8 @@ class Funcionarios: #Funcionarios
             for funcionario in Funcionarios.lista_funcionarios:
                 status_funcionarios = 'Ativo' if funcionario.status else 'desligado'    
                 print(f'\n--> Nome: {funcionario.nome} | Setor: {funcionario.setor} | Posição: {funcionario.posicao} | Código: {funcionario.codigo} | Status do contrato: {status_funcionarios}')
-            input('\n(Digite Enter para continuar)')
+            
+        input('\n(Digite Enter para continuar)')
 
     def mostrar_opcoes(): #mostra as opçoes que o usuario pode escolher
         print('\n1 - Todos os funcionarios')
@@ -423,10 +418,8 @@ class Funcionarios: #Funcionarios
                     break
 
                 elif escolha == 2:
-                    limpar_tela()
-                    Funcionarios.name_app()
                     Funcionarios.cadastrar_funcionario()
-                    cadastrar_outro(Funcionarios)
+                    cadastrar_outro(Funcionarios,Funcionarios.cadastrar_funcionario)
                     Funcionarios.executar_programa()
                     break
                 
@@ -494,6 +487,7 @@ class Main: #MAIN.
                     Pedidos.executar_programa()
                     Main.executar_programa()
                     break
+
                 elif escolha == 3:
                     Estoque.executar_programa()
                     Main.executar_programa()

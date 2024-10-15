@@ -1,6 +1,6 @@
 from Funcionalidades.Utils import *
 
-class Estoque:
+class Estoque: #menu de estoque
     def name_app(): # titulo    
         print('''
     ███████╗░██████╗████████╗░█████╗░░██████╗░██╗░░░██╗███████╗
@@ -40,7 +40,7 @@ class Estoque:
         print('2 - Em falta')
         print('3 - Voltar ao menu inicial')
 
-    def checagem_estoque(): #faz a checagem doq foi escolhido entre os mostrados acima
+    def checagem(): #faz a checagem doq foi escolhido entre os mostrados acima
         while True:
             try:
                 print('\nEscolha uma opção')
@@ -81,13 +81,10 @@ class Estoque:
                 Estoque.mostrar_opcoes()
                 erro_de_valor()
         
-    def main_estoque(): #executa todas as funções na ordem certa
+    def executar_programa(): #mostra o programa na tela
         limpar_tela()
         Estoque.name_app()
-        Estoque.mostrar_opcoes_estoque()
-        Estoque.checagem_estoque()
-        
-    def executar_programa(): #mostra o programa na tela
-        Estoque.main_estoque()
+        Estoque.mostrar_opcoes()
+        Estoque.checagem()
         
 #Estoque.executar_programa() #usado para testes unitarios (Por padrao desabilitado)

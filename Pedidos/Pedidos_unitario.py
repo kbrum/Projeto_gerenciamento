@@ -4,7 +4,7 @@ from .Controle import *
 from .Doces import *
 from .Salgados import *
 
-class Pedidos: #Pedidos
+class Pedidos: #menu de pedidos
     def name_app():
         print('''
     ██████╗░███████╗██████╗░██╗██████╗░░█████╗░░██████╗

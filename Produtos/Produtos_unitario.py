@@ -3,7 +3,7 @@ from Funcionalidades.Geradorores import *
 from Funcionalidades.Solicitações import *
 from Funcionalidades.Construtores import Novo_produto
 
-class Produtos:
+class Produtos: #menu de produtos 
     def name_app():
         print('''
     ██████╗░██████╗░░█████╗░██████╗░██╗░░░██╗████████╗░█████╗░░██████╗
@@ -20,11 +20,11 @@ class Produtos:
     def cadastrar_produto():  # Função para cadastrar um novo produto
         while True:
             try:
-                nome = solicitar_entrada('Qual o nome do seu produto?', 'nome', Produtos).upper()
-                tipo = solicitar_entrada('Qual o tipo do seu produto? (ex: Calçado, Vestuário, Eletrônico)', 'tipo', Produtos).upper()
-                subsecao = solicitar_entrada('Qual a subseção do seu produto? (ex: Tenis, Camisa regata, Camisa social)', 'subseção', Produtos).upper()
+                nome = solicitar_entrada('Qual o nome do seu produto?','nome', Produtos).upper()
+                tipo = solicitar_entrada('Qual o tipo do seu produto? (ex: Calçado, Vestuário, Eletrônico)','tipo', Produtos).upper()
+                subsecao = solicitar_entrada('Qual a subseção do seu produto? (ex: Tenis, Camisa regata, Camisa social)','subseção', Produtos).upper()
                 quantidade = solicitar_quantidade(Produtos)
-                valor = solicitar_valor(Produtos,'Produtos')
+                valor = solicitar_valor('Produtos',Produtos)
                 codigo_produto = Produtos.gerador.pro_num() 
                 final = Novo_produto(nome,tipo,subsecao,quantidade,valor,codigo_produto)
                 
@@ -82,7 +82,7 @@ class Produtos:
 
                 elif escolha == 2:
                     Produtos.cadastrar_produto()
-                    cadastrar_outro(Produtos)
+                    cadastrar_outro(Produtos, Produtos.cadastrar_produto)
                     Produtos.executar_programa()
                     break
                 
@@ -108,5 +108,5 @@ class Produtos:
         Produtos.mostrar_opcoes()
         Produtos.checagem()
         
-#Produtos.executar_programa() #usado para testes unitarios(Por padrao desabilitado)
+Produtos.executar_programa() #usado para testes unitarios(Por padrao desabilitado)
     

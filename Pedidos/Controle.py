@@ -90,17 +90,17 @@ class Controle_pedido:
                 if pedido_encontrada:  # Se o pedido foi encontrado
                     if pedido_encontrada.status:  # Verifica se o pedido está pendente
                         pedido_encontrada.status = False  # Finaliza o pedido
+                        
                         limpar_tela()
                         quem_chama.name_app()
-                        print(f'\nO pedido "{pedido_encontrada.nome}" de código {pedido_encontrada.codigo} '
-                            f'foi finalizado com sucesso.')
+                        print(f'\nO pedido "{pedido_encontrada.nome}" de código {pedido_encontrada.codigo} foi finalizado com sucesso.')
                     else:
                         print(f'\nO pedido "{pedido_encontrada.nome}" de código {pedido_encontrada.codigo} já estava finalizado.')
                 else:
                     print(f'\nPedido de código {codigo_s} não encontrado.')  # Caso o pedido não seja encontrado
                 
                 input('\n(Pressione Enter para continuar)')
-                break  # Finaliza o loop
+                break 
             
             except ValueError:
                 print('\nErro: O código do pedido deve ser um número.')  # Caso digite uma letra ou deixe vazio

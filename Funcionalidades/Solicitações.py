@@ -6,7 +6,8 @@ def solicitar_entrada(mensagem, tipo, quem_chama):  # Faz checagem de entrada nu
     while True:
         limpar_tela()
         quem_chama.name_app()
-        valor = input(f'\n{mensagem}\n------------->').strip()
+        print(f'\n{mensagem}')
+        valor = input(f'\n------------->').strip()
         if valor:
             return valor
         else:
@@ -25,7 +26,7 @@ def solicitar_valor(quem_chama_str,quem_chama):  # Solicita o valor da conta a s
                 dado = 'da sua conta?'
             
             elif quem_chama_str == 'Produtos':
-                dado = 'do seu produto?'
+                dado = 'do seu produto? (por unidade)'
                 
             elif quem_chama_str == 'Pedidos':
                 dado = 'do seu pedido?'
@@ -37,12 +38,12 @@ def solicitar_valor(quem_chama_str,quem_chama):  # Solicita o valor da conta a s
             else:
                 limpar_tela()
                 print(f'O valor {dado} deve ser positivo.')
-                input('(Pressione Enter para continuar)')
+                input('\n(Pressione Enter para continuar)')
         except ValueError:
             limpar_tela()
             quem_chama.name_app()
             preço_erro()
-            input('(Pressione Enter para continuar)')
+            input('\n(Pressione Enter para continuar)')
             
 def solicitar_dados(quem_chama_str,quem_chama): # Solicita o cpf ou cnpj de quem vai ser pago ou vai pagar
     while True:
@@ -108,7 +109,7 @@ def solicitar_quantidade(quem_chama): #solicita a quantidade de produtos em esto
         try:
             limpar_tela()
             quem_chama.name_app()
-            print('\nQual a quantidade do seu produto? (Insira apenas números)')
+            print('\nQual a quantidade você tem em estoque? (Insira apenas números)')
             preço = int(input('\n------------->').strip())
             if preço > 0:
                 return preço
@@ -116,12 +117,12 @@ def solicitar_quantidade(quem_chama): #solicita a quantidade de produtos em esto
                 limpar_tela()
                 quem_chama.name_app()
                 print('A quantidade do produto deve ser positiva.')
-                input('(Pressione Enter para continuar)')
+                input('\n(Pressione Enter para continuar)')
         except ValueError:
             limpar_tela()
             quem_chama.name_app()
             preço_erro()
-            input('(Pressione Enter para continuar)')
+            input('\n(Pressione Enter para continuar)')
                 
 def solicitar_pagamento(quem_chama): #Pergunta a forma de pagamento
     while True:
@@ -223,4 +224,6 @@ def solicitar_seçao(quem_chama):
             erro_de_valor()
             input('(Pressione Enter para continuar)')
     return seçao
-# o parametro quem_chama serve para identificar de qual setor a função esta sendo chamada para poder exibir as funçoes "name_app" corretamente
+
+
+# o parametro quem_chama serve para identificar de qual setor a função esta sendo chamada, o parametro quem_chama_str é usado para poder exibir as funçoes "name_app" corretamente

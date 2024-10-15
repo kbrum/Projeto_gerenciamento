@@ -3,7 +3,7 @@ from .Contas_a_pagar import *
 from .Contas_a_receber import *
 from .Saldo import *
 
-class Financeiro: #Financeiro
+class Financeiro: #menu de financeiro
     def name_app(): #titulo
         print('''
     ███████╗██╗███╗░░██╗░█████╗░███╗░░██╗░█████╗░███████╗██╗██████╗░░█████╗░

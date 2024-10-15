@@ -56,27 +56,38 @@ class Contas_a_pagar:
             try:
                 limpar_tela()
                 Contas_a_pagar.name_app()
-                codigo = int(input('\nDigite o código do pedido que deseja finalizar: ').strip())
+                codigo = input('\nDigite o código do pedido que deseja finalizar: ').strip()
+                
+                codigo = int(codigo)
                 
                 # Busca a conta com o código informado
                 conta_encontrada = None
                 for conta in Contas_a_pagar.lista_contas_a_pagar: # procurando o codigo na lista
                     if conta.codigo == codigo:
-                        conta_encontrada == conta
-                    
+                        conta_encontrada = conta
+                        break
+                 
+                if conta_encontrada:
+                    if conta_encontrada.status:
+                        conta_encontrada.status = False
+                        
+                        
+                        limpar_tela()
+                        Contas_a_pagar.name_app()
+                        print(f'\nA conta "{conta_encontrada.nome}" de código {conta_encontrada.codigo} foi paga com sucesso')
+
                     else:
-                        print(f'\nConta de código {codigo} não encontrada.') #caso a conta não seja encontrado
-                if conta.status == True:
-                    conta.status = False
-                    limpar_tela()
-                    Contas_a_pagar.name_app()
-                    print(f'\nA conta "{conta.nome}" de código {conta.codigo} {'ainda esta Pendente' if conta.status else 'foi Paga com sucesso'}')
+                        print(f'\nA Conta "{conta_encontrada.nome}" de código {conta_encontrada.codigo} ja está paga') #caso a conta não seja encontrada
+                        
+                else:
+                    print(f'\nConta de código {codigo} não encontrada')
                     
-                    input('\n(Pressione Enter para continuar)')
-                    break
+                input('\n(Pressione Enter para continuar)')
+                break 
                 	
             except ValueError:
-                print('Erro: O código da conta deve ser um número inteiro.') # caso digite uma letra ou deixe vazio
+                print('\nErro: O código da conta deve ser um número inteiro.') # caso digite uma letra ou deixe vazio
+                input('\n(Pressione Enter para continuar)')
     
     def mostrar_opcoes(): #mostra as opções que o usuario pode escolher no contas a pagar
         print('\n1 - Ver todas as contas a pagar')
@@ -112,7 +123,7 @@ class Contas_a_pagar:
 
                 elif escolha == 2:
                     Contas_a_pagar.cadastrar_conta()
-                    cadastrar_outro(Contas_a_pagar)
+                    cadastrar_outro(Contas_a_pagar,Contas_a_pagar.cadastrar_conta)
                     Contas_a_pagar.executar_programa()
                     break
                 

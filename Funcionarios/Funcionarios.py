@@ -2,15 +2,16 @@ from Funcionalidades.Utils import *
 from Funcionalidades.Geradorores import *
 from Funcionalidades.Solicitações import *
 from Funcionalidades.Construtores import Novo_funcionario
-class Funcionarios: #Funcionarios
+
+class Funcionarios: #menu de funcionarios
     def name_app():
         print('''
-    ███████╗░██████╗░██╗░░░██╗██╗██████╗░███████╗
-    ██╔════╝██╔═══██╗██║░░░██║██║██╔══██╗██╔════╝
-    █████╗░░██║██╗██║██║░░░██║██║██████╔╝█████╗░░
-    ██╔══╝░░╚██████╔╝██║░░░██║██║██╔═══╝░██╔══╝░░
-    ███████╗░╚═██╔═╝░╚██████╔╝██║██║░░░░░███████╗
-    ╚══════╝░░░╚═╝░░░░╚═════╝░╚═╝╚═╝░░░░░╚══════╝''')
+    ███████╗██╗░░░██╗███╗░░██╗░█████╗░██╗░█████╗░███╗░░██╗░█████╗░██████╗░██╗░█████╗░░██████╗   
+    ██╔════╝██║░░░██║████╗░██║██╔══██╗██║██╔══██╗████╗░██║██╔══██╗██╔══██╗██║██╔══██╗██╔════╝
+    █████╗░░██║░░░██║██╔██╗██║██║░░╚═╝██║██║░░██║██╔██╗██║███████║██████╔╝██║██║░░██║╚█████╗░
+    ██╔══╝░░██║░░░██║██║╚████║██║░░██╗██║██║░░██║██║╚████║██╔══██║██╔══██╗██║██║░░██║░╚═══██╗
+    ██║░░░░░╚██████╔╝██║░╚███║╚█████╔╝██║╚█████╔╝██║░╚███║██║░░██║██║░░██║██║╚█████╔╝██████╔╝
+    ╚═╝░░░░░░╚═════╝░╚═╝░░╚══╝░╚════╝░╚═╝░╚════╝░╚═╝░░╚══╝╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░╚════╝░╚═════╝░''')
 
     gerador = Codigo() #instacia do gerador de codigo
 
@@ -47,7 +48,9 @@ class Funcionarios: #Funcionarios
             for funcionario in Funcionarios.lista_funcionarios:
                 status_funcionarios = 'Ativo' if funcionario.status else 'desligado'    
                 print(f'\n--> Nome: {funcionario.nome} | Setor: {funcionario.setor} | Posição: {funcionario.posicao} | Código: {funcionario.codigo} | Status do contrato: {status_funcionarios}')
-            input('\n(Digite Enter para continuar)')
+            
+        input('\n(Digite Enter para continuar)')
+        
 
     def mostrar_opcoes(): #mostra as opçoes que o usuario pode escolher
         print('\n1 - Todos os funcionarios')
@@ -83,7 +86,7 @@ class Funcionarios: #Funcionarios
 
                 elif escolha == 2:
                     Funcionarios.cadastrar_funcionario()
-                    cadastrar_outro(Funcionarios)
+                    cadastrar_outro(Funcionarios,Funcionarios.cadastrar_funcionario)
                     Funcionarios.executar_programa()
                     break
                 
