@@ -31,10 +31,10 @@ class Contas_a_receber:
     def cadastrar_conta(): #cadastra uma conta a pagar
         while True:
             try:
-                nome = solicitar_entrada('Qual o nome da sua conta?', 'nome', Contas_a_receber)
-                tipo = solicitar_entrada('Qual o tipo da sua conta? (ex: Salário, Água, luz)', 'tipo', Contas_a_receber)
+                nome = solicitar_entrada('Qual o nome da sua conta?', 'nome', Contas_a_receber).upper()
+                tipo = solicitar_entrada('Qual o tipo da sua conta? (ex: Salário, Água, luz)', 'tipo', Contas_a_receber).upper()
                 dados_recebedor = solicitar_dados('Contas_a_receber')
-                valor = solicitar_valor('Contas_a_receber')
+                valor = solicitar_valor(Contas_a_receber,'Contas_a_receber')
                 data = solicitar_data('Contas_a_receber')
                 codigo_conta = Contas_a_receber.gerador.pro_num()
                 status = True
