@@ -21,7 +21,7 @@ class Funcionarios: #Funcionarios
             try:
                 nome = solicitar_entrada('Qual o nome do seu funcionario?', 'nome', Funcionarios).upper()
                 setor = solicitar_entrada('Qual o setor do seu funcionario?', 'setor', Funcionarios).upper()
-                posicao = solicitar_entrada('Qual a posição desse funcionario? (ex: Analista, Tecnico, Estagiarios)', 'posição', Funcionarios)
+                posicao = solicitar_entrada('Qual a posição desse funcionario? (ex: Analista, Tecnico, Estagiario)', 'posição', Funcionarios)
                 codigo = Funcionarios.gerador.pro_num()
                 status = True
                 

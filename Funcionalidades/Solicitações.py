@@ -10,11 +10,12 @@ def solicitar_entrada(mensagem, tipo, quem_chama):  # Faz checagem de entrada nu
         if valor:
             return valor
         else:
-            quem_chama.name_app()
             limpar_tela()
-            print(f'\nO {tipo} do seu produto não pode ficar em branco.')
+            quem_chama.name_app()
+            print(f'\nO {tipo} não pode ficar em branco.')
+            input('(Pressione Enter para continuar)')
 
-def solicitar_valor(quem_chama,quem_chama_str):  # Solicita o valor da conta a ser cadastrada
+def solicitar_valor(quem_chama_str,quem_chama):  # Solicita o valor da conta a ser cadastrada
     while True:        
         try:
             limpar_tela()
@@ -36,17 +37,20 @@ def solicitar_valor(quem_chama,quem_chama_str):  # Solicita o valor da conta a s
             else:
                 limpar_tela()
                 print(f'O valor {dado} deve ser positivo.')
+                input('(Pressione Enter para continuar)')
         except ValueError:
             limpar_tela()
+            quem_chama.name_app()
             preço_erro()
+            input('(Pressione Enter para continuar)')
             
-def solicitar_dados(quem_chama,quem_chama_str): # Solicita o cpf ou cnpj de quem vai ser pago ou vai pagar
+def solicitar_dados(quem_chama_str,quem_chama): # Solicita o cpf ou cnpj de quem vai ser pago ou vai pagar
     while True:
         try:
             limpar_tela()
             quem_chama.name_app()
             dado = None # onde fica armazenado se alguem esta pagando ou sendo pago
-            if quem_chama == 'Contas_a_pagar': # se for chamado pelo contas a pagar
+            if quem_chama_str == 'Contas_a_pagar': # se for chamado pelo contas a pagar
                 dado = 'recebedor'
             
             elif quem_chama_str == 'Contas_a_receber': # se for chamado pelo contas a receber
@@ -61,13 +65,19 @@ def solicitar_dados(quem_chama,quem_chama_str): # Solicita o cpf ou cnpj de quem
                 dados = formatar_cnpj(dados)
                 break
             else:
+                limpar_tela()
+                quem_chama.name_app()
                 raise ValueError("CPF/CNPJ inválido.")
+            
         except ValueError as e:
+            limpar_tela()
+            quem_chama.name_app()
             print(f"\nErro: {e}. Não foi possível formatar o CPF/CNPJ.")
+            input('(Pressione Enter para continuar)')
     
     return dados
 
-def solicitar_data(quem_chama,quem_chama_str): # Solicita a data
+def solicitar_data(quem_chama_str,quem_chama): # Solicita a data
     while True:
         limpar_tela()
         quem_chama.name_app()
@@ -86,7 +96,10 @@ def solicitar_data(quem_chama,quem_chama_str): # Solicita a data
                 print('\nData inválida. Tente novamente.')
 
         except ValueError as e:
+            limpar_tela()
+            quem_chama.name_app()
             print(f'Error: {e}')
+            input('(Pressione Enter para continuar)')
 
     return data_final
 
@@ -103,10 +116,12 @@ def solicitar_quantidade(quem_chama): #solicita a quantidade de produtos em esto
                 limpar_tela()
                 quem_chama.name_app()
                 print('A quantidade do produto deve ser positiva.')
+                input('(Pressione Enter para continuar)')
         except ValueError:
             limpar_tela()
             quem_chama.name_app()
             preço_erro()
+            input('(Pressione Enter para continuar)')
                 
 def solicitar_pagamento(quem_chama): #Pergunta a forma de pagamento
     while True:
@@ -124,7 +139,7 @@ def solicitar_pagamento(quem_chama): #Pergunta a forma de pagamento
                 limpar_tela()
                 quem_chama.name_app()
                 print('\nEste campo não pode ficar em branco')
-                input('\n(Digite Enter para continuar)')
+                input('(Pressione Enter para continuar)')
                 continue
             
             pagamento = int(pagamento)
@@ -148,7 +163,7 @@ def solicitar_pagamento(quem_chama): #Pergunta a forma de pagamento
             limpar_tela()
             quem_chama.name_app()
             erro_de_valor()
-            input('\n(Digite Enter para continuar)')
+            input('(Pressione Enter para continuar)')
 
     return pagamento
         
@@ -165,15 +180,16 @@ def solicitar_numero(quem_chama): # solicta um numero para contato
             else:
                 raise ValueError("Numero inválido.")
         except ValueError as e:
+            limpar_tela()
+            quem_chama.name_app()
             print(f"\nErro: {e}. Não foi possível formatar o numero.")
+            input('(Pressione Enter para continuar)')
     
     return numero
 
 def solicitar_seçao(quem_chama):
     while True:
         try:
-            limpar_tela()
-            quem_chama.name_app()
             limpar_tela()
             quem_chama.name_app()
             print('\nDe qual seção você deseja pedir? ')
@@ -186,7 +202,7 @@ def solicitar_seçao(quem_chama):
                 limpar_tela()
                 quem_chama.name_app()
                 print('\nEste campo não pode ficar em branco')
-                input('\n(Digite Enter para continuar)')
+                input('(Pressione Enter para continuar)')
                 continue
             
             seçao = int(seçao)
@@ -205,6 +221,6 @@ def solicitar_seçao(quem_chama):
             limpar_tela()
             quem_chama.name_app()
             erro_de_valor()
-            input('\n(Digite Enter para continuar)')
+            input('(Pressione Enter para continuar)')
     return seçao
 # o parametro quem_chama serve para identificar de qual setor a função esta sendo chamada para poder exibir as funçoes "name_app" corretamente

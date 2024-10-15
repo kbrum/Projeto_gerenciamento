@@ -172,6 +172,8 @@ class Pedidos: #Pedidos
         Pedidos.mostrar_opcoes()
         Pedidos.checagem()
 
+from Funcionalidades.Utils import *
+
 class Estoque:
     def name_app(): # titulo    
         print('''
@@ -239,7 +241,7 @@ class Estoque:
                 elif escolha == 2:
                     limpar_tela()
                     Estoque.name_app()
-                    Estoque.Produtos_em_falta()
+                    Estoque.Em_falta()
                     Estoque.executar_programa()
                     break
                 

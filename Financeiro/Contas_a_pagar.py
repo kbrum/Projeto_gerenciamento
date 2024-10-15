@@ -33,9 +33,9 @@ class Contas_a_pagar:
             try:
                 nome = solicitar_entrada('Qual o nome da sua conta?', 'nome', Contas_a_pagar).upper()
                 tipo = solicitar_entrada('Qual o tipo da sua conta? (ex: Luz, Agua, Outros)', 'tipo', Contas_a_pagar).upper()
-                dado = solicitar_dados(Contas_a_pagar,'Contas_a_pagar')               
-                valor = solicitar_valor(Contas_a_pagar,'Contas_a_pagar')
-                data = solicitar_data(Contas_a_pagar,'Contas_a_pagar')
+                dado = solicitar_dados('Contas_a_pagar',Contas_a_pagar)               
+                valor = solicitar_valor('Contas_a_pagar',Contas_a_pagar)
+                data = solicitar_data('Contas_a_pagar',Contas_a_pagar)
                 codigo_conta = Contas_a_pagar.gerador.pro_num() 
                 status = True
                 

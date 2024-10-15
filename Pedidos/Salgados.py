@@ -35,7 +35,7 @@ class Salgados:
                     print('\nNenhum pedido ativo ou cadastrado')
         input('\n(Digite Enter para continuar)')
         
-    def mostrar_opçoes():
+    def mostrar_opcoes():
         print('\n1 - Ver todos os pedidos')
         print('2 - Ver pedidos ativos')
         print('3 - Finalizar pedido')
@@ -64,7 +64,7 @@ class Salgados:
                 elif escolha== 3:
                     limpar_tela()
                     Salgados.name_app()
-                    Controle_pedido.finalizar_pedido(Salgados, 'Seção de salgados') # finalizar pedidos da seção salgados
+                    Controle_pedido.finalizar_pedido_salgado(Salgados) # finalizar pedidos da seção salgados
                     Salgados.executar_programa()
                     break                
                 
@@ -77,10 +77,9 @@ class Salgados:
                 Salgados.name_app()
                 Salgados.mostrar_opcoes()
                 erro_de_valor()
-                Salgados.checagem()
                    
     def executar_programa():
         limpar_tela()
         Salgados.name_app()
-        Salgados.mostrar_opçoes()
+        Salgados.mostrar_opcoes()
         Salgados.checagem()

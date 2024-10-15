@@ -24,7 +24,9 @@ class Pedidos: #Pedidos
         while True:
             try:
                 print('\nEscolha uma opção')
-                escolha = int(input('\n-------------> '))
+                escolha = input('\n-------------> ').strip()
+                
+                escolha = int(escolha)
                 
                 if escolha == 1:
                     limpar_tela()
@@ -52,7 +54,6 @@ class Pedidos: #Pedidos
                 Pedidos.name_app()
                 Pedidos.mostrar_opcoes()
                 erro_de_valor()
-                Pedidos.checagem()
             
     def executar_programa(): # mostra na tela
         limpar_tela()
@@ -60,4 +61,4 @@ class Pedidos: #Pedidos
         Pedidos.mostrar_opcoes()
         Pedidos.checagem()
 
-#Pedidos.executar_programa() # usado para testes unitarios
+Pedidos.executar_programa() # usado para testes unitarios
