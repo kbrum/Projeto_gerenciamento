@@ -12,11 +12,11 @@ class Controle_pedido:
             while True:
                 try: # Função para cadastrar um novo produto
                     nome = solicitar_entrada('Qual o nome do cliente que está fazendo o pedido?', 'nome', quem_chama).upper()
-                    seçao = solicitar_seçao(quem_chama)
+                    seçao = solicitar_seçao(quem_chama).upper()
                     tipo = solicitar_entrada('Qual o tipo do seu pedido? (ex: Bolo, Centro de salgado)', 'tipo', quem_chama).upper()
                     quantidade = solicitar_quantidade(quem_chama)
-                    numero = solicitar_numero()
-                    valor = solicitar_valor(quem_chama_str)
+                    numero = solicitar_numero(quem_chama)
+                    valor = solicitar_valor(quem_chama,quem_chama_str)
                     pagamento = solicitar_pagamento(quem_chama)
                     codigo = Controle_pedido.gerador.pro_num()
                     status = True
@@ -56,7 +56,7 @@ class Controle_pedido:
                         pedido.status = False
                         limpar_tela()
                         quem_chama.name_app()
-                        print(f'\nA pedido "{pedido.nome}" de código {pedido.codigo} {'ainda esta Pendente' if pedido.status else 'foi Paga com sucesso'}')
+                        print(f'\nO pedido "{pedido.tipo}" do cliente "{pedido.nome}" de código {pedido.codigo} {'ainda esta Pendente' if pedido.status else 'foi Finalizado com sucesso'}')
                         
                         input('\n(Pressione Enter para continuar)')
                         break

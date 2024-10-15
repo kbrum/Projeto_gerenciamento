@@ -4,6 +4,7 @@ from datetime import datetime
 
 def solicitar_entrada(mensagem, tipo, quem_chama):  # Faz checagem de entrada nula/vazia nos inputs+                                 
     while True:
+        limpar_tela()
         quem_chama.name_app()
         valor = input(f'\n{mensagem}\n------------->').strip()
         if valor:
@@ -13,9 +14,11 @@ def solicitar_entrada(mensagem, tipo, quem_chama):  # Faz checagem de entrada nu
             limpar_tela()
             print(f'\nO {tipo} do seu produto não pode ficar em branco.')
 
-def solicitar_valor(quem_chama_str):  # Solicita o valor da conta a ser cadastrada
+def solicitar_valor(quem_chama,quem_chama_str):  # Solicita o valor da conta a ser cadastrada
     while True:        
         try:
+            limpar_tela()
+            quem_chama.name_app()
             dado = None
             if quem_chama_str ==  'Contas_a_pagar' or quem_chama_str == 'Contas_a_receber':
                 dado = 'da sua conta?'
@@ -40,6 +43,8 @@ def solicitar_valor(quem_chama_str):  # Solicita o valor da conta a ser cadastra
 def solicitar_dados(quem_chama): # Solicita o cpf ou cnpj de quem vai ser pago ou vai pagar
     while True:
         try:
+            limpar_tela()
+            quem_chama.name_app()
             dado = None # onde fica armazenado se alguem esta pagando ou sendo pago
             if quem_chama == 'Contas_a_pagar': # se for chamado pelo contas a pagar
                 dado = 'recebedor'
@@ -64,6 +69,8 @@ def solicitar_dados(quem_chama): # Solicita o cpf ou cnpj de quem vai ser pago o
 
 def solicitar_data(quem_chama): # Solicita a data
     while True:
+        limpar_tela()
+        quem_chama.name_app()
         dado = None # variavel vazia para guardar que modulo chamou a funçao
         if quem_chama == 'Contas_a_pagar' or quem_chama == 'Contas_a_receber':
             dado = 'de abertura da conta'
@@ -86,6 +93,8 @@ def solicitar_data(quem_chama): # Solicita a data
 def solicitar_quantidade(quem_chama): #solicita a quantidade de produtos em estoque
     while True:
         try:
+            limpar_tela()
+            quem_chama.name_app()
             print('\nQual a quantidade do seu produto? (Insira apenas números)')
             preço = int(input('\n------------->').strip())
             if preço > 0:
@@ -143,9 +152,11 @@ def solicitar_pagamento(quem_chama): #Pergunta a forma de pagamento
 
     return pagamento
         
-def solicitar_numero(): # solicta um numero para contato
+def solicitar_numero(quem_chama): # solicta um numero para contato
     while True:
         try:
+            limpar_tela()
+            quem_chama.name_app()
             print('\nDigite um numero para contato (com DDD)')
             numero = input('\n------------->').strip()
             if len(numero) == 11:
@@ -161,6 +172,8 @@ def solicitar_numero(): # solicta um numero para contato
 def solicitar_seçao(quem_chama):
     while True:
         try:
+            limpar_tela()
+            quem_chama.name_app()
             limpar_tela()
             quem_chama.name_app()
             print('\nDe qual seção você deseja pedir? ')

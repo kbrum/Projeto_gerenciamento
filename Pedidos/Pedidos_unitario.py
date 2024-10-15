@@ -61,4 +61,4 @@ class Pedidos: #Pedidos
         Pedidos.mostrar_opcoes()
         Pedidos.checagem()
 
-#Pedidos.executar_programa() # usado para testes unitarios
+Pedidos.executar_programa() # usado para testes unitarios
