@@ -463,7 +463,7 @@ class Main: #MAIN.
             try:
                 print('\nEscolha uma opção')
                 
-                # Captura a entrada e remove espaços em branco
+        
                 escolha = input('\n-------------> ').strip()
         
                 # Verifica se a entrada está vazia
