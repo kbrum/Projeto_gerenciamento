@@ -43,7 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'menu_principal',
     'financeiro',
-]
+    'pedidos',
+    'estoque',
+    'produtos',
+    'funcionarios',
+    
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
