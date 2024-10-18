@@ -1,6 +1,6 @@
 from scripts.Funcionalidades.Utils import *
 
-class Estoque:
+class Estoque: #menu de estoque
     def name_app(): # titulo    
         print('''
     ███████╗░██████╗████████╗░█████╗░░██████╗░██╗░░░██╗███████╗
@@ -35,12 +35,12 @@ class Estoque:
             print('\nNenhum produto cadastrado.')
             input('\nPressione Enter para continuar.')
             
-    def mostrar_opcoes_estoque(): #mostra a opções q o usuario pode escolher
+    def mostrar_opcoes(): #mostra a opções q o usuario pode escolher
         print('\n1 - Ver todos')
         print('2 - Em falta')
         print('3 - Voltar ao menu inicial')
 
-    def checagem_estoque(): #faz a checagem doq foi escolhido entre os mostrados acima
+    def checagem(): #faz a checagem doq foi escolhido entre os mostrados acima
         while True:
             try:
                 print('\nEscolha uma opção')
@@ -67,7 +67,7 @@ class Estoque:
                 elif escolha == 2:
                     limpar_tela()
                     Estoque.name_app()
-                    Estoque.Produtos_em_falta()
+                    Estoque.Em_falta()
                     Estoque.executar_programa()
                     break
                 
@@ -78,16 +78,13 @@ class Estoque:
             except:
                 limpar_tela()
                 Estoque.name_app()
-                Estoque.mostrar_opcoes_estoque()
+                Estoque.mostrar_opcoes()
                 erro_de_valor()
         
-    def main_estoque(): #executa todas as funções na ordem certa
+    def executar_programa(): #mostra o programa na tela
         limpar_tela()
         Estoque.name_app()
-        Estoque.mostrar_opcoes_estoque()
-        Estoque.checagem_estoque()
+        Estoque.mostrar_opcoes()
+        Estoque.checagem()
         
-    def executar_programa(): #mostra o programa na tela
-        Estoque.main_estoque()
-        
-Estoque.executar_programa() #usado para testes unitarios (Por padrao desabilitado)
+#Estoque.executar_programa() #usado para testes unitarios (Por padrao desabilitado)

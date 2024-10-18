@@ -16,7 +16,7 @@ def cadastro_feito(quem_chama): #mostra mensagem de cadastro bem sucedido
         print('\n Cadastro concluido com succeso')
         input('\n Pressione enter para continuar')
                 
-def cadastrar_outro(quem_chama): #pergunta se quer cadastrar outra coisa (conta, produto, funcionario)
+def cadastrar_outro(quem_chama,funcao_cadastro): #pergunta se quer cadastrar outra coisa (conta, produto, funcionario)
         while True:
             try:    
                 limpar_tela()
@@ -38,7 +38,7 @@ def cadastrar_outro(quem_chama): #pergunta se quer cadastrar outra coisa (conta,
                 if novo == 1:
                     limpar_tela()
                     quem_chama.name_app()
-                    quem_chama.cadastrar_conta()
+                    funcao_cadastro() #função cadastro diz respeito a função usada para cadastrar um novo objeto na classe especifica que esta sendo chamada
                 
                 elif novo == 2:
                     break

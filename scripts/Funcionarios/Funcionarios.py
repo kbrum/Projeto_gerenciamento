@@ -3,15 +3,15 @@ from scripts.Funcionalidades.Geradorores import *
 from scripts.Funcionalidades.Solicitações import *
 from scripts.Funcionalidades.Construtores import Novo_funcionario
 
-class Funcionarios: #Funcionarios
+class Funcionarios: #menu de funcionarios
     def name_app():
         print('''
-    ███████╗░██████╗░██╗░░░██╗██╗██████╗░███████╗
-    ██╔════╝██╔═══██╗██║░░░██║██║██╔══██╗██╔════╝
-    █████╗░░██║██╗██║██║░░░██║██║██████╔╝█████╗░░
-    ██╔══╝░░╚██████╔╝██║░░░██║██║██╔═══╝░██╔══╝░░
-    ███████╗░╚═██╔═╝░╚██████╔╝██║██║░░░░░███████╗
-    ╚══════╝░░░╚═╝░░░░╚═════╝░╚═╝╚═╝░░░░░╚══════╝''')
+    ███████╗██╗░░░██╗███╗░░██╗░█████╗░██╗░█████╗░███╗░░██╗░█████╗░██████╗░██╗░█████╗░░██████╗   
+    ██╔════╝██║░░░██║████╗░██║██╔══██╗██║██╔══██╗████╗░██║██╔══██╗██╔══██╗██║██╔══██╗██╔════╝
+    █████╗░░██║░░░██║██╔██╗██║██║░░╚═╝██║██║░░██║██╔██╗██║███████║██████╔╝██║██║░░██║╚█████╗░
+    ██╔══╝░░██║░░░██║██║╚████║██║░░██╗██║██║░░██║██║╚████║██╔══██║██╔══██╗██║██║░░██║░╚═══██╗
+    ██║░░░░░╚██████╔╝██║░╚███║╚█████╔╝██║╚█████╔╝██║░╚███║██║░░██║██║░░██║██║╚█████╔╝██████╔╝
+    ╚═╝░░░░░░╚═════╝░╚═╝░░╚══╝░╚════╝░╚═╝░╚════╝░╚═╝░░╚══╝╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░╚════╝░╚═════╝░''')
 
     gerador = Codigo() #instacia do gerador de codigo
 
@@ -22,7 +22,7 @@ class Funcionarios: #Funcionarios
             try:
                 nome = solicitar_entrada('Qual o nome do seu funcionario?', 'nome', Funcionarios).upper()
                 setor = solicitar_entrada('Qual o setor do seu funcionario?', 'setor', Funcionarios).upper()
-                posicao = solicitar_entrada('Qual a posição desse funcionario? (ex: Analista, Tecnico, Estagiarios)', 'posição', Funcionarios)
+                posicao = solicitar_entrada('Qual a posição desse funcionario? (ex: Analista, Tecnico, Estagiario)', 'posição', Funcionarios)
                 codigo = Funcionarios.gerador.pro_num()
                 status = True
                 
@@ -48,7 +48,9 @@ class Funcionarios: #Funcionarios
             for funcionario in Funcionarios.lista_funcionarios:
                 status_funcionarios = 'Ativo' if funcionario.status else 'desligado'    
                 print(f'\n--> Nome: {funcionario.nome} | Setor: {funcionario.setor} | Posição: {funcionario.posicao} | Código: {funcionario.codigo} | Status do contrato: {status_funcionarios}')
-            input('\n(Digite Enter para continuar)')
+            
+        input('\n(Digite Enter para continuar)')
+        
 
     def mostrar_opcoes(): #mostra as opçoes que o usuario pode escolher
         print('\n1 - Todos os funcionarios')
@@ -83,10 +85,8 @@ class Funcionarios: #Funcionarios
                     break
 
                 elif escolha == 2:
-                    limpar_tela()
-                    Funcionarios.name_app()
                     Funcionarios.cadastrar_funcionario()
-                    cadastrar_outro(Funcionarios)
+                    cadastrar_outro(Funcionarios,Funcionarios.cadastrar_funcionario)
                     Funcionarios.executar_programa()
                     break
                 

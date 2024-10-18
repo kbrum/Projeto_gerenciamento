@@ -36,7 +36,7 @@ class Doces:
                     print('\nNenhum pedido ativo ou cadastrado')
         input('\n(Digite Enter para continuar)')
         
-    def mostrar_opçoes():
+    def mostrar_opcoes():
         print('\n1 - Ver todos os pedidos')
         print('2 - Ver pedidos ativos')
         print('3 - Finalizar pedido')
@@ -65,7 +65,7 @@ class Doces:
                 elif escolha== 3:
                     limpar_tela()
                     Doces.name_app()
-                    Controle_pedido.finalizar_pedido(Doces, 'Seção de doces') # finalizar pedidos da seção doces
+                    Controle_pedido.finalizar_pedido_doce(Doces) # finalizar pedidos da seção doces
                     Doces.executar_programa()
                     break                
                 
@@ -78,10 +78,10 @@ class Doces:
                 Doces.name_app()
                 Doces.mostrar_opcoes()
                 erro_de_valor()
-                Doces.checagem()
                    
     def executar_programa():
         limpar_tela()
         Doces.name_app()
-        Doces.mostrar_opçoes()
+        Doces.mostrar_opcoes()
         Doces.checagem()
+        

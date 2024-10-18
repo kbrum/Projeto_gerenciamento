@@ -18,11 +18,11 @@ class Contas_a_receber:
     lista_Contas_a_receber = [] #lista de contas a pagar
 
     def mostrar_contas(): # mostra as contas a pagar
-        if len(Contas_a_receber.lista_contas_a_receber) == 0:
+        if len(Contas_a_receber.lista_Contas_a_receber) == 0:
             print('\nNenhum produto cadastrado.')
         else:
             print('\nLista de produtos cadastrados:')
-            for i, conta in enumerate(Contas_a_receber.lista_contas_a_receber, start=1):
+            for i, conta in enumerate(Contas_a_receber.lista_Contas_a_receber, start=1):
                 status_conta = 'Pendente' if conta.status else 'Recebido' # Fatora a string para exibir se a conta ja foi recebida ou não
                 print(f'\n{i}. Nome: {conta.nome} | Tipo: {conta.tipo} |  CPF/CNPJ Do Recebedor: {conta.dado} |  Valor: R$ {conta.valor} | Data de abertura: {conta.data.strftime('%d/%m/%y')} | Código: {conta.codigo} | Status da conta: {status_conta}')
         
@@ -33,9 +33,9 @@ class Contas_a_receber:
             try:
                 nome = solicitar_entrada('Qual o nome da sua conta?', 'nome', Contas_a_receber).upper()
                 tipo = solicitar_entrada('Qual o tipo da sua conta? (ex: Salário, Água, luz)', 'tipo', Contas_a_receber).upper()
-                dados_recebedor = solicitar_dados('Contas_a_receber')
-                valor = solicitar_valor(Contas_a_receber,'Contas_a_receber')
-                data = solicitar_data('Contas_a_receber')
+                dados_recebedor = solicitar_dados('Contas_a_receber',Contas_a_receber)
+                valor = solicitar_valor('Contas_a_receber',Contas_a_receber)
+                data = solicitar_data('Contas_a_receber',Contas_a_receber)
                 codigo_conta = Contas_a_receber.gerador.pro_num()
                 status = True
                 
@@ -43,7 +43,7 @@ class Contas_a_receber:
                 
                 Contas_a_receber.lista_Contas_a_receber.append(lista_conta) #adciona uma nova conta a listade contas
                 
-                Contas_a_receber.cadastro_feito()  # Confirma o cadastro da conta
+                cadastro_feito(Contas_a_receber)  # Confirma o cadastro da conta
                 break 
 
             except ValueError:
@@ -56,27 +56,38 @@ class Contas_a_receber:
             try:
                 limpar_tela()
                 Contas_a_receber.name_app()
-                codigo = int(input('\nDigite o código do pedido que deseja finalizar: ').strip())
+                codigo = input('\nDigite o código do pedido que deseja finalizar: ').strip()
+                
+                codigo = int(codigo)
                 
                 # Busca a conta com o código informado
                 conta_encontrada = None
                 for conta in Contas_a_receber.lista_Contas_a_receber: # procurando o codigo na lista
                     if conta.codigo == codigo:
-                        conta_encontrada == conta
-                    
+                        conta_encontrada = conta
+                        break
+                 
+                if conta_encontrada:
+                    if conta_encontrada.status:
+                        conta_encontrada.status = False
+                        
+                        
+                        limpar_tela()
+                        Contas_a_receber.name_app()
+                        print(f'\nA conta "{conta_encontrada.nome}" de código {conta_encontrada.codigo} foi recebida com sucesso')
+
                     else:
-                        print(f'\nConta de código {codigo} não encontrada.') #caso a conta não seja encontrado
-                if conta.status == True:
-                    conta.status = False
-                    limpar_tela()
-                    Contas_a_receber.name_app()
-                    print(f'\nA conta "{conta.nome}" de código {conta.codigo} {'ainda esta Pendente' if conta.status else 'foi Paga com sucesso'}')
+                        print(f'\nA Conta "{conta_encontrada.nome}" de código {conta_encontrada.codigo} ja foi recebida') #caso a conta não seja encontrada
+                        
+                else:
+                    print(f'\nConta de código {codigo} não encontrada')
                     
-                    input('\n(Pressione Enter para continuar)')
-                    break
+                input('\n(Pressione Enter para continuar)')
+                break 
                 	
             except ValueError:
-                print('Erro: O código da conta deve ser um número inteiro.') # caso digite uma letra ou deixe vazio
+                print('\nErro: O código da conta deve ser um número inteiro.') # caso digite uma letra ou deixe vazio
+                input('\n(Pressione Enter para continuar)')
     
     def mostrar_opcoes(): #mostra as opções que o usuario pode escolher no contas a pagar
         print('\n1 - Ver todas as contas a pagar')
@@ -111,10 +122,8 @@ class Contas_a_receber:
                     break
                 
                 elif escolha == 2:
-                    limpar_tela()
-                    Contas_a_receber.name_app()
                     Contas_a_receber.cadastrar_conta()
-                    cadastrar_outro(Contas_a_receber)
+                    cadastrar_outro(Contas_a_receber,Contas_a_receber.cadastrar_conta)
                     Contas_a_receber.executar_programa()
                     break
                 
