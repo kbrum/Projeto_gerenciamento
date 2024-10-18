@@ -3,7 +3,7 @@ from pedidos.views import index, doces, salgados
 
 urlpatterns = [
     path('pedidos/', index),
-    path('doces/', doces),
-    path('salgados/', salgados)
+    path('pedidos/doces/', doces),
+    path('pedidos/salgados/', salgados)
 
 ]
