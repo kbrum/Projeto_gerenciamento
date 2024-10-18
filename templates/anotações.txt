@@ -1,0 +1,1 @@
+tem que usar {% 'path/arquivo' %} dentro dos arquivos html para poder importar os estilos css da pagina e para poder mostrar as imagens
